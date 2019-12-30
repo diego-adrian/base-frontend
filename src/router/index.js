@@ -1,14 +1,18 @@
 import Vue from 'vue';
 import VueRouter from 'vue-router';
-import Home from '../views/Home.vue';
 
 Vue.use(VueRouter);
 
 const routes = [
   {
+    path: '/login',
+    name: 'login',
+    component: () => import(/* webpackChunkName: "login" */'../components/auth/Login.vue'),
+  },
+  {
     path: '/',
-    name: 'home',
-    component: Home,
+    name: 'Dashboard',
+    component: () => import(/* webpackChunkName: "about" */ '../views/About.vue'),
   },
   {
     path: '/about',
@@ -21,8 +25,8 @@ const routes = [
 ];
 
 const router = new VueRouter({
-  mode: 'history',
-  base: process.env.BASE_URL,
+  // mode: 'history',
+  base: process.env.APP_VUE_BASE_URL,
   routes,
 });
 
