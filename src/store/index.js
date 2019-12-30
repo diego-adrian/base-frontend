@@ -1,6 +1,8 @@
 import Vue from 'vue';
 import Vuex from 'vuex';
 
+import layout from '../layout/modules/layout';
+
 Vue.use(Vuex);
 
 export default new Vuex.Store({
@@ -214,5 +216,8 @@ export default new Vuex.Store({
     INIT_INTERVAL(state, interval) {
       state.sessionInterval = interval;
     }
+  },
+  modules: {
+    layout
   }
 });

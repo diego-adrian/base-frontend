@@ -34,9 +34,6 @@
             return response.json();
           })
           .then(function (response) {
-            console.log('--------EEEEEEEEEE----------------------------');
-            console.log(response);
-            console.log('------------------------------------');
             var data = response;
             if (data.url) {
               window.location = data.url;
@@ -47,7 +44,7 @@
               window.localStorage.setItem(config.appName + '_sidenav', JSON.stringify(true));
               window.localStorage.setItem(config.appName + '_permissions', JSON.stringify(data.permisos));
               window.localStorage.setItem(config.appName + '_user', JSON.stringify(data.usuario));
-              window.location = config.urlHome + (data.redirect ? '#/' + data.redirect : '');
+              window.location = config.urlHome + '#/';
             }
           })
           .catch(function (error) {

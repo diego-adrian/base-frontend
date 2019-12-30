@@ -74,7 +74,10 @@
       "no-shadow": "off",
       "object-shorthand": "off",
       "max-len": "off",
-      "import/no-extraneous-dependencies": "off"
+      "import/no-extraneous-dependencies": "off",
+      "no-plusplus": "off",
+      "array-callback-return": "off",
+      "vue/no-use-v-if-with-v-for": "off"
     },
     "parserOptions": {
       "parser": "babel-eslint"

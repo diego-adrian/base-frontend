@@ -9,11 +9,13 @@ import vuetify from './plugins/vuetify';
 import Message from '@/plugins/message/message';
 import Storage from '@/plugins/storage';
 import Service from '@/plugins/service';
+import Util from '@/plugins/util';
 
 import './assets/scss/index.scss';
 
 Vue.use(Message);
 Vue.use(Storage);
+Vue.use(Util);
 Vue.use(Service, {
   apiUrl: process.env.VUE_APP_API_URL,
   baseServer: process.env.VUE_APP_BASE_SERVER,

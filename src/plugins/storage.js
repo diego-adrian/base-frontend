@@ -1,30 +1,30 @@
 export default {
   install: (Vue, { appName } = {
-    appName: process.env.SITENAME || 'local'
+    appName: process.env.VUE_APP_SITENAME || 'app'
   }) => {
     const Storage = {
-      setUser(user) {
+      setUser (user) {
         this.set('user', user);
       },
 
-      getUser() {
+      getUser () {
         return this.get('user');
       },
 
-      existUser() {
+      existUser () {
         return this.exist('user');
       },
 
-      removeUser() {
+      removeUser () {
         this.remove('user');
       },
 
       // window.LocalStorage
-      set(key, value) {
+      set (key, value) {
         window.localStorage.setItem(`${appName}_${key}`, JSON.stringify(value));
       },
 
-      get(key) {
+      get (key) {
         const data = window.localStorage.getItem(`${appName}_${key}`);
         try {
           return JSON.parse(data);
@@ -33,18 +33,17 @@ export default {
         }
       },
 
-      remove(key) {
+      remove (key) {
         window.localStorage.removeItem(`${appName}_${key}`);
       },
 
-      destroy(key) {
+      destroy (key) {
         this.remove(key);
       },
 
-      exist(key) {
+      exist (key) {
         const value = window.localStorage.getItem(`${appName}_${key}`);
-        return typeof value !== 'undefined' && value !== undefined && value !== null
-          && value !== 'null' && value !== '[]';
+        return typeof value !== 'undefined' && value !== undefined && value !== null && value !== 'null' && value !== '[]';
       },
 
       // window.SessionStorage
