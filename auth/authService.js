@@ -1,6 +1,5 @@
 const crypto = require('crypto');
-const moment = require('moment');
-const Issuer = require('openid-client').Issuer;
+const { Issuer } = require('openid-client');
 const firebase = require('./firebase');
 const config = require('./config');
 
@@ -22,7 +21,7 @@ module.exports = function authService () {
    * @returns {JSON}
    */
 
-  function getCode () {
+  async function getCode () {
     try {
       const state = crypto.randomBytes(16).toString('hex');
       const nonce = crypto.randomBytes(16).toString('hex');
@@ -33,8 +32,7 @@ module.exports = function authService () {
       }, config.openId.client_params);
       const authorizeUrl = cliente.authorizationUrl(authorizationRequest);
 
-
-      const key = ciudadaniaDigitalRef.push().key;
+      const { key } = ciudadaniaDigitalRef.push();
       const newCode = {
         id: key,
         state,
@@ -42,13 +40,15 @@ module.exports = function authService () {
           nonce
         }
       };
-      ciudadaniaDigitalRef.child(key).update(newCode).then(() => {
-        return {
-          url: authorizeUrl,
-          codigo: state
-        };
-      });
+      await ciudadaniaDigitalRef.child(key).update(newCode);
+      return {
+        url: authorizeUrl,
+        codigo: state
+      };
     } catch (error) {
+      console.log('--------asdasd----------------------------');
+      console.log(error);
+      console.log('------------------------------------');
       console.error(error.message);
     }
   }
@@ -86,11 +86,11 @@ module.exports = function authService () {
         console.log(response);
         console.log('------------------------------------');
         return response;
-      }).catch(err => {
+      }).catch((err) => {
         console.log('-----------ERRRRRRRRROOOOOOO-------------------------');
         console.log(err.message);
         console.log('------------------------------------');
-      })
+      });
     } catch (error) {
       console.error(error.message);
     }
@@ -99,5 +99,5 @@ module.exports = function authService () {
   return {
     getCode,
     authorizate
-  }
+  };
 };

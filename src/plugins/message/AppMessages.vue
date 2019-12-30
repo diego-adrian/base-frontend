@@ -9,10 +9,10 @@
       :timeout="timeout"
       top
     >
-      <v-icon>{{ t.icon }}</v-icon>
+      <v-icon class="text--white">{{ t.icon }}</v-icon>
       {{ t.message }}
       <v-btn icon dark @click.native="remove(t.key)">
-        <v-icon>close</v-icon>
+        <v-icon color="white">close</v-icon>
       </v-btn>
     </v-snackbar>
   </section>

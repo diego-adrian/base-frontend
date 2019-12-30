@@ -1,5 +1,6 @@
 const openId = require('./openId');
 const iss = require('./Iss');
+
 const config = {
   openId,
   iss

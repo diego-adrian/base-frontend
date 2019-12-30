@@ -27,9 +27,9 @@ app.get('/authorization', (req, res) => {
   }
 });
 
-app.get('/auth', (req, res) => {
+app.get('/auth', async (req, res) => {
   try {
-    const response = auth.getCode();
+    const response = await auth.getCode();
     if (response && response.url) {
       res.json({
         finalizado: true,
@@ -42,7 +42,11 @@ app.get('/auth', (req, res) => {
       throw new Error('Error al tratar de conectarse con ciudadanía digital');
     }
   } catch (err) {
-    console.error(err.message);
+    res.json({
+      finalizado: false,
+      mensaje: err.message,
+      datos: {}
+    });
   }
 });
 
