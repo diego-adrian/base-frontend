@@ -24,51 +24,6 @@
     <v-btn icon @click.stop="$store.commit('layout/toggleRightDrawer')">
       <v-icon>notifications</v-icon>
     </v-btn>
-    <v-menu
-      offset-x
-      :close-on-content-click="false"
-      max-width="320"
-      min-width="320"
-    >
-      <v-app-bar-title slot="activator">
-        <v-avatar class="info">
-          <span class="white--text headline">{{ inicial }}</span>
-        </v-avatar>
-      </v-app-bar-title>
-      <v-card>
-        <v-container grid-list-md class="menu-person">
-          <v-layout row wrap>
-            <v-flex xs3 text-md-center>
-              <v-avatar
-                class="info"
-                size="64"
-              >
-                <span class="white--text headline">{{ inicial }}</span>
-              </v-avatar>
-            </v-flex>
-            <v-flex xs9>
-              <h3>{{ nombreCompleto }}</h3>
-              <v-icon>mail</v-icon> {{ user.email }}<br>
-              <v-icon>person_pin</v-icon> {{ user.rol }} <br>
-              <v-icon>location_city</v-icon>{{ user.entidad }}
-            </v-flex>
-          </v-layout>
-        </v-container>
-        <v-divider></v-divider>
-        <v-list>
-          <v-list-tile @click="$router.push('account')">
-            <v-list-tile-title>
-              <v-icon>account_circle</v-icon> Cuenta
-            </v-list-tile-title>
-          </v-list-tile>
-          <v-list-tile @click="logout">
-            <v-list-tile-title>
-              <v-icon>&#xE8AC;</v-icon> Salir
-            </v-list-tile-title>
-          </v-list-tile>
-        </v-list>
-      </v-card>
-    </v-menu>
   </v-app-bar>
 </template>
 

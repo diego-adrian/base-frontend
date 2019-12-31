@@ -10,6 +10,7 @@
       app
       mini-variant-width="70"
       class="app--sidenav"
+      :expand-on-hover="$store.state.layout.miniVariant"
     >
       <v-row class="fill-height" no-gutters>
         <v-navigation-drawer
@@ -36,7 +37,9 @@
               @click=""
             >
               <v-list-item-action>
+                <!-- SI SON BADGES -->
                 <v-badge
+                  v-if="action.badget"
                   :color="action.theme"
                   overlap
                   right
@@ -52,6 +55,16 @@
                     {{ action.icon }}
                   </v-icon>
                 </v-badge>
+                <!-- SI SON ICONOS SIMPLES -->
+                <v-icon
+                  v-if="!action.badget"
+                  medium
+                 :color="action.theme"
+                 @click="action.event ? action.event : ''"
+                >
+                  {{ action.icon }}
+                </v-icon>
+
               </v-list-item-action>
 
               <v-list-item-content>
@@ -110,11 +123,35 @@ export default {
     this.setActive(this.$route.path);
     setTimeout(() => (this.clickEvent(this.$route.path)), 600);
   },
+  watch: {
+    clipped (val) {
+      console.log('---------aaaaaaaa---------------------------');
+      console.log(val);
+      console.log('------------------------------------');
+    }
+  },
   data: () => ({
     clipped: false,
     actions: [
-      { title: 'Home', icon: 'dashboard', theme: 'success' },
-      { title: 'About', icon: 'question_answer', theme: 'primary' },
+      {
+        title: 'Notificaciones',
+        icon: 'notifications',
+        theme: 'success',
+        badget: true
+      },
+      {
+        title: 'Reload',
+        icon: 'refresh',
+        theme: 'white',
+        badget: false
+      },
+      {
+        title: 'FullScreen',
+        icon: 'fullscreen',
+        theme: 'white',
+        badget: false,
+        event: 'fullscreen'
+      }
     ],
     links: ['Home', 'Contacts', 'Settings'],
     mini: true,
@@ -123,6 +160,11 @@ export default {
     ...mapState(['menu', 'user'])
   },
   methods: {
+    fullscreen () {
+      console.log('------------------------------------');
+      console.log('fullscreen');
+      console.log('------------------------------------');
+    },
     handleClickAvatar () {
       console.log('------------------------------------');
       console.log('AVATAR');
@@ -164,6 +206,7 @@ export default {
       .v-list-item {
         .v-list-item__title {
           font-size: 14px;
+          font-weight: 600;
         }
       }
       .app-logo {
