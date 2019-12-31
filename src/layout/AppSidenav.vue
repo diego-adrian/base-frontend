@@ -36,7 +36,9 @@
               :key="action.title"
               @click=""
             >
-              <v-list-item-action>
+              <v-list-item-action
+                class="cursor--pointer"
+              >
                 <!-- SI SON BADGES -->
                 <v-badge
                   v-if="action.badget"
@@ -50,6 +52,7 @@
                   </template>
                   <v-icon
                     medium
+                    class="cursor--pointer"
                     color="white"
                   >
                     {{ action.icon }}
@@ -60,7 +63,7 @@
                   v-if="!action.badget"
                   medium
                  :color="action.theme"
-                 @click="action.event ? action.event : ''"
+                 v-on="action.hasOwnProperty('event') ? { click: () => this[action.event] }  : null"
                 >
                   {{ action.icon }}
                 </v-icon>
@@ -86,6 +89,7 @@
             v-for="link in links"
             :key="link"
             link
+            class="cursor--pointer"
           >
             <v-list-item-title
               v-text="link"
@@ -100,9 +104,10 @@
 <script>
 import { mapState } from 'vuex';
 import layout from './mixins/layout';
+import Auth from '@/components/auth/mixins/auth';
 
 export default {
-  mixins: [layout],
+  mixins: [layout, Auth],
   mounted () {
     if (this.$storage.exist('menu')) {
       this.$store.commit('setMenu', this.$storage.get('menu'));
@@ -123,47 +128,41 @@ export default {
     this.setActive(this.$route.path);
     setTimeout(() => (this.clickEvent(this.$route.path)), 600);
   },
-  watch: {
-    clipped (val) {
-      console.log('---------aaaaaaaa---------------------------');
-      console.log(val);
-      console.log('------------------------------------');
-    }
+  data () {
+    return {
+      clipped: false,
+      actions: [
+        {
+          title: 'Notificaciones',
+          icon: 'notifications',
+          theme: 'success',
+          badget: true
+        },
+        {
+          title: 'Reload',
+          icon: 'refresh',
+          theme: 'white',
+          badget: false,
+          event: 'reload'
+        },
+        {
+          title: 'fullscreen',
+          icon: 'fullscreen',
+          theme: 'white',
+          badget: false,
+          event: 'fullscreen'
+        }
+      ],
+      links: ['Home', 'Contacts', 'Settings'],
+      mini: true,
+    };
   },
-  data: () => ({
-    clipped: false,
-    actions: [
-      {
-        title: 'Notificaciones',
-        icon: 'notifications',
-        theme: 'success',
-        badget: true
-      },
-      {
-        title: 'Reload',
-        icon: 'refresh',
-        theme: 'white',
-        badget: false
-      },
-      {
-        title: 'FullScreen',
-        icon: 'fullscreen',
-        theme: 'white',
-        badget: false,
-        event: 'fullscreen'
-      }
-    ],
-    links: ['Home', 'Contacts', 'Settings'],
-    mini: true,
-  }),
   computed: {
     ...mapState(['menu', 'user'])
   },
   methods: {
     fullscreen () {
-      console.log('------------------------------------');
-      console.log('fullscreen');
-      console.log('------------------------------------');
+      this.$util.fullscreen();
     },
     handleClickAvatar () {
       console.log('------------------------------------');
