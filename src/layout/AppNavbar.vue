@@ -2,28 +2,14 @@
   <v-app-bar
     app
     :clipped-left="clipped"
-    height="70"
-    class="app-navbar white"
+    height="58"
+    :class="auth ? 'app-navbar white white--text' : 'view--init white--text'"
+    :style="auth ? '' : 'box-shadow: none'"
   >
-    <v-app-bar-nav-icon class="btn-mini-variant" @click.stop="$store.commit('layout/toggleMiniVariant')"></v-app-bar-nav-icon>
-    <v-app-bar-nav-icon class="btn-drawer" @click.stop="$store.commit('layout/toggleDrawer')"></v-app-bar-nav-icon>
+    <v-app-bar-nav-icon v-if="auth" class="btn-mini-variant" @click.stop="$store.commit('layout/toggleMiniVariant')"></v-app-bar-nav-icon>
+    <v-app-bar-nav-icon v-if="auth" class="btn-drawer" @click.stop="$store.commit('layout/toggleDrawer')"></v-app-bar-nav-icon>
     <v-spacer></v-spacer>
-    <v-tooltip bottom>
-      <v-btn icon @click="fullscreen()" class="btn-fullscreen" slot="activator">
-        <v-icon>fullscreen</v-icon>
-        <v-icon>fullscreen_exit</v-icon>
-      </v-btn>
-      <span>Pantalla completa</span>
-    </v-tooltip>
-    <v-tooltip bottom>
-      <v-btn icon @click="reload" slot="activator">
-        <v-icon>refresh</v-icon>
-      </v-btn>
-      <span>Actualizar la página</span>
-    </v-tooltip>
-    <v-btn icon @click.stop="$store.commit('layout/toggleRightDrawer')">
-      <v-icon>notifications</v-icon>
-    </v-btn>
+
   </v-app-bar>
 </template>
 
@@ -37,10 +23,6 @@ export default {
     clipped: false
   }),
   methods: {
-    fullscreen () {
-      document.querySelector('body').classList.toggle('fullscreen');
-      this.$util.fullscreen();
-    }
   },
   computed: {
     ...mapState(['user']),
@@ -62,7 +44,10 @@ export default {
 
 <style lang="scss">
 @import '../assets/scss/variables.scss';
-
+.view--init {
+  background: transparent !important;
+  border-bottom: 1px solid rgba($color: $black, $alpha: .25) !important;
+}
 .app-navbar {
   box-shadow: 0px 1px 15px 1px rgba(69, 65, 78, 0.1);
 
@@ -72,17 +57,6 @@ export default {
 
   .v-btn .v-icon {
     color: $color;
-  }
-
-  .menu-user {
-    margin-right: 10px;
-    .v-app-bar__title {
-      font-size: 16px;
-      color: $color;
-    }
-    .v-icon {
-      font-size: 40px;
-    }
   }
 
   .btn-mini-variant {
@@ -108,27 +82,6 @@ body.fullscreen {
     .v-icon:last-child {
       display: inline-block;
     }
-  }
-}
-
-.menu-person {
-  color: lighten($warning, 10%);
-  font-size: 1rem;
-  padding: 10px 15px;
-  background-color: darken($primary, 5%);
-  // background-image: url(../../assets/images/bg.png);
-  background-position: center;
-  background-size: cover;
-
-  h3 {
-    font-size: 1.3rem;
-    color: white;
-    font-weight: 400;
-  }
-
-  .v-icon {
-    color: white !important;
-    font-size: 1.1rem;
   }
 }
 

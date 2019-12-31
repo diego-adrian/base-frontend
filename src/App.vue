@@ -1,7 +1,7 @@
 <template>
   <v-app :class="{ 'app-login': !auth }">
-    <app-sidenav v-if="auth && sidenav"></app-sidenav>
-    <app-navbar v-if="auth && sidenav"></app-navbar>
+    <app-sidenav v-if="auth"></app-sidenav>
+    <app-navbar></app-navbar>
     <v-content v-if="main">
       <!-- <app-breadcrumbs v-if="auth"></app-breadcrumbs> -->
       <div class="main">
@@ -10,6 +10,7 @@
         </transition>
       </div>
     </v-content>
+    <app-footer></app-footer>
   </v-app>
 </template>
 
@@ -17,6 +18,7 @@
 import { mapState } from 'vuex';
 import AppSidenav from '@/layout/AppSidenav.vue';
 import AppNavbar from '@/layout/AppNavbar.vue';
+import AppFooter from '@/layout/AppFooter.vue';
 import Auth from '@/components/auth/mixins/auth';
 
 // Páginas que no necesitan autenticación/token/sesión
@@ -30,7 +32,8 @@ export default {
   },
   components: {
     AppSidenav,
-    AppNavbar
+    AppNavbar,
+    AppFooter
   },
   created () {
     const error = this.$storage.get('error');

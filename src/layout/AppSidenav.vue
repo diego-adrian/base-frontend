@@ -4,7 +4,7 @@
       :clipped="clipped"
       v-model="$store.state.layout.drawer"
       mobile-break-point="600"
-      src="../../public/sidebar.jpg"
+      src="../../public/img/sidebar.jpg"
       fixed
       width="260"
       app
