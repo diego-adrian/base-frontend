@@ -15,6 +15,17 @@ export default {
       } catch (error) {
         this.$message.error(error.message || 'Ocurrio un error a tratar de conectarse con ciudadania digital');
       }
+    },
+    reload() {
+      this.$store.commit('setMain', false);
+      this.$nextTick(() => {
+        this.$store.commit('setMain', true);
+      });
+    },
+    logout () {
+      console.log('------------------------------------');
+      console.log('Logout');
+      console.log('------------------------------------');
     }
   }
 };

@@ -1,71 +1,78 @@
 <template>
-  <v-navigation-drawer
-    persistent
-    :mini-variant="$store.state.layout.miniVariant"
-    :clipped="clipped"
-    v-model="$store.state.layout.drawer"
-    enable-resize-watcher
-    mobile-break-point="600"
-    fixed
-    class="app-sidenav"
-    app
-    width="260"
-    mini-variant-width="68"
-  >
-    <div class="app-logo">
-      <h1 class="app-title">
-        <section :class="classAssigned"></section>
-        <span> Titulo Sidenav </span>
-      </h1>
-    </div>
-    <v-list id="sidenav-menu">
-      <v-list-group
-        v-model="item.active"
-        v-for="item in menu"
-        :key="item.label"
-        :prepend-icon="item.icon"
-        v-if="item.submenu"
-        class="sidenav-parent"
-        no-action
-      >
-        <v-list-tile
-          slot="activator"
-          @click="send(item.url, item.submenu, item)"
-          :data-url="item.url"
+   <v-navigation-drawer
+      :mini-variant="$store.state.layout.miniVariant"
+      :clipped="clipped"
+      v-model="$store.state.layout.drawer"
+      mobile-break-point="600"
+      src="../../public/sidebar.jpg"
+      fixed
+      width="260"
+      app
+      mini-variant-width="70"
+    >
+      <v-row class="fill-height" no-gutters>
+        <v-navigation-drawer
+          dark
+          mini-variant
+          mini-variant-width="56"
+          permanent
         >
-          <v-list-tile-content>
-            <v-list-tile-title :name="getLabel(item)">{{ getLabel(item) }}</v-list-tile-title>
-          </v-list-tile-content>
-        </v-list-tile>
-        <v-list-tile
-          v-for="subItem in item.submenu"
-          :key="subItem.label"
-          @click="send(subItem.url, null, subItem)"
-          :data-url="subItem.url"
-          class="sidenav-children"
-        >
-          <v-list-tile-content>
-            <v-list-tile-title>{{ getLabel(subItem) }}</v-list-tile-title>
-          </v-list-tile-content>
-        </v-list-tile>
-      </v-list-group>
-      <v-list-tile
-        v-else
-        @click="send(item.url, item.submenu, item)"
-        :data-url="item.url"
-        class="sidenav-one"
-      >
-        <v-list-tile-action>
-          <v-icon color="warning">{{ item.icon }}</v-icon>
-        </v-list-tile-action>
-        <v-list-tile-content>
-          <v-list-tile-title>
-            {{ getLabel(item) }}
-          </v-list-tile-title>
-        </v-list-tile-content>
-      </v-list-tile>
-    </v-list>
-  </v-navigation-drawer>
+          <v-list-item>
+            <v-list-item-avatar>
+              <v-img src="https://randomuser.me/api/portraits/women/75.jpg"></v-img>
+            </v-list-item-avatar>
+          </v-list-item>
+
+          <v-divider></v-divider>
+          <!-- SECCION PARA ICONOS COMO SER NOTIFICACIONES, ETC -->
+          <v-list
+            dense
+            nav
+          >
+
+            <v-list-item
+              v-for="action in actions"
+              :key="action.title"
+              @click=""
+            >
+              <v-list-item-action>
+                <v-badge
+                  color="success"
+                  overlap
+                  right
+                  class="align-self-center"
+                >
+                  <template v-slot:badge>
+                    <span>!</span>
+                  </template>
+                  <v-icon
+                    medium
+                    color="grey"
+                  >
+                    {{ action.icon }}
+                  </v-icon>
+                </v-badge>
+              </v-list-item-action>
+
+              <v-list-item-content>
+                <v-list-item-title>{{ action.title }}</v-list-item-title>
+              </v-list-item-content>
+            </v-list-item>
+          </v-list>
+          <!-- TERMINA AQUI LA SECCION -->
+        </v-navigation-drawer>
+
+        <v-list class="grow">
+          <v-list-item
+            v-for="link in links"
+            :key="link"
+            link
+          >
+            <v-list-item-title v-text="link"></v-list-item-title>
+          </v-list-item>
+        </v-list>
+      </v-row>
+    </v-navigation-drawer>
 </template>
 
 <script>
@@ -95,7 +102,13 @@ export default {
     setTimeout(() => (this.clickEvent(this.$route.path)), 600);
   },
   data: () => ({
-    clipped: false
+    clipped: false,
+    actions: [
+      { title: 'Home', icon: 'dashboard' },
+      { title: 'About', icon: 'question_answer' },
+    ],
+    links: ['Home', 'Contacts', 'Settings'],
+    mini: true,
   }),
   computed: {
     ...mapState(['menu', 'user'])
@@ -130,7 +143,7 @@ export default {
 <style lang="scss">
 @import '../assets/scss/variables.scss';
 
-$bgSidenav: darken($primary, 5%);
+$bgSidenav: rgba($color: $black, $alpha: .65);
 
 .theme--light .app-sidenav {
   background-color: $bgSidenav !important;

@@ -1,14 +1,13 @@
 <template>
-  <v-toolbar
+  <v-app-bar
     app
     :clipped-left="clipped"
     height="70"
     class="app-navbar white"
   >
-    <v-toolbar-side-icon class="btn-mini-variant" @click.stop="$store.commit('layout/toggleMiniVariant')"></v-toolbar-side-icon>
-    <v-toolbar-side-icon class="btn-drawer" @click.stop="$store.commit('layout/toggleDrawer')"></v-toolbar-side-icon>
+    <v-app-bar-nav-icon class="btn-mini-variant" @click.stop="$store.commit('layout/toggleMiniVariant')"></v-app-bar-nav-icon>
+    <v-app-bar-nav-icon class="btn-drawer" @click.stop="$store.commit('layout/toggleDrawer')"></v-app-bar-nav-icon>
     <v-spacer></v-spacer>
-    <app-lang></app-lang>
     <v-tooltip bottom>
       <v-btn icon @click="fullscreen()" class="btn-fullscreen" slot="activator">
         <v-icon>fullscreen</v-icon>
@@ -31,11 +30,11 @@
       max-width="320"
       min-width="320"
     >
-      <v-toolbar-title slot="activator">
+      <v-app-bar-title slot="activator">
         <v-avatar class="info">
           <span class="white--text headline">{{ inicial }}</span>
         </v-avatar>
-      </v-toolbar-title>
+      </v-app-bar-title>
       <v-card>
         <v-container grid-list-md class="menu-person">
           <v-layout row wrap>
@@ -70,7 +69,7 @@
         </v-list>
       </v-card>
     </v-menu>
-  </v-toolbar>
+  </v-app-bar>
 </template>
 
 <script>
@@ -112,7 +111,7 @@ export default {
 .app-navbar {
   box-shadow: 0px 1px 15px 1px rgba(69, 65, 78, 0.1);
 
-  .v-toolbar__content {
+  .v-app-bar__content {
     padding: 0 15px;
   }
 
@@ -122,7 +121,7 @@ export default {
 
   .menu-user {
     margin-right: 10px;
-    .v-toolbar__title {
+    .v-app-bar__title {
       font-size: 16px;
       color: $color;
     }

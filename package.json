@@ -77,7 +77,8 @@
       "import/no-extraneous-dependencies": "off",
       "no-plusplus": "off",
       "array-callback-return": "off",
-      "vue/no-use-v-if-with-v-for": "off"
+      "vue/no-use-v-if-with-v-for": "off",
+      "vue/valid-v-on": "off"
     },
     "parserOptions": {
       "parser": "babel-eslint"
