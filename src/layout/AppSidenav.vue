@@ -199,6 +199,7 @@ export default {
 @import '../assets/scss/variables.scss';
   $bgSidenav: rgba($color: $black, $alpha: .75);
   .app--sidenav {
+    overflow: hidden !important;
     .app--sidenav__background {
       background: $bgSidenav !important;
       padding: 0;
