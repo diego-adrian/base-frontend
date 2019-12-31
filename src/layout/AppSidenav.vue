@@ -9,6 +9,7 @@
       width="260"
       app
       mini-variant-width="70"
+      class="app--sidenav"
     >
       <v-row class="fill-height" no-gutters>
         <v-navigation-drawer
@@ -19,7 +20,7 @@
         >
           <v-list-item>
             <v-list-item-avatar>
-              <v-img src="https://randomuser.me/api/portraits/women/75.jpg"></v-img>
+              <v-img src="https://randomuser.me/api/portraits/women/75.jpg" class="app--sidenav__imagen" @click="handleClickAvatar"></v-img>
             </v-list-item-avatar>
           </v-list-item>
 
@@ -29,7 +30,6 @@
             dense
             nav
           >
-
             <v-list-item
               v-for="action in actions"
               :key="action.title"
@@ -37,17 +37,17 @@
             >
               <v-list-item-action>
                 <v-badge
-                  color="success"
+                  :color="action.theme"
                   overlap
                   right
                   class="align-self-center"
                 >
                   <template v-slot:badge>
-                    <span>!</span>
+                    <span>2</span>
                   </template>
                   <v-icon
                     medium
-                    color="grey"
+                    color="white"
                   >
                     {{ action.icon }}
                   </v-icon>
@@ -62,13 +62,22 @@
           <!-- TERMINA AQUI LA SECCION -->
         </v-navigation-drawer>
 
-        <v-list class="grow">
+        <!-- SECCION MENU PRINCIPAL -->
+        <v-list class="grow app--sidenav__background">
+          <div class="app-logo">
+            <h1 class="app-title">
+              <span class="white--text text-md-center text-lg-center">Frontend Base</span>
+            </h1>
+          </div>
           <v-list-item
             v-for="link in links"
             :key="link"
             link
           >
-            <v-list-item-title v-text="link"></v-list-item-title>
+            <v-list-item-title
+              v-text="link"
+              class="white--text">
+            </v-list-item-title>
           </v-list-item>
         </v-list>
       </v-row>
@@ -104,8 +113,8 @@ export default {
   data: () => ({
     clipped: false,
     actions: [
-      { title: 'Home', icon: 'dashboard' },
-      { title: 'About', icon: 'question_answer' },
+      { title: 'Home', icon: 'dashboard', theme: 'success' },
+      { title: 'About', icon: 'question_answer', theme: 'primary' },
     ],
     links: ['Home', 'Contacts', 'Settings'],
     mini: true,
@@ -114,6 +123,11 @@ export default {
     ...mapState(['menu', 'user'])
   },
   methods: {
+    handleClickAvatar () {
+      console.log('------------------------------------');
+      console.log('AVATAR');
+      console.log('------------------------------------');
+    },
     send (url, submenu) {
       if (submenu === undefined) {
         if (this.$storage.exist('menu')) {
@@ -142,162 +156,27 @@ export default {
 
 <style lang="scss">
 @import '../assets/scss/variables.scss';
-
-$bgSidenav: rgba($color: $black, $alpha: .65);
-
-.theme--light .app-sidenav {
-  background-color: $bgSidenav !important;
-
-  .v-list {
-    background-color: $bgSidenav;
-    padding: 0;
-  }
-
-  .v-list .v-list__tile--link.active {
-    background-color: rgba(0,0,0,0.12);
-  }
-
-  .v-list__group__items--no-action .v-list__tile {
-    padding-left: 60px;
-  }
-
-  .v-list__group__header__prepend-icon {
-    padding: 0 4px 0 16px;
-
-    & + div > .v-list__tile {
-      padding-left: 4px;
-    }
-  }
-
-  .v-list__tile.primary--text, .v-list__group,
-  .sidenav-one .v-list__tile__content {
-    color: lighten($primary, 40%);
-
-    .v-icon {
-      color: lighten($warning, 6%);
-    }
-
-    .v-list__tile__title {
-      font-size: 16px;
-    }
-  }
-
-  .sidenav-one {
-    .v-list__tile__action {
-      min-width: 44px;
-    }
-    .v-list__tile__content {
-
-    }
-  }
-
-  .app-logo {
-    background-color: darken($bgSidenav, 2%);
-    height: 70px;
-
-    .v-icon {
-      font-size: 36px;
-      margin: -5px 5px 0 0;
-    }
-
-    .app-title {
-      color: white;
-      font-weight: 300;
-      line-height: 66px;
-      font-size: 24px;
-      padding: 0 15px;
-      white-space: nowrap;
-    }
-  }
-
-  &.v-navigation-drawer--mini-variant {
-    overflow: initial;
-
-    .app-title {
-      span {
-        display: none;
-      }
-    }
-
-    .sidenav-one:hover {
-      width: 280px;
-      background-color: $primary;
-
-      .v-list__tile__action {
-        margin-right: 30px;
-      }
-    }
-
-    .v-list__tile__content {
-      opacity: 1;
-    }
-
-    .v-list__group__items--no-action .v-list__tile {
-      padding-left: 20px;
-      padding-right: 20px;
-    }
-
-    .sidenav-parent {
-      background-color: $primary;
-      position: relative;
-
-      &:hover {
-        .v-list__group__header {
-          background-color: $primary;
-          width: 280px;
-
-          .v-list__tile--link {
-            display: block;
-          }
-        }
-
-        .v-list__group__items {
-          border-top: 2px solid darken($primary, 10%);
-          background-color: $primary;
-          display: block !important;
-          position: absolute;
-          z-index: 5;
-          top: 60px;
-          left: 70px;
-          border-radius: 0 0 3px 3px;
-          width: 210px;
+  $bgSidenav: rgba($color: $black, $alpha: .75);
+  .app--sidenav {
+    .app--sidenav__background {
+      background: $bgSidenav !important;
+      padding: 0;
+      .v-list-item {
+        .v-list-item__title {
+          font-size: 14px;
         }
       }
-    }
-
-    .v-list {
-      .sidenav-one .v-list__tile--link {
-        padding: 10px 20px 10px 9px;
-        height: 60px;
-
-        .v-list__tile__action {
-        }
+      .app-logo {
+        height: 57px;
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: center;
+        border-bottom: 1px solid rgba($color: $white, $alpha: .3);
       }
     }
-
-    .v-list__group__header {
-      .v-list__group__header__prepend-icon {
-        padding: 16px 4px 16px 20px;
-        width: 68px;
-
-        .v-icon {
-          font-size: 2rem;
-        }
-      }
-
-      .v-list__tile--link {
-        display: none;
-      }
-
-      .v-list__group__header__append-icon {
-        display: none;
-      }
-    }
-
-    .v-list__group__items {
-      display: none !important;
+    .app--sidenav__imagen {
+      cursor: pointer;
     }
   }
-
-}
 </style>

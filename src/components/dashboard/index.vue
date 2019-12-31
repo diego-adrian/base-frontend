@@ -1,6 +1,6 @@
 <template>
   <div>
-    asdasd
+    Inicio
   </div>
 </template>
 <script>

@@ -2,8 +2,10 @@ body, html {
   padding: 0;
   margin: 0;
   overflow: auto;
-  font-family: 'Sansation';
-  font-weight: 300;
+  .v-application {
+    font-family: 'Sansation';
+    font-weight: 300;
+  }
 }
 .main {
   padding: 0;
