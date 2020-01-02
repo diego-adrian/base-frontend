@@ -1,0 +1,16 @@
+body, html {
+  padding: 0;
+  margin: 0;
+  overflow: auto;
+  .v-application {
+    font-family: 'Sansation';
+    font-weight: 300;
+  }
+}
+.cursor--pointer {
+  cursor: pointer !important;
+}
+.main {
+  padding: 0;
+  margin: 0;
+}

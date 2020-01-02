@@ -1,0 +1,177 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   viewBox="0 0 1682.48 397.91"
+   version="1.1"
+   id="svg48"
+   sodipodi:docname="Recurso 58-vector.svg"
+   inkscape:version="0.92.2 2405546, 2018-03-11">
+  <metadata
+     id="metadata52">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <sodipodi:namedview
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1"
+     objecttolerance="10"
+     gridtolerance="10"
+     guidetolerance="10"
+     inkscape:pageopacity="0"
+     inkscape:pageshadow="2"
+     inkscape:window-width="1870"
+     inkscape:window-height="1011"
+     id="namedview50"
+     showgrid="false"
+     inkscape:zoom="0.53373592"
+     inkscape:cx="926.12764"
+     inkscape:cy="496.88341"
+     inkscape:window-x="50"
+     inkscape:window-y="30"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="svg48" />
+  <defs
+     id="defs4">
+    <style
+       id="style2">.cls-1{fill:none;}.cls-2{fill:#f09204;}.cls-3{fill:#f49e07;}.cls-4{fill:#ffea17;}.cls-5{fill:#f5ac07;}.cls-6{fill:#f3970b;}.cls-7{fill:#ef8c11;}.cls-8{fill:#ffde0c;}</style>
+  </defs>
+  <title
+     id="title6">Recurso 58-vector</title>
+  <g
+     id="g202">
+    <path
+       sodipodi:nodetypes="ccccc"
+       inkscape:connector-curvature="0"
+       id="polygon36"
+       d="M 252.24024,397.89561 252.29229,0 H 0 v 276.13 z"
+       style="fill:#f5ac07"
+       transform="scale(6.6687408,1)" />
+    <g
+       transform="translate(-0.35522011,-0.01439)"
+       id="g94"
+       data-name="Capa 2">
+      <g
+         id="g92"
+         data-name="Capa 1">
+        <polygon
+           style="fill:none"
+           class="cls-1"
+           points="559.5,176.55 559.49,176.56 540.5,315.25 "
+           id="polygon54" />
+        <path
+           style="fill:#f09204"
+           inkscape:connector-curvature="0"
+           class="cls-2"
+           d="m 1081.46,0 h -4.09 l 0.44,0.95 z"
+           id="path56" />
+        <polygon
+           style="fill:#f09204"
+           class="cls-2"
+           points="1597.38,0 1594.19,391.52 1599.89,391.93 1682.48,126.2 1682.48,0 "
+           id="polygon58" />
+        <polygon
+           style="fill:#f49e07"
+           class="cls-3"
+           points="1567.96,389.62 1594.19,391.52 1597.38,0 1088.07,0 "
+           id="polygon60" />
+        <path
+           style="fill:#ffea17"
+           inkscape:connector-curvature="0"
+           class="cls-4"
+           d="m 304.69,298.18 235.81,17.07 19,-138.69 Q 429.65,231.88 304.69,298.18 Z"
+           id="path62" />
+        <polygon
+           style="fill:#f09204"
+           class="cls-2"
+           points="559.5,176.55 559.52,176.54 559.5,176.5 559.49,176.56 "
+           id="polygon64" />
+        <path
+           style="fill:#f09204"
+           inkscape:connector-curvature="0"
+           class="cls-2"
+           d="m 839.3,63.12 -1.07,8.47 7.94,-2.59 z"
+           id="path66" />
+        <path
+           style="fill:#f5ac07"
+           inkscape:connector-curvature="0"
+           class="cls-5"
+           d="m 559.53,176.54 95,147 100.65,7.29 -30.84,-219.35 c -55.53,20.38 -110.53,41.93 -164.81,65.06 z"
+           id="path68" />
+        <path
+           style="fill:#f3970b"
+           inkscape:connector-curvature="0"
+           class="cls-6"
+           d="m 724.34,111.48 30.79,219.31 50,3.62 33.1,-262.82 C 800,84.24 762,97.63 724.34,111.48 Z"
+           id="path70" />
+        <path
+           style="fill:#f49e07"
+           inkscape:connector-curvature="0"
+           class="cls-3"
+           d="m 846.17,69 344.5,293.35 58.59,4.24 L 1077.82,0.95 Q 960.41,31.59 846.17,69 Z"
+           id="path72" />
+        <polygon
+           style="fill:#f49e07"
+           class="cls-3"
+           points="796.34,0 668.15,0 724.3,111.25 "
+           id="polygon74" />
+        <polygon
+           style="fill:#f5ac07"
+           class="cls-5"
+           points="668.15,0 565.15,0 724.3,111.25 "
+           id="polygon76" />
+        <path
+           style="fill:#f09204"
+           inkscape:connector-curvature="0"
+           class="cls-2"
+           d="M 304.69,298.18 Q 429.63,231.8 559.49,176.56 v -0.06 0 c 54.29,-23.13 109.28,-44.68 164.81,-65.06 v -0.23 L 565.15,0 H 95.25 l 156.92,294.38 z"
+           id="path78" />
+        <path
+           style="fill:#f09204"
+           inkscape:connector-curvature="0"
+           class="cls-2"
+           d="M 724.34,111.48 C 762,97.63 800,84.24 838.23,71.59 l 1.07,-8.47 6.87,5.88 Q 960.39,31.54 1077.82,1 l -0.44,-0.95 h -281 l -72,111.25 z"
+           id="path80" />
+        <polygon
+           style="fill:#f5ac07"
+           class="cls-5"
+           points="252.17,294.38 95.25,0 0,0 0,276.13 "
+           id="polygon82" />
+        <path
+           style="fill:#ef8c11"
+           inkscape:connector-curvature="0"
+           class="cls-7"
+           d="m 838.23,71.59 -33.06,262.82 385.5,27.9 L 846.17,69 Z"
+           id="path84" />
+        <path
+           style="fill:#ef8c11"
+           inkscape:connector-curvature="0"
+           class="cls-7"
+           d="M 1249.25,366.55 1568,389.62 1088.07,0 h -6.61 l -3.64,0.95 z"
+           id="path86" />
+        <polygon
+           style="fill:#ffde0c"
+           class="cls-8"
+           points="559.52,176.54 559.5,176.55 540.5,315.25 654.48,323.5 "
+           id="polygon88" />
+        <polygon
+           style="fill:#f09204"
+           class="cls-2"
+           points="1682.48,397.91 1682.48,126.2 1599.89,391.93 "
+           id="polygon90" />
+      </g>
+    </g>
+  </g>
+</svg>
