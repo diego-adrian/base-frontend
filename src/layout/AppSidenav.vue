@@ -8,7 +8,8 @@
       fixed
       width="260"
       app
-      mini-variant-width="70"
+      floating
+      mini-variant-width="56"
       class="app--sidenav"
       :expand-on-hover="$store.state.layout.miniVariant"
     >
@@ -17,7 +18,7 @@
           dark
           mini-variant
           mini-variant-width="56"
-          permanent
+          fixed
         >
           <v-list-item>
             <v-menu
@@ -35,24 +36,19 @@
                   </v-img>
                 </v-list-item-avatar>
               </template>
-
               <v-card>
                 <v-list>
                   <v-list-item>
                     <v-list-item-avatar>
                       <img src="https://randomuser.me/api/portraits/women/75.jpg" alt="Women">
                     </v-list-item-avatar>
-
                     <v-list-item-content>
                       <v-list-item-title>{{ `${user.nombres} ${user.primer_apellido} ${user.segundo_apellido}` }}</v-list-item-title>
                       <v-list-item-subtitle>{{ user.correo }}</v-list-item-subtitle>
                     </v-list-item-content>
-
                   </v-list-item>
                 </v-list>
-
                 <v-divider></v-divider>
-
                 <v-list>
                   <v-list-item @click="logout">
                     <v-list-item-title class="red--text">
@@ -60,12 +56,9 @@
                       Cerrar Session
                     </v-list-item-title>
                   </v-list-item>
-
                 </v-list>
               </v-card>
-
             </v-menu>
-
           </v-list-item>
 
           <!-- SECCION PARA ICONOS COMO SER NOTIFICACIONES, ETC -->
@@ -174,12 +167,6 @@ export default {
     return {
       clipped: false,
       user: {},
-      items: [
-        { title: 'Click Me' },
-        { title: 'Click Me' },
-        { title: 'Click Me' },
-        { title: 'Click Me 2' },
-      ],
       actions: [
         {
           title: 'Notificaciones',
@@ -219,20 +206,11 @@ export default {
           const page = this.$util.getMenuOption(this.$storage.get('menu'), url);
           this.$store.commit('layout/setBreadcrumbs', page);
         }
-
         this.setActive(url);
-
         this.$router.push(`/${url || ''}`);
       }
     },
     getLabel (item) {
-      // if (item.url) {
-      //   let label = this.$t(`menu.${item.url.replace('/', '')}`);
-      //   if (label.indexOf('.') === -1) {
-      //     return label;
-      //   }
-      // }
-
       return item.label;
     }
   }
@@ -247,6 +225,7 @@ export default {
     .app--sidenav__background {
       background: $bgSidenav !important;
       padding: 0;
+      margin-left: 56px;
       .v-list-item {
         .v-list-item__title {
           font-size: .8rem;
