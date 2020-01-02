@@ -235,7 +235,7 @@ export default {
         }
         if (error.response.status === 403) {
           store.commit('setState403', true);
-          router.push('/403');
+          router.push('/404');
         }
         if (error.response.status === 500) {
           const { data } = error.response;

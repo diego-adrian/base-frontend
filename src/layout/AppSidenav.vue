@@ -30,10 +30,9 @@
             transition="scale-transition">
               <template v-slot:activator="{ on }">
                 <v-list-item-avatar>
-                  <v-img
-                    v-on="on"
-                    src="https://randomuser.me/api/portraits/women/75.jpg" class="app--sidenav__imagen">
-                  </v-img>
+                  <v-avatar size="48" color="info" v-on="on" class="app--sidenav__avatar">
+                    <span class="white--text headline">{{ appTitle.charAt(0) }}</span>
+                  </v-avatar>
                 </v-list-item-avatar>
               </template>
               <v-card>
@@ -53,14 +52,13 @@
                   <v-list-item @click="logout">
                     <v-list-item-title class="red--text">
                       <v-icon color="error"> home </v-icon>
-                      Cerrar Session
+                      Cerrar Sesion
                     </v-list-item-title>
                   </v-list-item>
                 </v-list>
               </v-card>
             </v-menu>
           </v-list-item>
-
           <!-- SECCION PARA ICONOS COMO SER NOTIFICACIONES, ETC -->
           <v-list
             dense
@@ -102,7 +100,6 @@
                 >
                   {{ action.icon }}
                 </v-icon>
-
               </v-list-item-action>
 
               <v-list-item-content>
@@ -114,23 +111,61 @@
         </v-navigation-drawer>
 
         <!-- SECCION MENU PRINCIPAL -->
-        <v-list class="grow app--sidenav__background">
+        <v-list dense class="grow app--sidenav__background">
           <div class="app-logo">
             <h4 class="app-title">
-              <span class="white--text text-md-center text-lg-center">Frontend Base</span>
+              <span class="white--text text-center">{{ appTitle }}</span>
             </h4>
           </div>
-          <v-list-item
-            v-for="link in links"
-            :key="link"
-            link
-            class="cursor--pointer"
-          >
-            <v-list-item-title
-              v-text="link"
-              class="white--text">
-            </v-list-item-title>
-          </v-list-item>
+
+          <template v-for="item in menu">
+            <!-- SI TIENE SUBMENU -->
+            <template v-if="item.submenu">
+              <v-list-group
+                :key="item.label"
+                :value="true"
+                color="warning"
+                :prepend-icon="item.icon"
+              >
+                <template v-slot:activator>
+                  <v-list-item-content>
+                    <v-list-item-title class="white--text">{{ item.label }}</v-list-item-title>
+                  </v-list-item-content>
+                </template>
+
+                  <v-list-item
+                    v-for="subItem in item.submenu"
+                    :key="subItem.label"
+                    link
+                    @click="redirect(subItem)"
+                  >
+                    <v-list-item-content>
+                      <v-list-item-title class="white--text" v-text="subItem.label"></v-list-item-title>
+                    </v-list-item-content>
+                  </v-list-item>
+              </v-list-group>
+            </template>
+            <!-- SI NO TIENE SUBMENU -->
+            <template v-else>
+              <v-list-item
+                :key="item.url"
+                color="warning"
+                class="cursor--pointer"
+                link
+                @click="redirect(item)"
+              >
+                <v-list-item-icon>
+                  <v-icon color="warning">{{ item.icon }}</v-icon>
+                </v-list-item-icon>
+                <v-list-item-content>
+                  <v-list-item-title
+                    class="white--text">
+                    {{ item.label }}
+                  </v-list-item-title>
+                </v-list-item-content>
+              </v-list-item>
+            </template>
+          </template>
         </v-list>
       </v-row>
     </v-navigation-drawer>
@@ -166,6 +201,7 @@ export default {
   data () {
     return {
       clipped: false,
+      appTitle: 'Frontend Base',
       user: {},
       actions: [
         {
@@ -194,21 +230,21 @@ export default {
     };
   },
   computed: {
-    ...mapState(['menu'])
+    ...mapState(['menu']),
+    currentRouteName() {
+      return this.$route.name;
+    }
   },
   methods: {
+    redirect (subItem) {
+      if (subItem && subItem.hasOwnProperty('url')) {
+        if (this.$route.path.replace(/\//gi, '') !== subItem.url) {
+          this.$router.push(subItem.url);
+        }
+      }
+    },
     fullscreen () {
       this.$util.fullscreen();
-    },
-    send (url, submenu) {
-      if (submenu === undefined) {
-        if (this.$storage.exist('menu')) {
-          const page = this.$util.getMenuOption(this.$storage.get('menu'), url);
-          this.$store.commit('layout/setBreadcrumbs', page);
-        }
-        this.setActive(url);
-        this.$router.push(`/${url || ''}`);
-      }
     },
     getLabel (item) {
       return item.label;
@@ -226,7 +262,12 @@ export default {
       background: $bgSidenav !important;
       padding: 0;
       margin-left: 56px;
+      width: 200px;
       .v-list-item {
+        .v-list-item__icon {
+          margin-right: 8px !important;
+          margin-left: -10px !important;
+        }
         .v-list-item__title {
           font-size: .8rem;
           font-weight: 600;
@@ -244,7 +285,7 @@ export default {
     .app--sidenav__user {
       width: 600px;
     }
-    .app--sidenav__imagen {
+    .app--sidenav__avatar {
       cursor: pointer;
     }
   }

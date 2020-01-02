@@ -1,9 +1,10 @@
+@import './variables.scss';
 body, html {
   padding: 0;
   margin: 0;
   overflow: auto;
   .v-application {
-    font-family: 'Sansation';
+    font-family: $fontFamilyTitilliumWeb;
     font-weight: 300;
   }
 }

@@ -16,9 +16,6 @@ app.get('/', (req, res) => res.send('Servidor funcionando correctamente'));
 app.get('/authorization', async (req, res) => {
   try {
     const response = await auth.authorizate(req);
-    console.log('-----------RESPUESTA AUTHORIZATION-------------------------');
-    console.log(response);
-    console.log('------------------------------------');
     res.json(response);
   } catch (error) {
     throw new Error(error.message);

@@ -94,28 +94,23 @@ module.exports = function authService () {
                   usuario: user,
                   token: token,
                   menu: [{
-                    url: 'config',
+                    url: 'dashboard',
+                    icon: 'desktop_mac',
+                    color: 'primary',
+                    label: 'Dashboard'
+                  },
+                  {
+                    url: 'configuracion',
                     icon: 'settings',
-                    label: 'Configuraciones',
+                    color: 'success',
+                    label: 'Configuración para el frontend Base',
                     submenu: [{
-                      url: 'entidades',
-                      label: 'Entidades'
-                    },
-                    {
                       url: 'usuarios',
                       label: 'Usuarios'
                     },
                     {
-                      url: 'modulos',
-                      label: 'Módulos y permisos'
-                    },
-                    {
-                      url: 'parametros',
-                      label: 'Preferencias'
-                    },
-                    {
-                      url: 'logs',
-                      label: 'Logs del sistema'
+                      url: 'entidades',
+                      label: 'Entidades'
                     }
                     ]
                   }],

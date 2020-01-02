@@ -1,6 +1,6 @@
 <template>
   <div>
-    Inicio
+    Inicio dashboard
   </div>
 </template>
 <script>

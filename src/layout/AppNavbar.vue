@@ -6,7 +6,7 @@
     height="49"
     class="bolivia__servicio"
     :class="auth ? 'app-navbar' : 'view--init'"
-    style="box-shadow: none"
+    flat
   >
     <v-app-bar-nav-icon v-if="auth" class="btn-mini-variant" @click.stop="$store.commit('layout/toggleMiniVariant')"></v-app-bar-nav-icon>
     <v-app-bar-nav-icon v-if="auth" class="btn-drawer" @click.stop="$store.commit('layout/toggleDrawer')"></v-app-bar-nav-icon>

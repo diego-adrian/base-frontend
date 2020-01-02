@@ -8,3 +8,13 @@ Archivo de estilos para fuentes externas
   font-weight: 300;
   src: local('Sansation'), local('Sansation_Light'), url('../fonts/sansation/Sansation_Light.ttf');
 }
+
+@font-face {
+  font-family: 'TitilliumText';
+  src: local('Titillium-Text-Light'), url('../fonts/titilliumtext/TitilliumText-Light.ttf');
+}
+
+@font-face {
+  font-family: 'TitilliumWeb';
+  src: local('Titillium-Web-Regular'), url('../fonts/TitilliumWeb/TitilliumWeb-Regular.ttf');
+}

@@ -78,7 +78,8 @@
       "no-plusplus": "off",
       "array-callback-return": "off",
       "vue/no-use-v-if-with-v-for": "off",
-      "vue/valid-v-on": "off"
+      "vue/valid-v-on": "off",
+      "no-prototype-builtins": "off"
     },
     "parserOptions": {
       "parser": "babel-eslint"
