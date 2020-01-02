@@ -7,18 +7,23 @@
     tile
     padless
     color="transparent"
-    class="white--text"
+    :class="!auth ? 'white--text' : 'black--text'"
   >
     <div>Desarrollado por AGETIC {{ new Date().getFullYear() }}</div>
   </v-footer>
 </template>
 
 <script>
+import { mapState } from 'vuex';
+
 export default {
   data: () => ({
     fixed: false,
     inset: true
-  })
+  }),
+  computed: {
+    ...mapState(['auth'])
+  }
 };
 </script>
 
@@ -30,6 +35,6 @@ export default {
   flex-direction: row;
   align-items: center;
   justify-content: center;
-  font-size: 0.8rem;
+  font-size: 0.75rem;
 }
 </style>

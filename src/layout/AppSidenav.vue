@@ -25,7 +25,6 @@
             </v-list-item-avatar>
           </v-list-item>
 
-          <v-divider></v-divider>
           <!-- SECCION PARA ICONOS COMO SER NOTIFICACIONES, ETC -->
           <v-list
             dense
@@ -81,9 +80,9 @@
         <!-- SECCION MENU PRINCIPAL -->
         <v-list class="grow app--sidenav__background">
           <div class="app-logo">
-            <h1 class="app-title">
+            <h4 class="app-title">
               <span class="white--text text-md-center text-lg-center">Frontend Base</span>
-            </h1>
+            </h4>
           </div>
           <v-list-item
             v-for="link in links"
@@ -205,12 +204,12 @@ export default {
       padding: 0;
       .v-list-item {
         .v-list-item__title {
-          font-size: 14px;
+          font-size: .8rem;
           font-weight: 600;
         }
       }
       .app-logo {
-        height: 57px;
+        height: 49px;
         display: flex;
         flex-direction: row;
         align-items: center;

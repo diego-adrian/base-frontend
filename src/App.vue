@@ -54,7 +54,7 @@ export default {
 
       // this.timerSession();
     } else if (PageNoLogin.indexOf(this.$route.path.substring(1)) === -1 || this.$route.path === '/') {
-      // this.logout();
+      this.logout();
     }
   },
   data () {
@@ -69,7 +69,7 @@ export default {
   watch: {
     '$route' (to, from) {
       if (!this.$storage.existUser() && PageNoLogin.indexOf(to.path.substring(1)) === -1) {
-        // this.logout();
+        this.logout();
       }
       if (to.path !== '/login' && from.path !== '/login') {
         this.transitionName = 'fade';

@@ -3,14 +3,14 @@
     app
     :clipped-left="clipped"
     fixed
-    height="58"
+    height="49"
     class="bolivia__servicio"
-    :class="auth ? 'app-navbar white white--text' : 'view--init white--text'"
-    :style="auth ? '' : 'box-shadow: none'"
+    :class="auth ? 'app-navbar' : 'view--init'"
+    style="box-shadow: none"
   >
     <v-app-bar-nav-icon v-if="auth" class="btn-mini-variant" @click.stop="$store.commit('layout/toggleMiniVariant')"></v-app-bar-nav-icon>
     <v-app-bar-nav-icon v-if="auth" class="btn-drawer" @click.stop="$store.commit('layout/toggleDrawer')"></v-app-bar-nav-icon>
-    <v-toolbar-title class="title__servicio">BOLIVIA A TU SERVICIO </v-toolbar-title>
+    <v-toolbar-title :class="[auth ? 'black--text' : 'white--text' ,'title__servicio']">BOLIVIA A TU SERVICIO </v-toolbar-title>
     <ul class="redes__sociales">
       <li tooltip="Facebook">&nbsp;</li>
       <li tooltip="Twitter">&nbsp;</li>
@@ -22,12 +22,13 @@
     </ul>
     <v-spacer></v-spacer>
     <v-toolbar-items class="hidden-sm-and-down bolivia__servicio__details">
-      <section>¿Qué es Empresa Digital?</section>
-      <section>Trámites Disponibles</section>
-      <section>Ayuda</section>
+      <section v-if="!auth">¿Qué es Ciudadania Digital?</section>
+      <section v-if="!auth">¿Donde me registro?</section>
+      <section v-if="!auth">Documentos</section>
+      <section v-if="!auth">Ayuda</section>
       <section>
         <v-btn icon>
-          <v-icon color="white">apps</v-icon>
+          <v-icon :color="auth ? 'black' : 'white'">apps</v-icon>
         </v-btn>
       </section>
     </v-toolbar-items>
@@ -53,16 +54,16 @@ export default {
 @import '../assets/scss/variables.scss';
 .view--init {
   background: transparent !important;
-  border-bottom: 1px solid rgba($color: $white, $alpha: .1) !important;
+  border-bottom: 1px solid rgba($color: $white, $alpha: .2) !important;
 }
 .app-navbar {
-
+  background: transparent !important;
+  background-size: 100%;
+  background-position: 0 center;
+  width: 100%;
+  border-bottom: 1px solid rgba($color: $black, $alpha: .5) !important;
   .v-app-bar__content {
     padding: 0 15px;
-  }
-
-  .v-btn .v-icon {
-    color: $color;
   }
 
   .btn-mini-variant {
@@ -99,9 +100,8 @@ body.fullscreen {
       text-transform: uppercase;
       font-weight: 300;
       line-height: 50px;
-      font-size: .8rem;
+      font-size: .7rem;
       font-family: $fontFamilySansation;
-      color: $white;
       user-select: none;
     }
     .bolivia__servicio__details {
@@ -116,10 +116,10 @@ body.fullscreen {
         flex-direction: row;
         align-items: center;
         cursor: pointer;
-        font-size: 14px;
+        font-size: .8rem;
         color: $white;
         margin-right: 20px;
-        &:nth-child(4) {
+        &:nth-child(5) {
           height: 50px;
           margin-right: auto;
           border-left: 1px solid rgba($color: $white, $alpha: .2);
@@ -149,7 +149,6 @@ body.fullscreen {
             padding: 5px;
             max-width: 100px;
             color: $white;
-            background: rgba($color: $black, $alpha: 1);
             font-size: 12px;
             position: absolute;
             top: 45px;
@@ -167,7 +166,6 @@ body.fullscreen {
             padding: 5px;
             max-width: 100px;
             color: $white;
-            background: rgba($color: $black, $alpha: 1);
             font-size: 12px;
             position: absolute;
             top: 45px;
@@ -185,7 +183,6 @@ body.fullscreen {
             padding: 5px;
             max-width: 100px;
             color: $white;
-            background: rgba($color: $black, $alpha: 1);
             font-size: 12px;
             position: absolute;
             top: 45px;
@@ -204,7 +201,6 @@ body.fullscreen {
             max-width: 150px;
             width: 130px;
             color: $white;
-            background: rgba($color: $black, $alpha: 1);
             font-size: 12px;
             position: absolute;
             top: 45px;
@@ -223,7 +219,6 @@ body.fullscreen {
             max-width: 150px;
             width: 110px;
             color: $white;
-            background: rgba($color: $black, $alpha: 1);
             font-size: 12px;
             position: absolute;
             top: 45px;
@@ -241,7 +236,6 @@ body.fullscreen {
             padding: 5px;
             max-width: 100px;
             color: $white;
-            background: rgba($color: $black, $alpha: 1);
             font-size: 12px;
             position: absolute;
             top: 45px;
@@ -259,7 +253,6 @@ body.fullscreen {
             padding: 5px;
             max-width: 100px;
             color: $white;
-            background: rgba($color: $black, $alpha: 1);
             font-size: 12px;
             position: absolute;
             top: 45px;
