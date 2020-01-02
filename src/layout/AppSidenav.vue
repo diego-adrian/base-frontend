@@ -20,9 +20,52 @@
           permanent
         >
           <v-list-item>
-            <v-list-item-avatar>
-              <v-img src="https://randomuser.me/api/portraits/women/75.jpg" class="app--sidenav__imagen" @click="handleClickAvatar"></v-img>
-            </v-list-item-avatar>
+            <v-menu
+            offset-y
+            :close-on-content-click="false"
+            :nudge-width="200"
+            :max-width="350"
+            origin="left top"
+            transition="scale-transition">
+              <template v-slot:activator="{ on }">
+                <v-list-item-avatar>
+                  <v-img
+                    v-on="on"
+                    src="https://randomuser.me/api/portraits/women/75.jpg" class="app--sidenav__imagen">
+                  </v-img>
+                </v-list-item-avatar>
+              </template>
+
+              <v-card>
+                <v-list>
+                  <v-list-item>
+                    <v-list-item-avatar>
+                      <img src="https://randomuser.me/api/portraits/women/75.jpg" alt="Women">
+                    </v-list-item-avatar>
+
+                    <v-list-item-content>
+                      <v-list-item-title>{{ `${user.nombres} ${user.primer_apellido} ${user.segundo_apellido}` }}</v-list-item-title>
+                      <v-list-item-subtitle>{{ user.correo }}</v-list-item-subtitle>
+                    </v-list-item-content>
+
+                  </v-list-item>
+                </v-list>
+
+                <v-divider></v-divider>
+
+                <v-list>
+                  <v-list-item @click="logout">
+                    <v-list-item-title class="red--text">
+                      <v-icon color="error"> home </v-icon>
+                      Cerrar Session
+                    </v-list-item-title>
+                  </v-list-item>
+
+                </v-list>
+              </v-card>
+
+            </v-menu>
+
           </v-list-item>
 
           <!-- SECCION PARA ICONOS COMO SER NOTIFICACIONES, ETC -->
@@ -114,7 +157,7 @@ export default {
 
     if (this.$storage.existUser()) {
       this.$store.commit('setAuth', true);
-
+      this.user = this.$storage.getUser();
       if (this.$storage.exist('sidenav')) {
         this.$store.commit('setSidenav', this.$storage.get('sidenav'));
       }
@@ -130,6 +173,13 @@ export default {
   data () {
     return {
       clipped: false,
+      user: {},
+      items: [
+        { title: 'Click Me' },
+        { title: 'Click Me' },
+        { title: 'Click Me' },
+        { title: 'Click Me 2' },
+      ],
       actions: [
         {
           title: 'Notificaciones',
@@ -157,16 +207,11 @@ export default {
     };
   },
   computed: {
-    ...mapState(['menu', 'user'])
+    ...mapState(['menu'])
   },
   methods: {
     fullscreen () {
       this.$util.fullscreen();
-    },
-    handleClickAvatar () {
-      console.log('------------------------------------');
-      console.log('AVATAR');
-      console.log('------------------------------------');
     },
     send (url, submenu) {
       if (submenu === undefined) {
@@ -216,6 +261,9 @@ export default {
         justify-content: center;
         border-bottom: 1px solid rgba($color: $white, $alpha: .3);
       }
+    }
+    .app--sidenav__user {
+      width: 600px;
     }
     .app--sidenav__imagen {
       cursor: pointer;
