@@ -17,6 +17,7 @@
       <li tooltip="Youtube">&nbsp;</li>
       <li tooltip="Teléfono de contacto">&nbsp;</li>
       <li tooltip="Correo electrónico">&nbsp;</li>
+      <li tooltip="Instagram">&nbsp;</li>
       <li tooltip="Whatsapp">&nbsp;</li>
       <li tooltip="Messenger">&nbsp;</li>
     </ul>
@@ -98,7 +99,7 @@ body.fullscreen {
     margin: 0;
     .title__servicio {
       text-transform: uppercase;
-      font-weight: 300;
+      font-weight: 600;
       line-height: 50px;
       font-size: .7rem;
       font-family: $fontFamilySansation;
@@ -135,12 +136,10 @@ body.fullscreen {
         align-self: center;
         margin-right: 2px;
         cursor: pointer;
-        opacity: .85;
-        filter: invert(1);
         &:nth-child(1) {
           width: 32px;
           height: 32px;
-          background: url('../../public/img/facebook.svg') no-repeat;
+          background: url('../../public/img/facebook.png') no-repeat;
           background-size: contain;
           background-position: center;
           &:hover::before {
@@ -151,13 +150,14 @@ body.fullscreen {
             color: $white;
             font-size: 12px;
             position: absolute;
+            background: $black;
             top: 45px;
           }
         }
         &:nth-child(2) {
           width: 32px;
           height: 32px;
-          background: url('../../public/img/twitter.svg') no-repeat;
+          background: url('../../public/img/twitter.png') no-repeat;
           background-size: contain;
           background-position: center;
           &:hover::before {
@@ -168,13 +168,14 @@ body.fullscreen {
             color: $white;
             font-size: 12px;
             position: absolute;
+            background: $black;
             top: 45px;
           }
         }
         &:nth-child(3) {
           width: 32px;
           height: 32px;
-          background: url('../../public/img/youtube.svg') no-repeat;
+          background: url('../../public/img/youtube.png') no-repeat;
           background-size: contain;
           background-position: center;
           &:hover::before {
@@ -185,13 +186,14 @@ body.fullscreen {
             color: $white;
             font-size: 12px;
             position: absolute;
+            background: $black;
             top: 45px;
           }
         }
         &:nth-child(4) {
           width: 32px;
           height: 32px;
-          background: url('../../public/img/phone.svg') no-repeat;
+          background: url('../../public/img/phone.png') no-repeat;
           background-size: contain;
           background-position: center;
           &:hover::before {
@@ -203,13 +205,14 @@ body.fullscreen {
             color: $white;
             font-size: 12px;
             position: absolute;
+            background: $black;
             top: 45px;
           }
         }
         &:nth-child(5) {
           width: 32px;
           height: 32px;
-          background: url('../../public/img/email.svg') no-repeat;
+          background: url('../../public/img/email.png') no-repeat;
           background-size: contain;
           background-position: center;
           &:hover::before {
@@ -217,14 +220,33 @@ body.fullscreen {
             font-family: $fontFamilySansation;
             padding: 5px;
             max-width: 150px;
-            width: 110px;
+            width: 120px;
             color: $white;
             font-size: 12px;
             position: absolute;
+            background: $black;
             top: 45px;
           }
         }
         &:nth-child(6) {
+          width: 32px;
+          height: 32px;
+          background: url('../../public/img/instagram.svg') no-repeat;
+          background-size: contain;
+          background-position: center;
+          &:hover::before {
+            content: attr(tooltip);
+            font-family: $fontFamilySansation;
+            padding: 5px;
+            max-width: 100px;
+            color: $white;
+            font-size: 12px;
+            position: absolute;
+            background: $black;
+            top: 45px;
+          }
+        }
+        &:nth-child(7) {
           width: 32px;
           height: 32px;
           background: url('../../public/img/whatsapp.svg') no-repeat;
@@ -238,10 +260,11 @@ body.fullscreen {
             color: $white;
             font-size: 12px;
             position: absolute;
+            background: $black;
             top: 45px;
           }
         }
-        &:nth-child(7) {
+        &:nth-child(8) {
           width: 32px;
           height: 32px;
           background: url('../../public/img/messenger.svg') no-repeat;
@@ -255,6 +278,7 @@ body.fullscreen {
             color: $white;
             font-size: 12px;
             position: absolute;
+            background: $black;
             top: 45px;
           }
         }
