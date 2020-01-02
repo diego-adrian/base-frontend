@@ -6,7 +6,7 @@
     app
     tile
     padless
-    color="rgba(255,255,255,.15)"
+    color="transparent"
     class="white--text"
   >
     <div>Desarrollado por AGETIC {{ new Date().getFullYear() }}</div>
