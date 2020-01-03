@@ -1,24 +1,24 @@
 <template>
    <v-navigation-drawer
-      :mini-variant="$store.state.layout.miniVariant"
-      :clipped="clipped"
-      v-model="$store.state.layout.drawer"
-      mobile-break-point="600"
-      src="../../public/img/sidebar.jpg"
-      fixed
-      width="260"
       app
-      floating
-      mini-variant-width="56"
-      class="app--sidenav"
+      permanent
+      :clipped="clipped"
+      :width="300"
+      :mini-variant="$store.state.layout.miniVariant"
+      v-model="$store.state.layout.drawer"
+      src="../../public/img/sidebar.jpg"
       :expand-on-hover="$store.state.layout.miniVariant"
+      mini-variant-width="57"
+      floating
+      class="app--sidenav"
     >
       <v-row class="fill-height" no-gutters>
         <v-navigation-drawer
           dark
           mini-variant
           mini-variant-width="56"
-          fixed
+          permanent
+          floating
         >
           <v-list-item>
             <v-menu
@@ -261,13 +261,8 @@ export default {
     .app--sidenav__background {
       background: $bgSidenav !important;
       padding: 0;
-      margin-left: 56px;
-      width: 200px;
+      width: 1px;
       .v-list-item {
-        .v-list-item__icon {
-          margin-right: 8px !important;
-          margin-left: -10px !important;
-        }
         .v-list-item__title {
           font-size: .8rem;
           font-weight: 600;
