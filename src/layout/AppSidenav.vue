@@ -11,10 +11,11 @@
       mini-variant-width="57"
       floating
       class="app--sidenav"
+      :mobile-break-point="600"
     >
       <v-row class="fill-height" no-gutters>
         <v-navigation-drawer
-          dark
+          color="#232323"
           mini-variant
           mini-variant-width="56"
           permanent
@@ -29,8 +30,8 @@
             origin="left top"
             transition="scale-transition">
               <template v-slot:activator="{ on }">
-                <v-list-item-avatar>
-                  <v-avatar size="48" color="info" v-on="on" class="app--sidenav__avatar">
+                <v-list-item-avatar text-center>
+                  <v-avatar size="38" color="info" v-on="on" class="app--sidenav__avatar">
                     <span class="white--text headline">{{ appTitle.charAt(0) }}</span>
                   </v-avatar>
                 </v-list-item-avatar>
@@ -224,16 +225,11 @@ export default {
           badget: false,
           event: 'fullscreen'
         }
-      ],
-      links: ['Home', 'Contacts', 'Settings'],
-      mini: true,
+      ]
     };
   },
   computed: {
-    ...mapState(['menu']),
-    currentRouteName() {
-      return this.$route.name;
-    }
+    ...mapState(['menu'])
   },
   methods: {
     redirect (subItem) {
@@ -255,7 +251,7 @@ export default {
 
 <style lang="scss">
 @import '../assets/scss/variables.scss';
-  $bgSidenav: rgba($color: $black, $alpha: .75);
+  $bgSidenav: rgba($color: darken($primary, 35%), $alpha: .75);
   .app--sidenav {
     overflow: hidden !important;
     .app--sidenav__background {
@@ -264,8 +260,8 @@ export default {
       width: 1px;
       .v-list-item {
         .v-list-item__title {
-          font-size: .8rem;
-          font-weight: 600;
+          font-size: 0.8rem;
+          font-weight: 400;
         }
       }
       .app-logo {
@@ -275,10 +271,10 @@ export default {
         align-items: center;
         justify-content: center;
         border-bottom: 1px solid rgba($color: $white, $alpha: .3);
+        .app-title {
+          font-weight: 400;
+        }
       }
-    }
-    .app--sidenav__user {
-      width: 600px;
     }
     .app--sidenav__avatar {
       cursor: pointer;
