@@ -25,7 +25,6 @@
     <v-toolbar-items class="hidden-sm-and-down bolivia__servicio__details">
       <section :class="auth ? 'black--text' : 'white--text'">¿Qué es Ciudadania Digital?</section>
       <section :class="auth ? 'black--text' : 'white--text'">¿Donde me registro?</section>
-      <section :class="auth ? 'black--text' : 'white--text'">Documentos</section>
       <section :class="auth ? 'black--text' : 'white--text'">Ayuda</section>
       <section>
         <v-btn icon>
@@ -118,7 +117,7 @@ body.fullscreen {
         cursor: pointer;
         font-size: .8rem;
         margin-right: 20px;
-        &:nth-child(5) {
+        &:nth-child(4) {
           height: 50px;
           margin-right: auto;
           border-left: 1px solid rgba($color: $white, $alpha: .2);
