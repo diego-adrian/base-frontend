@@ -196,7 +196,7 @@ export default {
      * @description Obtener los registros para el crudTable
      * @author dbarra@agetic.gob.bo
      */
-    async getData () {
+    getData () {
       try {
         this.loading = true;
         const {
