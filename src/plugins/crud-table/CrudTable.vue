@@ -73,9 +73,9 @@
         <v-data-table
         :headers="getHeaders"
         :items="items"
+        :options.sync="options"
         :loading="loading"
         :show-select="checkbox"
-        v-model="selected"
         :search="search"
         loading-text="Cargando registros..."
         rowsPerPageText="filas por pagina"
@@ -146,12 +146,12 @@ export default {
       totalItems: 0,
       items: [],
       loading: true,
-      pagination: {
-        rowsPerPage: 10
+      options: {
+        rowsPerPage: 10,
+        rowsPerPageItems: [5, 10, 25],
       },
       load: false,
       // rowsPerPageItems: [5, 10, 25, { text: 'Todos', value: -1 }]
-      rowsPerPageItems: [5, 10, 25],
       selected: []
     };
   },
@@ -160,12 +160,14 @@ export default {
       const [first] = this.order;
       this.pagination.sortBy = first;
       if (this.order[1]) {
-        this.pagination.descending = this.order[1] === 'DESC';
+        this.pagination.sortDesc = this.order[1] === 'DESC';
       }
     }
   },
   mounted () {
-    this.getData();
+    this.$nextTick(() => {
+      this.getData();
+    });
   },
   computed: {
     ...mapState(['modal']),
@@ -180,33 +182,34 @@ export default {
     }
   },
   methods: {
+    /**
+     * @function handleCleanSearch
+     * @description Limpiar el filtro de busqueda presionando la tecla escape
+     * @author dbarra@agetic.gob.bo
+     */
     handleCleanSearch () {
       this.filtrar();
       this.search = '';
     },
-    getValues () {
-      const values = [];
-      this.headers.map((el) => {
-        if (el.value) {
-          values.push(el.value);
-        }
-      });
-      return values.join('\n');
-    },
+    /**
+     * @function getData
+     * @description Obtener los registros para el crudTable
+     * @author dbarra@agetic.gob.bo
+     */
     async getData () {
       try {
         this.loading = true;
         const {
-          sortBy, descending, page, rowsPerPage
-        } = this.pagination;
+          sortBy, sortDesc, page, itemsPerPage
+        } = this.options;
 
         const query = {
-          limit: rowsPerPage,
+          limit: itemsPerPage,
           page
         };
 
         if (sortBy) {
-          query.order = (descending ? '-' : '') + sortBy;
+          query.order = (sortDesc ? '-' : '') + sortBy;
         }
 
         const response = await this.$service.list(this.url.list || this.url, query);
@@ -241,24 +244,11 @@ export default {
     }
   },
   watch: {
-    pagination: {
+    options: {
       handler () {
-        if (this.load) {
-          this.getData();
-        }
+        this.getData();
       },
       deep: true
-    },
-    selected: (val) => {
-      if (Array.isArray(val)) {
-        const selected = [];
-        val.map((item) => {
-          if (!item.hide) {
-            selected.push(item);
-          }
-        });
-        this.$store.commit('setSelected', selected);
-      }
     }
   }
 };
