@@ -20,6 +20,8 @@ export default {
     const instance = new Vue({
       mixins: [Auth]
     });
+
+    const Util = instance.$util;
     const Message = instance.$message;
     const Storage = instance.$storage;
     const Confirm = instance.$confirm;
@@ -29,11 +31,10 @@ export default {
       if (url[url.length - 1] !== '/' && id.length > 1) {
         id = `/${id}`;
       }
-      return PATERN_HOST.test(url) ? (url + id) : apiUrl + url + id;
+      return PATERN_HOST.test(url) ? (url + id) : baseServer + url + id;
     };
 
     const filterResponse = (response) => {
-      instance.$Progress.finish();
       const data = response.data || response.datos || response;
       if (data.error) {
         Message.error(data.error);
@@ -47,7 +48,6 @@ export default {
     };
 
     const _http = (method, url, data) => {
-      instance.$Progress.start();
       url = getUrl(url, data);
       if (process.env.DEBUG_MODE) {
         console.group('Petición con DataService:');
@@ -107,6 +107,11 @@ export default {
 
       remove (url, id) {
         return this.delete(url, id);
+      },
+
+      list(url, query) {
+        query = query ? '?' + Util.serialize(query) : '';
+        return _http('get', url + query);
       },
 
       save (url, data) {
@@ -179,7 +184,6 @@ export default {
     };
 
     const handlingErrors = (error) => {
-      instance.$Progress.fail();
       if (error.response) {
         const { status } = error.response;
         const { data } = error.response;

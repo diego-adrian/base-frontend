@@ -3,7 +3,7 @@
     <v-snackbar
       v-for="(t, idx) in items"
       :key="t.key"
-      :color="'success'"
+      :color="t.theme"
       :style="`top: ${t.top}px`"
       v-model="snackbar[idx]"
       :timeout="timeout"

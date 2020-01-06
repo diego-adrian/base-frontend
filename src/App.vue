@@ -4,7 +4,7 @@
     <app-navbar></app-navbar>
     <v-content v-if="main">
       <!-- <app-breadcrumbs v-if="auth"></app-breadcrumbs> -->
-      <div class="main">
+      <div class="main pa-3">
         <transition :name="transitionName" mode="out-in">
           <router-view/>
         </transition>

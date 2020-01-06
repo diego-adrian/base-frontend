@@ -3,7 +3,8 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "serve": "vue-cli-service serve",
+    "serve": "vue-cli-service --open serve",
+    "secure": "vue-cli-service --https --open serve",
     "server": "nodemon server.js",
     "build": "vue-cli-service build",
     "lint": "vue-cli-service lint"
@@ -79,7 +80,17 @@
       "array-callback-return": "off",
       "vue/no-use-v-if-with-v-for": "off",
       "vue/valid-v-on": "off",
-      "no-prototype-builtins": "off"
+      "no-prototype-builtins": "off",
+      "no-return-assign": "off",
+      "no-bitwise": "off",
+      "operator-assignment": "off",
+      "no-else-return": "off",
+      "no-restricted-globals": "off",
+      "radix": "off",
+      "prefer-template": "off",
+      "one-var": "off",
+      "one-var-declaration-per-line": "off",
+      "no-lonely-if": "off"
     },
     "parserOptions": {
       "parser": "babel-eslint"
