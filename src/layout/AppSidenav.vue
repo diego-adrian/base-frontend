@@ -118,7 +118,22 @@
               <span class="white--text text-center">{{ appTitle }}</span>
             </h4>
           </div>
-
+          <!-- CARD-IMAGEN PORTADA MENU -->
+         <v-card
+            flat
+            max-width="244"
+          >
+            <v-img
+              aspect-ratio="1.7"
+              class="white--text align-end"
+              height="200px"
+              src="../../public/img/bg-yellow.svg"
+            >
+              <v-card-title>{{ user.nombres }} {{ user.primer_apellido }}</v-card-title>
+              <v-card-subtitle class="pb-0 white--text">{{ user.email }}</v-card-subtitle>
+            </v-img>
+          </v-card>
+          <!-- FIN DEL CARD -->
           <template v-for="item in menu">
             <!-- SI TIENE SUBMENU -->
             <template v-if="item.submenu">

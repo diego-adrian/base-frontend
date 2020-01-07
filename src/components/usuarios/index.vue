@@ -9,10 +9,15 @@
 
           <template slot="buttons">
             <v-tooltip bottom>
-              <v-btn color="primary" dark
-                @click.native.stop="openModal()"
-                slot="activator"
-              ><v-icon dark>person_add</v-icon> Agregar </v-btn>
+              <template v-slot:activator="{ on }">
+                <v-btn
+                  color="primary"
+                  dark
+                  v-on="on"
+                  @click.native.stop="openModal()"
+                  slot="activator"
+                ><v-icon dark>person_add</v-icon> Agregar </v-btn>
+              </template>
               <span> Agregar usuario </span>
             </v-tooltip>
           </template>
@@ -111,6 +116,13 @@ export default {
     ],
     showFilter: true
   }),
+  methods: {
+    openModal () {
+      console.log('------------------------------------');
+      console.log(2222);
+      console.log('------------------------------------');
+    }
+  },
   components: {
     CrudTable
   }

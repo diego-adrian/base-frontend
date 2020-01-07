@@ -5,9 +5,10 @@
     :inset="inset"
     app
     tile
+    v-if="auth"
     padless
     color="transparent"
-    :class="!auth ? 'white--text' : 'black--text'"
+    class="black--text"
   >
     <div>Desarrollado por AGETIC {{ new Date().getFullYear() }}</div>
   </v-footer>
@@ -35,6 +36,6 @@ export default {
   flex-direction: row;
   align-items: center;
   justify-content: center;
-  font-size: 0.75rem;
+  font-size: 0.8rem;
 }
 </style>

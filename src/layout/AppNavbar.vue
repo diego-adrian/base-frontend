@@ -10,25 +10,24 @@
   >
     <v-app-bar-nav-icon v-if="auth" class="btn-mini-variant" @click.stop="$store.commit('layout/toggleMiniVariant')"></v-app-bar-nav-icon>
     <v-app-bar-nav-icon v-if="auth" class="btn-drawer" @click.stop="$store.commit('layout/toggleMiniVariant')"></v-app-bar-nav-icon>
-    <v-toolbar-title :class="[auth ? 'black--text' : 'white--text', 'title__servicio']">BOLIVIA A TU SERVICIO </v-toolbar-title>
+    <v-toolbar-title :class="['black--text', 'title__servicio']">BOLIVIA A TU SERVICIO </v-toolbar-title>
     <ul class="redes__sociales">
-      <li tooltip="Facebook" :style="auth ? 'filter: invert(1)' : ''">&nbsp;</li>
-      <li tooltip="Twitter" :style="auth ? 'filter: invert(1)' : ''">&nbsp;</li>
-      <li tooltip="Youtube" :style="auth ? 'filter: invert(1)' : ''">&nbsp;</li>
-      <li tooltip="Teléfono de contacto" :style="auth ? 'filter: invert(1)' : ''">&nbsp;</li>
-      <li tooltip="Correo electrónico" :style="auth ? 'filter: invert(1)' : ''">&nbsp;</li>
-      <li tooltip="Instagram" :style="auth ? 'filter: invert(1)' : ''">&nbsp;</li>
-      <li tooltip="Whatsapp" :style="auth ? 'filter: invert(1)' : ''">&nbsp;</li>
-      <li tooltip="Messenger" :style="auth ? 'filter: invert(1)' : ''">&nbsp;</li>
+      <li tooltip="Facebook">&nbsp;</li>
+      <li tooltip="Twitter">&nbsp;</li>
+      <li tooltip="Youtube">&nbsp;</li>
+      <li tooltip="Teléfono de contacto">&nbsp;</li>
+      <li tooltip="Correo electrónico">&nbsp;</li>
+      <li tooltip="Whatsapp">&nbsp;</li>
+      <li tooltip="Messenger">&nbsp;</li>
     </ul>
     <v-spacer></v-spacer>
     <v-toolbar-items class="hidden-sm-and-down bolivia__servicio__details">
-      <section :class="auth ? 'black--text' : 'white--text'">¿Qué es Ciudadania Digital?</section>
-      <section :class="auth ? 'black--text' : 'white--text'">¿Donde me registro?</section>
-      <section :class="auth ? 'black--text' : 'white--text'">Ayuda</section>
+      <section class="black--text">¿Qué es Ciudadania Digital?</section>
+      <section class="black--text">¿Donde me registro?</section>
+      <section class="black--text">Ayuda</section>
       <section>
         <v-btn icon>
-          <v-icon :color="auth ? 'black' : 'white'">apps</v-icon>
+          <v-icon color="black">apps</v-icon>
         </v-btn>
       </section>
     </v-toolbar-items>
@@ -54,8 +53,8 @@ export default {
 @import '../assets/scss/variables.scss';
 $bgNabvar: rgba($color: darken($primary, 35%), $alpha: .75);
 .view--init {
-  background: transparent !important;
-  border-bottom: 1px solid rgba($color: $white, $alpha: .2) !important;
+  background: rgba($color: $white, $alpha: 1) !important;
+  border-bottom: 1px solid rgba($color: $white, $alpha: .3) !important;
 }
 .app-navbar {
   background: #f4f4f4 !important;
@@ -120,7 +119,7 @@ body.fullscreen {
         &:nth-child(4) {
           height: 50px;
           margin-right: auto;
-          border-left: 1px solid rgba($color: $white, $alpha: .2);
+          border-left: 1px solid rgba($color: $black, $alpha: .2);
         }
       }
 
@@ -136,7 +135,7 @@ body.fullscreen {
         &:nth-child(1) {
           width: 32px;
           height: 32px;
-          background: url('../../public/img/facebook.png') no-repeat;
+          background: url('../../public/img/facebook.svg') no-repeat;
           background-size: contain;
           background-position: center;
           &:hover::before {
@@ -154,7 +153,7 @@ body.fullscreen {
         &:nth-child(2) {
           width: 32px;
           height: 32px;
-          background: url('../../public/img/twitter.png') no-repeat;
+          background: url('../../public/img/twitter.svg') no-repeat;
           background-size: contain;
           background-position: center;
           &:hover::before {
@@ -172,7 +171,7 @@ body.fullscreen {
         &:nth-child(3) {
           width: 32px;
           height: 32px;
-          background: url('../../public/img/youtube.png') no-repeat;
+          background: url('../../public/img/youtube.svg') no-repeat;
           background-size: contain;
           background-position: center;
           &:hover::before {
@@ -190,7 +189,7 @@ body.fullscreen {
         &:nth-child(4) {
           width: 32px;
           height: 32px;
-          background: url('../../public/img/phone.png') no-repeat;
+          background: url('../../public/img/phone.svg') no-repeat;
           background-size: contain;
           background-position: center;
           &:hover::before {
@@ -209,7 +208,7 @@ body.fullscreen {
         &:nth-child(5) {
           width: 32px;
           height: 32px;
-          background: url('../../public/img/email.png') no-repeat;
+          background: url('../../public/img/email.svg') no-repeat;
           background-size: contain;
           background-position: center;
           &:hover::before {
@@ -228,24 +227,6 @@ body.fullscreen {
         &:nth-child(6) {
           width: 32px;
           height: 32px;
-          background: url('../../public/img/instagram.svg') no-repeat;
-          background-size: contain;
-          background-position: center;
-          &:hover::before {
-            content: attr(tooltip);
-            font-family: $fontFamilyRoboto;
-            padding: 5px;
-            max-width: 100px;
-            color: $white;
-            font-size: 12px;
-            position: absolute;
-            background: $black;
-            top: 45px;
-          }
-        }
-        &:nth-child(7) {
-          width: 32px;
-          height: 32px;
           background: url('../../public/img/whatsapp.svg') no-repeat;
           background-size: contain;
           background-position: center;
@@ -261,7 +242,7 @@ body.fullscreen {
             top: 45px;
           }
         }
-        &:nth-child(8) {
+        &:nth-child(7) {
           width: 32px;
           height: 32px;
           background: url('../../public/img/messenger.svg') no-repeat;

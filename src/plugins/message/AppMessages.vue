@@ -1,17 +1,14 @@
 <template>
   <section class="snackbar__container">
     <v-snackbar
-      v-for="(t, idx) in items"
-      :key="t.key"
-      :color="t.theme"
-      :style="`top: ${t.top}px`"
-      v-model="snackbar[idx]"
+      :class="`snackbar--${item.theme}`"
+      v-model="snackbar"
       :timeout="timeout"
+      :multi-line="false"
       top
     >
-      <v-icon class="text--white">{{ t.icon }}</v-icon>
-      {{ t.message }}
-      <v-btn icon dark @click.native="remove(t.key)">
+      {{ item.message }}
+      <v-btn dark icon @click.native.prevent="remove">
         <v-icon color="white">close</v-icon>
       </v-btn>
     </v-snackbar>
@@ -23,7 +20,7 @@ export default {
   props: {
     timeout: {
       type: Number,
-      default: 6000
+      default: 60000
     }
   },
   methods: {
@@ -44,27 +41,63 @@ export default {
         this.$mount();
         document.body.appendChild(this.$el);
       }
-      const item = {
-        message, title, icon, theme, key: `${Date.now()}-${Math.random()}`, top: (this.items.length * 60) + 10
+      this.snackbar = true;
+      this.item = {
+        message, title, icon, theme
       };
-      this.items.push(item);
-      this.snackbar.push(true);
-      setTimeout(() => {
-        this.remove(item.key);
-      }, this.timeout);
     },
-    remove (key) {
-      const index = this.items.findIndex(item => item.key === key);
-      this.snackbar[index] = false;
-      this.snackbar.splice(index, 1);
-      this.items.splice(index, 1);
+    remove () {
+      this.snackbar = false;
     }
   },
   data () {
     return {
-      snackbar: [],
-      items: []
+      snackbar: false,
+      item: {}
     };
   }
 };
 </script>
+<style lang="scss">
+  @import '../../assets/scss/variables.scss';
+  .snackbar--success {
+    .v-snack__wrapper {
+      border-radius: 7px;
+      .v-snack__content {
+        border-radius: 7px;
+        background: $success;
+        font-size: .8rem;
+      }
+    }
+  }
+  .snackbar--info {
+    .v-snack__wrapper {
+      border-radius: 7px;
+      .v-snack__content {
+        border-radius: 7px;
+        background: $info;
+        font-size: .8rem;
+      }
+    }
+  }
+  .snackbar--error {
+    .v-snack__wrapper {
+      border-radius: 7px;
+      .v-snack__content {
+        border-radius: 7px;
+        background: $error;
+        font-size: .8rem;
+      }
+    }
+  }
+  .snackbar--warning {
+    .v-snack__wrapper {
+      border-radius: 7px;
+      .v-snack__content {
+        border-radius: 7px;
+        background: $warning;
+        font-size: .8rem;
+      }
+    }
+  }
+</style>

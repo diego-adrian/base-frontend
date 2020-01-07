@@ -67,23 +67,22 @@
     <v-skeleton-loader
       boilerplate
       :loading="loading"
-      transition="scale-transition"
+      transition="fade-transition"
       type="table"
     >
         <v-data-table
         :headers="getHeaders"
         :items="items"
-        :options.sync="options"
+        :items-per-page="10"
         :loading="loading"
-        :show-select="checkbox"
         :search="search"
         loading-text="Cargando registros..."
         rowsPerPageText="filas por pagina"
         no-results-text="No se encontraron registros que coincidan"
         no-data-text="No hay resultados"
-        :items-per-page="5"
         :mobile-breakpoint="600"
         :footer-props="{
+          itemsPerPageOptions: [10, 20, 50],
           itemsPerPageAllText: 'todos',
           itemsPerPageText: 'Filas por página'
         }"
@@ -146,27 +145,20 @@ export default {
       totalItems: 0,
       items: [],
       loading: true,
+      selected: [],
       options: {
-        rowsPerPage: 10,
-        rowsPerPageItems: [5, 10, 25],
-      },
-      load: false,
-      // rowsPerPageItems: [5, 10, 25, { text: 'Todos', value: -1 }]
-      selected: []
-    };
-  },
-  created () {
-    if (this.$util.toType(this.order) === 'array' && this.order.length) {
-      const [first] = this.order;
-      this.pagination.sortBy = first;
-      if (this.order[1]) {
-        this.pagination.sortDesc = this.order[1] === 'DESC';
+        page: 1,
+        itemsPerPage: 20
       }
-    }
+    };
   },
   mounted () {
     this.$nextTick(() => {
-      this.getData();
+      try {
+        this.getData();
+      } catch (error) {
+        this.$message.error(error.message);
+      }
     });
   },
   computed: {
@@ -182,6 +174,27 @@ export default {
     }
   },
   methods: {
+    hola (data) {
+      console.log('-----------datas-------------------------');
+      console.log(data);
+      console.log('------------------------------------');
+    },
+    handleItemsPerPageOptions (itemsPerPage) {
+      // this.options.itemsPerPage = itemsPerPage;
+      console.log('------------------------------------');
+      console.log(itemsPerPage);
+      console.log('------------------------------------');
+    },
+    handleChangePagination (page) {
+      // this.options.page = page;
+      // console.log('------------------------------------');
+      // console.log(2222222222222222222);
+      // console.log('------------------------------------');
+      // this.getData();
+      console.log('------------------------------------');
+      console.log(page);
+      console.log('------------------------------------');
+    },
     /**
      * @function handleCleanSearch
      * @description Limpiar el filtro de busqueda presionando la tecla escape
@@ -196,39 +209,29 @@ export default {
      * @description Obtener los registros para el crudTable
      * @author dbarra@agetic.gob.bo
      */
-    getData () {
+    async getData () {
       try {
         this.loading = true;
-        const {
-          sortBy, sortDesc, page, itemsPerPage
-        } = this.options;
+        const { page, itemsPerPage } = this.options;
 
         const query = {
           limit: itemsPerPage,
           page
         };
 
-        if (sortBy) {
-          query.order = (sortDesc ? '-' : '') + sortBy;
-        }
+        const data = await this.$service.list(this.url, query);
+        const items = data[this.attribute];
+        const { total } = data;
 
-        const response = await this.$service.list(this.url.list || this.url, query);
-        this.selected = [];
-
-        const items = response[this.attribute];
         items.map((el) => {
           if (el.estado !== undefined) {
             el.active = el.estado === 'INACTIVO' ? 'INACTIVE' : 'ACTIVE';
           }
         });
 
-        this.items = items;
-        this.totalItems = response.totalFiltro || response.total || response.count;
-        if (response.totalFiltro !== undefined && response.totalFiltro < response.total && response.totalFiltro < this.pagination.rowsPerPage) {
-          this.pagination.page = 1;
-        }
         this.loading = false;
-        this.load = true;
+        this.items = items;
+        this.totalItems = total;
       } catch (error) {
         this.$message.error(error.message);
       }
@@ -238,17 +241,8 @@ export default {
     },
     parseDate (date) {
       if (!date) return null;
-
       const [month, day, year] = date.split('/');
       return `${year}-${month.padStart(2, '0')}-${day.padStart(2, '0')}`;
-    }
-  },
-  watch: {
-    options: {
-      handler () {
-        this.getData();
-      },
-      deep: true
     }
   }
 };
