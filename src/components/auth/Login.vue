@@ -27,6 +27,10 @@ export default {
     return {};
   },
   methods: {
+    /**
+     * @function loginOpenid
+     * @description Conectar con OpenID
+     */
     loginOpenid () {
       this.getCode();
     }
