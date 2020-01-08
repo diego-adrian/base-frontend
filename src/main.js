@@ -10,6 +10,7 @@ import Message from '@/plugins/message/message';
 import Storage from '@/plugins/storage';
 import Service from '@/plugins/service';
 import Datetime from '@/plugins/datetime';
+import Notifications from '@/plugins/notifications/notification';
 import Util from '@/plugins/util';
 
 import './assets/scss/index.scss';
@@ -18,6 +19,7 @@ Vue.use(Message);
 Vue.use(Storage);
 Vue.use(Datetime);
 Vue.use(Util);
+Vue.use(Notifications);
 Vue.use(Service, {
   apiUrl: process.env.VUE_APP_API_URL,
   baseServer: process.env.VUE_APP_BASE_SERVER,

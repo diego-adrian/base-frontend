@@ -24,6 +24,7 @@
           <v-list-item>
             <v-menu
             offset-y
+            offset-x
             :close-on-content-click="false"
             :nudge-width="200"
             :max-width="350"
@@ -40,7 +41,7 @@
                 <v-list>
                   <v-list-item>
                     <v-list-item-avatar>
-                      <img src="https://randomuser.me/api/portraits/women/75.jpg" alt="Women">
+                      <v-icon size="50" color="info">account_circle</v-icon>
                     </v-list-item-avatar>
                     <v-list-item-content>
                       <v-list-item-title>{{ `${user.nombres} ${user.primer_apellido} ${user.segundo_apellido}` }}</v-list-item-title>
@@ -52,7 +53,7 @@
                 <v-list>
                   <v-list-item @click="logout">
                     <v-list-item-title class="red--text">
-                      <v-icon color="error"> home </v-icon>
+                      <v-icon color="error">folder_shared</v-icon>
                       Cerrar Sesion
                     </v-list-item-title>
                   </v-list-item>
@@ -82,12 +83,13 @@
                   class="align-self-center"
                 >
                   <template v-slot:badge>
-                    <span>2</span>
+                    <span> {{ action.number }} </span>
                   </template>
                   <v-icon
                     medium
                     class="cursor--pointer"
                     color="white"
+                    v-on="action.hasOwnProperty('event') ? { click: () => execute(action.event) } : null"
                   >
                     {{ action.icon }}
                   </v-icon>
@@ -97,7 +99,7 @@
                   v-if="!action.badget"
                   medium
                  :color="action.theme"
-                 v-on="action.hasOwnProperty('event') ? { click: () => this[action.event] }  : null"
+                 v-on="action.hasOwnProperty('event') ? { click: () => execute(action.event) } : null"
                 >
                   {{ action.icon }}
                 </v-icon>
@@ -230,7 +232,9 @@ export default {
           title: 'Notificaciones',
           icon: 'notifications',
           theme: 'success',
-          badget: true
+          number: 15,
+          badget: true,
+          event: 'getNotifications'
         },
         {
           title: 'Reload',
@@ -259,6 +263,12 @@ export default {
           this.$router.push(subItem.url);
         }
       }
+    },
+    getNotifications () {
+      this.$notifications();
+    },
+    execute (func) {
+      this[func]();
     },
     handleMiniVariant () {
       this.$store.commit('layout/toggleMiniVariant');

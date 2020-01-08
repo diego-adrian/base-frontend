@@ -11,6 +11,7 @@
       </div>
     </v-content>
     <app-footer></app-footer>
+    <app-notifications/>
   </v-app>
 </template>
 
@@ -19,6 +20,7 @@ import { mapState } from 'vuex';
 import AppSidenav from '@/layout/AppSidenav.vue';
 import AppNavbar from '@/layout/AppNavbar.vue';
 import AppFooter from '@/layout/AppFooter.vue';
+import AppNotifications from '@/plugins/notifications/AppNotifications.vue';
 import Auth from '@/components/auth/mixins/auth';
 
 // Páginas que no necesitan autenticación/token/sesión
@@ -33,7 +35,8 @@ export default {
   components: {
     AppSidenav,
     AppNavbar,
-    AppFooter
+    AppFooter,
+    AppNotifications
   },
   created () {
     const error = this.$storage.get('error');

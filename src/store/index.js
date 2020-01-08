@@ -8,17 +8,14 @@ Vue.use(Vuex);
 export default new Vuex.Store({
   state: {
     main: true,
-    time: null,
-    sessionInterval: null,
     auth: false,
     menu: {},
     user: {},
-    notificaciones: {},
+    notifications: {
+      show: false
+    },
     date: {},
     permissions: {},
-    rol: '',
-    pendientes: false,
-    dataPendientes: null,
     sidenav: false,
     navbar: false,
     state403: false,
@@ -32,10 +29,6 @@ export default new Vuex.Store({
     modal8: false,
     action: null,
     selected: null,
-    uploadingFiles: {
-      status: false,
-      files: []
-    },
     alert: {
       show: false,
       title: 'Alerta',
@@ -43,20 +36,6 @@ export default new Vuex.Store({
       callback: null
     },
     form: {},
-    clean: false,
-    changes: 0,
-    promise: null,
-    globalModal: {
-      show: false,
-      template: null,
-      textOk: 'Aceptar',
-      callbackOk: null,
-      width: null,
-      textCancel: 'Cancelar',
-      callbackCancel: null,
-      title: null,
-      body: {}
-    },
     confirm: {
       show: false,
       text: '',
@@ -65,45 +44,18 @@ export default new Vuex.Store({
       callbackCancel: null,
       textOk: '',
       textCancel: ''
-    },
-    locked: {
-      show: false,
-      time: null,
-      path: null
-    },
-    waiting: {
-      show: false,
-      message: ''
-    },
-    guiaPendientes: false,
-    objetoSeleccionado: false
+    }
   },
   mutations: {
     setActive(state, value) {
       state.sidenav = value;
       state.navbar = value;
     },
-    setFileUploading(state, value) {
-      state.uploadingFiles.status = value.status;
-      if (value.file) state.uploadingFiles.files.push(value.file);
-    },
-    setClearFilesUploading(state) {
-      state.uploadingFiles.files = [];
-    },
     setMain(state, value) {
       state.main = value;
     },
     setUser(state, value) {
       state.user = value;
-    },
-    setNotificaciones(state, value) {
-      state.notificaciones = value;
-    },
-    setNotificacion(state, value) {
-      if (state.notificaciones.listado.length === 10) {
-        state.notificaciones.listado.pop();
-      }
-      state.notificaciones.listado.unshift(value);
     },
     setMenu(state, value) {
       state.menu = value;
@@ -121,9 +73,6 @@ export default new Vuex.Store({
     setForm(state, value) {
       state.form = value;
     },
-    setChanges(state, value) {
-      state.changes = value;
-    },
     setAction(state, value) {
       if (value && value.sleep) {
         setTimeout(() => {
@@ -133,9 +82,6 @@ export default new Vuex.Store({
       } else {
         state.action = value;
       }
-    },
-    cleanDate(state, value) {
-      state.clean = value;
     },
     openModal(state, id = '') {
       state[`modal${id}`] = true;
@@ -158,16 +104,6 @@ export default new Vuex.Store({
         state.date = value;
       }
     },
-    setSelected(state, value) {
-      if (Array.isArray(value)) {
-        state.selected = value;
-      } else {
-        if (!state.selected) {
-          state.selected = [];
-        }
-        state.selected.push(value);
-      }
-    },
     setState403(state, value) {
       state.state403 = value;
     },
@@ -175,10 +111,9 @@ export default new Vuex.Store({
       state.auth = false;
       state.menu = {};
       state.user = {};
-      state.notificaciones = {};
+      state.notifications = {};
       state.date = {};
       state.permissions = {};
-      state.rol = '';
       state.layout.breadcrumbs = {};
       state.modal = false;
       state.modal2 = false;
@@ -198,23 +133,8 @@ export default new Vuex.Store({
     CLOSE_CONFIRM(state) {
       state.confirm.show = false;
     },
-    CLOSE_MODAL(state) {
-      state.globalModal.show = false;
-    },
-    SET_TIME(state, value) {
-      state.time = value;
-    },
-    TIME_DECREASE(state) {
-      state.time -= 15;
-    },
-    DESTROY_INTERVAL(state) {
-      if (state.sessionInterval) {
-        window.clearInterval(state.sessionInterval);
-      }
-      state.sessionInterval = null;
-    },
-    INIT_INTERVAL(state, interval) {
-      state.sessionInterval = interval;
+    CLOSE_NOTIFICATIONS(state) {
+      state.notifications.show = false;
     }
   },
   modules: {

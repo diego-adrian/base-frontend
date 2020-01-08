@@ -212,13 +212,7 @@ export default {
 
     // INTERCEPTORS CONFIG
     // Add a request interceptor
-    axios.interceptors.request.use((config) => {
-      // Actualizando el tiempo de sesión de inactividad
-      if (store.state.time) {
-        store.commit('SET_TIME', process.env.APP_VUE_TIME_SESSION_EXPIRED * 60);
-      }
-      return config;
-    }, error => Promise.reject(error));
+    axios.interceptors.request.use(config => config, error => Promise.reject(error));
 
     // Add a response interceptor
     axios.interceptors.response.use(response => response, (error) => {
