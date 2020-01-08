@@ -5,17 +5,17 @@
       :clipped="clipped"
       :width="300"
       :mini-variant="$store.state.layout.miniVariant"
-      v-model="$store.state.layout.drawer"
       src="../../public/img/sidebar.jpg"
-      :expand-on-hover="$store.state.layout.miniVariant"
       mini-variant-width="57"
+      :expand-on-hover="$store.state.layout.expandOnHover"
       floating
+      hide-overlay
       class="app--sidenav"
       :mobile-break-point="600"
     >
       <v-row class="fill-height" no-gutters>
         <v-navigation-drawer
-          color="#232323"
+          class=app--sidenav__left
           mini-variant
           mini-variant-width="56"
           permanent
@@ -31,7 +31,7 @@
             transition="scale-transition">
               <template v-slot:activator="{ on }">
                 <v-list-item-avatar text-center>
-                  <v-avatar size="38" color="info" v-on="on" class="app--sidenav__avatar">
+                  <v-avatar size="40" color="info" v-on="on" class="app--sidenav__avatar">
                     <span class="white--text headline">{{ appTitle.charAt(0) }}</span>
                   </v-avatar>
                 </v-list-item-avatar>
@@ -44,7 +44,7 @@
                     </v-list-item-avatar>
                     <v-list-item-content>
                       <v-list-item-title>{{ `${user.nombres} ${user.primer_apellido} ${user.segundo_apellido}` }}</v-list-item-title>
-                      <v-list-item-subtitle>{{ user.correo }}</v-list-item-subtitle>
+                      <v-list-item-subtitle>{{ user.email }}</v-list-item-subtitle>
                     </v-list-item-content>
                   </v-list-item>
                 </v-list>
@@ -108,6 +108,11 @@
               </v-list-item-content>
             </v-list-item>
           </v-list>
+          <template v-slot:append>
+            <div class="pa-2 app--sidenav__drawer">
+              <v-app-bar-nav-icon color="white" class="btn-mini-variant" @click.prevent="handleMiniVariant"></v-app-bar-nav-icon>
+            </div>
+          </template>
           <!-- TERMINA AQUI LA SECCION -->
         </v-navigation-drawer>
 
@@ -115,7 +120,7 @@
         <v-list dense class="grow app--sidenav__background">
           <div class="app-logo">
             <h4 class="app-title">
-              <span class="white--text text-center">{{ appTitle }}</span>
+              <span class="white--text text-center">{{ appTitle.toUpperCase() }}</span>
             </h4>
           </div>
           <!-- CARD-IMAGEN PORTADA MENU -->
@@ -142,6 +147,7 @@
                 :value="true"
                 color="warning"
                 :prepend-icon="item.icon"
+                mandatory
               >
                 <template v-slot:activator>
                   <v-list-item-content>
@@ -254,6 +260,10 @@ export default {
         }
       }
     },
+    handleMiniVariant () {
+      this.$store.commit('layout/toggleMiniVariant');
+      this.$store.commit('layout/toggleExpandOnHover');
+    },
     fullscreen () {
       this.$util.fullscreen();
     },
@@ -266,9 +276,12 @@ export default {
 
 <style lang="scss">
 @import '../assets/scss/variables.scss';
-  $bgSidenav: rgba($color: darken($primary, 35%), $alpha: .75);
+  $bgSidenav: rgba($color: darken($primary, 28), $alpha: .75);
   .app--sidenav {
     overflow: hidden !important;
+    .app--sidenav__left {
+      background-color: darken($color: $primary, $amount: 24) !important;
+    }
     .app--sidenav__background {
       background: $bgSidenav !important;
       padding: 0;
@@ -289,6 +302,14 @@ export default {
         .app-title {
           font-weight: 400;
         }
+      }
+    }
+    .app--sidenav__drawer {
+      .btn-mini-variant {
+        display: inline-block;
+      }
+      .btn-drawer {
+        display: none;
       }
     }
     .app--sidenav__avatar {

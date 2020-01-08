@@ -1,23 +1,15 @@
 const layout = {
   namespaced: true,
   state: {
-    drawer: true,
     miniVariant: false,
-    rightDrawer: false,
-    breadcrumbs: {}
+    expandOnHover: false
   },
   mutations: {
-    toggleDrawer(state) {
-      state.drawer = !state.drawer;
-    },
     toggleMiniVariant(state) {
       state.miniVariant = !state.miniVariant;
     },
-    toggleRightDrawer(state) {
-      state.rightDrawer = !state.rightDrawer;
-    },
-    setBreadcrumbs(state, items) {
-      state.breadcrumbs = items;
+    toggleExpandOnHover(state) {
+      state.expandOnHover = !state.expandOnHover;
     }
   }
 };

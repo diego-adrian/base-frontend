@@ -8,8 +8,7 @@
     :class="[auth ? 'app-navbar' : 'view--init', $store.state.layout.miniVariant ? 'isMiniVariant' : auth ? 'normalMiniVariant' : '']"
     flat
   >
-    <v-app-bar-nav-icon v-if="auth" class="btn-mini-variant" @click.stop="$store.commit('layout/toggleMiniVariant')"></v-app-bar-nav-icon>
-    <v-app-bar-nav-icon v-if="auth" class="btn-drawer" @click.stop="$store.commit('layout/toggleMiniVariant')"></v-app-bar-nav-icon>
+    <v-app-bar-nav-icon v-if="auth" class="btn-mini-variant" @click.prevent="handleMiniVariant"></v-app-bar-nav-icon>
     <v-toolbar-title :class="['black--text', 'title__servicio']">BOLIVIA A TU SERVICIO </v-toolbar-title>
     <ul class="redes__sociales">
       <li tooltip="Facebook">&nbsp;</li>
@@ -43,6 +42,12 @@ export default {
   data: () => ({
     clipped: false
   }),
+  methods: {
+    handleMiniVariant () {
+      this.$store.commit('layout/toggleMiniVariant');
+      this.$store.commit('layout/toggleExpandOnHover');
+    }
+  },
   computed: {
     ...mapState(['auth'])
   }
@@ -57,7 +62,6 @@ $bgNabvar: rgba($color: darken($primary, 35%), $alpha: .75);
   border-bottom: 1px solid rgba($color: $white, $alpha: .3) !important;
 }
 .app-navbar {
-  background: #f4f4f4 !important;
   width: auto;
   border-bottom: 1px solid rgba($color: $black, $alpha: .2) !important;
   .v-app-bar__content {
@@ -97,9 +101,8 @@ body.fullscreen {
     .title__servicio {
       text-transform: uppercase;
       font-weight: 300;
+      font-size: 1rem;
       line-height: 50px;
-      font-size: .8rem;
-      font-family: $fontFamilyRoboto;
       user-select: none;
     }
     .bolivia__servicio__details {
@@ -108,7 +111,6 @@ body.fullscreen {
       justify-content: center;
       align-items: center;
       section {
-        font-family: $fontFamilyRoboto;
         font-weight: 300;
         display: flex;
         flex-direction: row;
@@ -140,7 +142,6 @@ body.fullscreen {
           background-position: center;
           &:hover::before {
             content: attr(tooltip);
-            font-family: $fontFamilyRoboto;
             padding: 5px;
             max-width: 100px;
             color: $white;
@@ -158,7 +159,6 @@ body.fullscreen {
           background-position: center;
           &:hover::before {
             content: attr(tooltip);
-            font-family: $fontFamilyRoboto;
             padding: 5px;
             max-width: 100px;
             color: $white;
@@ -176,7 +176,6 @@ body.fullscreen {
           background-position: center;
           &:hover::before {
             content: attr(tooltip);
-            font-family: $fontFamilyRoboto;
             padding: 5px;
             max-width: 100px;
             color: $white;
@@ -194,7 +193,6 @@ body.fullscreen {
           background-position: center;
           &:hover::before {
             content: attr(tooltip);
-            font-family: $fontFamilyRoboto;
             padding: 5px;
             max-width: 150px;
             width: 130px;
@@ -213,7 +211,6 @@ body.fullscreen {
           background-position: center;
           &:hover::before {
             content: attr(tooltip);
-            font-family: $fontFamilyRoboto;
             padding: 5px;
             max-width: 150px;
             width: 120px;
@@ -232,7 +229,6 @@ body.fullscreen {
           background-position: center;
           &:hover::before {
             content: attr(tooltip);
-            font-family: $fontFamilyRoboto;
             padding: 5px;
             max-width: 100px;
             color: $white;
@@ -250,7 +246,6 @@ body.fullscreen {
           background-position: center;
           &:hover::before {
             content: attr(tooltip);
-            font-family: $fontFamilyRoboto;
             padding: 5px;
             max-width: 100px;
             color: $white;
@@ -269,15 +264,4 @@ body.fullscreen {
   .normalMiniVariant {
     width: calc(100vw - 300px);
   }
-
-@media (max-width: 1256px) {
-  .app-navbar {
-    .btn-mini-variant {
-      display: none;
-    }
-    .btn-drawer {
-      display: inline-block;
-    }
-  }
-}
 </style>

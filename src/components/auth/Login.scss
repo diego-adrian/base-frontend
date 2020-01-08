@@ -46,7 +46,7 @@
     height: 50vh;
     padding: 0;
     // background: linear-gradient(rgba($color: $white, $alpha: .7) 30%, $secondary, $primary);
-    background: rgba($color: $primary, $alpha: .35);
+    background: rgba($color: darken($primary, 20), $alpha: .65);
     border-radius: 8px;
     overflow: hidden;
 
@@ -62,7 +62,7 @@
     .app-login__boton {
       margin-top: 15px;
       font-size: 0.8rem;
-      font-weight: 300;
+      font-weight: 400;
       color: $white;
       text-align: center;
       text-decoration: none;

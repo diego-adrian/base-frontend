@@ -3,10 +3,13 @@ body, html {
   padding: 0;
   margin: 0;
   overflow: auto;
+  font-family: $fontFamilyTitilliumWeb;
+  font-weight: 300;
+  font-size: 16px;
   .v-application {
-    font-family: $fontFamilyTitilliumWeb !important;
+    font-family: $fontFamilyTitilliumWeb;
     font-weight: 300;
-    font-size: 13px;
+    font-size: 16px;
   }
   .cursor--pointer {
     cursor: pointer !important;
