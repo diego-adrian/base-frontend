@@ -132,9 +132,9 @@
           >
             <v-img
               aspect-ratio="1.7"
-              class="white--text align-end"
+              class="white--text align-start app--sidenav__img"
               height="200px"
-              src="../../public/img/bg-yellow.svg"
+              src="../../public/img/geometric.png"
             >
               <v-card-title>{{ user.nombres }} {{ user.primer_apellido }}</v-card-title>
               <v-card-subtitle class="pb-0 white--text">{{ user.email }}</v-card-subtitle>
@@ -291,6 +291,9 @@ export default {
     overflow: hidden !important;
     .app--sidenav__left {
       background-color: darken($color: $primary, $amount: 24) !important;
+    }
+    .app--sidenav__img {
+      background: rgba($color: #ff974f, $alpha: 1);
     }
     .app--sidenav__background {
       background: $bgSidenav !important;
