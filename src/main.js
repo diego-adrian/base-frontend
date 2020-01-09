@@ -11,10 +11,12 @@ import Storage from '@/plugins/storage';
 import Service from '@/plugins/service';
 import Datetime from '@/plugins/datetime';
 import Notifications from '@/plugins/notifications/notification';
+import Progress from '@/plugins/progress-bar/progress';
 import Util from '@/plugins/util';
 
 import './assets/scss/index.scss';
 
+Vue.use(Progress);
 Vue.use(Message);
 Vue.use(Storage);
 Vue.use(Datetime);

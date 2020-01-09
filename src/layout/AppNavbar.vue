@@ -3,7 +3,7 @@
     app
     :clipped-left="clipped"
     fixed
-    height="49"
+    height="50"
     class="bolivia__servicio"
     :class="[auth ? 'app-navbar' : 'view--init', $store.state.layout.miniVariant ? 'isMiniVariant' : auth ? 'normalMiniVariant' : '']"
     flat

@@ -14,6 +14,9 @@ export default new Vuex.Store({
     notifications: {
       show: false
     },
+    progress: {
+      active: false
+    },
     date: {},
     permissions: {},
     sidenav: false,
@@ -135,6 +138,9 @@ export default new Vuex.Store({
     },
     CLOSE_NOTIFICATIONS(state) {
       state.notifications.show = false;
+    },
+    CLOSE_PROGRESS(state) {
+      state.progress.active = false;
     }
   },
   modules: {

@@ -76,6 +76,9 @@
         :items-per-page="10"
         :loading="loading"
         :search="search"
+        @update:page="hola"
+        :options.sync="options"
+        :server-items-length="totalItems"
         loading-text="Cargando registros..."
         rowsPerPageText="filas por pagina"
         no-results-text="No se encontraron registros que coincidan"
@@ -148,7 +151,7 @@ export default {
       selected: [],
       options: {
         page: 1,
-        itemsPerPage: 20
+        itemsPerPage: 10
       }
     };
   },
@@ -178,6 +181,8 @@ export default {
       console.log('-----------datas-------------------------');
       console.log(data);
       console.log('------------------------------------');
+      this.options.page = data;
+      this.getData();
     },
     handleItemsPerPageOptions (itemsPerPage) {
       // this.options.itemsPerPage = itemsPerPage;
@@ -228,7 +233,6 @@ export default {
             el.active = el.estado === 'INACTIVO' ? 'INACTIVE' : 'ACTIVE';
           }
         });
-
         this.loading = false;
         this.items = items;
         this.totalItems = total;
@@ -300,7 +304,7 @@ export default {
         width: 0;
         height: 0;
         bottom: -10px;
-        left: 14px;
+        left: 26px;
         border-bottom: 12px solid $filterBorder;
         border-left: 14px solid transparent;
         border-right: 14px solid transparent;
@@ -313,7 +317,7 @@ export default {
         width: 0;
         height: 0;
         bottom: -11px;
-        left: 14px;
+        left: 26px;
         border-bottom: 12px solid $filterBackground;
         border-left: 14px solid transparent;
         border-right: 14px solid transparent;

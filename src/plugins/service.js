@@ -22,6 +22,7 @@ export default {
     });
 
     const Util = instance.$util;
+    const Progress = instance.$progress;
     const Message = instance.$message;
     const Storage = instance.$storage;
     const Confirm = instance.$confirm;
@@ -35,6 +36,7 @@ export default {
     };
 
     const filterResponse = (response) => {
+      Progress.close();
       const data = response.data || response.datos || response;
       if (data.error) {
         Message.error(data.error);
@@ -48,8 +50,9 @@ export default {
     };
 
     const _http = (method, url, data) => {
+      Progress.start();
       url = getUrl(url, data);
-      if (process.env.DEBUG_MODE) {
+      if (process.env.VUE_APP_DEBUG_MODE) {
         console.group('Petición con DataService:');
         console.info('URL:', method.toUpperCase(), url);
         if (data) {
@@ -238,7 +241,7 @@ export default {
         if (error.response.status === 500) {
           const { data } = error.response;
           let message = null;
-          if (process.env.DEBUG_MODE) {
+          if (process.env.VUE_APP_DEBUG_MODE) {
             if (data.mensaje || data.message) {
               message = data.mensaje || data.message;
             } else if (typeof data === 'object') {

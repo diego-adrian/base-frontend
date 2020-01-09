@@ -12,6 +12,7 @@
     </v-content>
     <app-footer></app-footer>
     <app-notifications/>
+    <app-progress/>
   </v-app>
 </template>
 
@@ -21,6 +22,7 @@ import AppSidenav from '@/layout/AppSidenav.vue';
 import AppNavbar from '@/layout/AppNavbar.vue';
 import AppFooter from '@/layout/AppFooter.vue';
 import AppNotifications from '@/plugins/notifications/AppNotifications.vue';
+import AppProgress from '@/plugins/progress-bar/AppProgress.vue';
 import Auth from '@/components/auth/mixins/auth';
 
 // Páginas que no necesitan autenticación/token/sesión
@@ -36,7 +38,8 @@ export default {
     AppSidenav,
     AppNavbar,
     AppFooter,
-    AppNotifications
+    AppNotifications,
+    AppProgress
   },
   created () {
     const error = this.$storage.get('error');
