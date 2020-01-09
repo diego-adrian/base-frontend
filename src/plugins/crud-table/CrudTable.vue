@@ -65,7 +65,6 @@
     </v-layout>
 
     <v-skeleton-loader
-      boilerplate
       :loading="loading"
       transition="fade-transition"
       type="table"

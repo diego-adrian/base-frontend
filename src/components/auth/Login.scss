@@ -70,3 +70,12 @@
     }
   }
 }
+
+@media screen and (max-width: 600px) and (min-width: 1px) {
+  .app-login {
+    .app-login__background { 
+      filter: none;
+      transform: none;
+    }
+  }
+}
