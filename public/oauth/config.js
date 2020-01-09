@@ -1,6 +1,6 @@
 const config = {
-  backendApi: 'http://localhost:3000',
-  subdomain: 'http://localhost:8080', // subdominio donde está instalado el frontend si está en la raiz se colocar vacio
+  backendApi: 'http://192.168.28.234:3000',
+  subdomain: 'http://192.168.28.234:8080', // subdominio donde está instalado el frontend si está en la raiz se colocar vacio
   appName: 'app' // prefijo para los localstorage del sistema
 };
 
