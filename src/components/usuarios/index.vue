@@ -3,6 +3,7 @@
     <crud-table
         :headers="headers"
         :url="url"
+        :filters="filters"
         :widthModal="800"
         :order="order"
         >
@@ -114,7 +115,26 @@ export default {
       { text: 'Fecha de creacion', value: '_created_at' },
       { text: 'Estado', sortable: false, value: 'estado' }
     ],
-    showFilter: true
+    filters: [
+      {
+        field: 'usuario',
+        label: 'Usuario',
+        type: 'text',
+        typeG: 'String'
+      },
+      {
+        field: 'cargo',
+        label: 'Nombre completo',
+        type: 'text',
+        typeG: 'String'
+      },
+      {
+        field: 'email',
+        label: 'Email',
+        type: 'text',
+        typeG: 'String'
+      }
+    ]
   }),
   methods: {
     openModal () {

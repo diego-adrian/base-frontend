@@ -33,7 +33,7 @@
               <template v-slot:activator="{ on }">
                 <v-list-item-avatar text-center>
                   <v-avatar size="40" color="info" v-on="on" class="app--sidenav__avatar">
-                    <span class="white--text headline">{{ appTitle.charAt(0) }}</span>
+                    <span class="white--text headline">{{ appTitle ? appTitle.charAt(0) : '' }}</span>
                   </v-avatar>
                 </v-list-item-avatar>
               </template>
@@ -139,7 +139,7 @@
               src="../../public/img/geometric.png"
             >
               <v-card-title>
-                <div class="initial--name"> {{ user.nombres.charAt(0)}}</div>
+                <div class="initial--name"> {{ user && user.nombres ? user.nombres.charAt(0) : ''}}</div>
                 <div>{{ user.nombres }} {{ user.primer_apellido }}</div>
               </v-card-title>
               <v-card-subtitle class="pb-0 white--text email--user">{{ user.email }}</v-card-subtitle>

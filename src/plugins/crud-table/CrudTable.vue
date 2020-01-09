@@ -41,24 +41,50 @@
       </v-flex>
 
       <!-- Section Filter -->
-      <v-flex xs12 v-if="showFilter">
+      <v-flex xs12 v-if="showFilter && filters.length > 0">
         <transition name="slide-fade">
-          <div class="filter-container">
-            <v-layout row wrap>
-              <v-flex xs12 sm12 md12 lg12>
+          <v-container fluid class="container--filter">
+            <v-row
+              no-gutters
+              style="width: 97%"
+            >
+              <v-col
+                v-for="(filter, idx) in filters"
+                :key="filter.field"
+                :cols="parseInt(12 / filters.length)"
+              >
                 <v-text-field
-                  @keyup.esc="handleCleanSearch"
-                  color="info"
+                  dense
                   outlined
-                  autofocus
-                  v-model="search"
-                  append-icon="search"
-                  label="Buscar"
+                  ref="searchTextField"
+                  class="ml-2 mr-2"
+                  :autofocus="idx === 0"
+                  v-if="filter.type == 'text'"
+                  v-model="search[filter.field]"
+                  :label="filter.label"
                   hide-details
                 ></v-text-field>
-              </v-flex>
-            </v-layout>
-          </div>
+              </v-col>
+
+              <v-tooltip bottom>
+                <template v-slot:activator="{ on }">
+                  <v-btn
+                    @click.native="handleCleanFilters()" v-on="on"
+                    color="gray"
+                    dark
+                    small
+                    absolute
+                    right
+                    fab
+                  >
+                    <v-icon>close</v-icon>
+                  </v-btn>
+                </template>
+                <span>Cerrar filtro/búsqueda</span>
+              </v-tooltip>
+
+            </v-row>
+          </v-container>
         </transition>
       </v-flex>
       <!-- END Section Filter -->
@@ -74,8 +100,8 @@
         :items="items"
         :items-per-page="10"
         :loading="loading"
-        :search="search"
-        @update:page="hola"
+        @update:page="requestData"
+        @update:items-per-page="handleItemsPerPageOptions"
         :options.sync="options"
         :server-items-length="totalItems"
         loading-text="Cargando registros..."
@@ -119,6 +145,10 @@ export default {
       type: Array,
       default: () => []
     },
+    filters: {
+      type: Array,
+      default: () => []
+    },
     widthModal: {
       type: Number,
       default: 480
@@ -140,10 +170,22 @@ export default {
       default: null
     }
   },
+  watch: {
+    activeSearch: {
+      handler (value) {
+        if (value) {
+          this.getData();
+          this.activeSearch = false;
+        }
+      },
+      deep: true
+    }
+  },
   data () {
     return {
       showFilter: false,
-      search: '',
+      search: {},
+      activeSearch: false,
       totalItems: 0,
       items: [],
       loading: true,
@@ -151,7 +193,8 @@ export default {
       options: {
         page: 1,
         itemsPerPage: 10
-      }
+      },
+      showFilterActive: this.showFilter,
     };
   },
   mounted () {
@@ -176,37 +219,44 @@ export default {
     }
   },
   methods: {
-    hola (data) {
-      console.log('-----------datas-------------------------');
-      console.log(data);
-      console.log('------------------------------------');
+    requestData (data) {
       this.options.page = data;
       this.getData();
     },
-    handleItemsPerPageOptions (itemsPerPage) {
-      // this.options.itemsPerPage = itemsPerPage;
-      console.log('------------------------------------');
-      console.log(itemsPerPage);
-      console.log('------------------------------------');
+    /**
+        * @function addEventKeydown
+        * @description Esta funcion esta implementada nativamente, porque vue no reconoce el keydown solo el jekup
+        * @link  https://vuejs.org/v2/guide/events.html
+        * @param name index
+      */
+    addEventKeydown (elem) {
+      const element = elem;
+      let typingTimer;
+      const doneTypingInterval = 1000;
+      if (element) {
+        element.onkeydown = () => {
+          clearTimeout(typingTimer);
+          typingTimer = setTimeout(async () => {
+            this.activeSearch = true;
+          }, doneTypingInterval);
+          return true;
+        };
+      }
     },
-    handleChangePagination (page) {
-      // this.options.page = page;
-      // console.log('------------------------------------');
-      // console.log(2222222222222222222);
-      // console.log('------------------------------------');
-      // this.getData();
-      console.log('------------------------------------');
-      console.log(page);
-      console.log('------------------------------------');
+    handleItemsPerPageOptions (itemsPerPage) {
+      this.options.itemsPerPage = itemsPerPage;
+      this.options.page = 1;
+      this.getData();
     },
     /**
-     * @function handleCleanSearch
-     * @description Limpiar el filtro de busqueda presionando la tecla escape
+     * @function handleCleanFilters
+     * @description Limpiar los filtros
      * @author dbarra@agetic.gob.bo
      */
-    handleCleanSearch () {
-      this.filtrar();
-      this.search = '';
+    handleCleanFilters () {
+      this.search = {};
+      this.getData();
+      this.showFilter = false;
     },
     /**
      * @function getData
@@ -222,6 +272,14 @@ export default {
           limit: itemsPerPage,
           page
         };
+
+        if (Object.keys(this.search).length) {
+          for (const key in this.search) {
+            if (this.search[key] !== '') {
+              query[key] = this.search[key];
+            }
+          }
+        }
 
         const data = await this.$service.list(this.url, query);
         const items = data[this.attribute];
@@ -241,6 +299,16 @@ export default {
     },
     filtrar () {
       this.showFilter = !this.showFilter;
+      if (this.showFilter) {
+        for (const key in this.search) {
+          this.search[key] = '';
+        }
+        setTimeout(() => {
+          for (const elem of this.$refs.searchTextField) {
+            this.addEventKeydown(elem.$el);
+          }
+        }, 300);
+      }
     },
     parseDate (date) {
       if (!date) return null;
@@ -324,32 +392,9 @@ export default {
         display: none;
       }
     }
-
-    .filter-container {
-      background-color: $filterBackground;
-      padding: 10px 15px 20px;
+    .container--filter {
+      background: $filterBackground;
       border: 1px solid $filterBorder;
-      position: relative;
-      margin: auto;
-      width: 98.5%;
-
-      .filter-item {
-        display: inline-block;
-        width: 200px;
-        margin-right: 10px;
-        vertical-align: top;
-      }
-
-      & > .v-tooltip {
-        position: absolute;
-        top: -3px;
-        right: 0px;
-      }
-
-      & > .v-icon {
-        display: inline-block;
-        margin: 14px 5px 0 0;
-      }
     }
   }
 </style>
