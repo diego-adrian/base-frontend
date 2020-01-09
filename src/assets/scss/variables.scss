@@ -9,7 +9,10 @@ $white: #FFF;
 $black: #000;
 $fontFamilyRoboto: 'Roboto'; 
 $fontFamilySansation: 'Sansation';
-$fontFamilyTitilliumText: 'TitilliumText';
 $fontFamilyTitilliumWeb: 'Titillium Web';
 $bgSidenav: #2c2e3e;
 $loginColor: #002635;
+
+// Vuetify Globals
+@import '~vuetify/src/styles/styles.sass';
+$body-font-family: $fontFamilyTitilliumWeb;
