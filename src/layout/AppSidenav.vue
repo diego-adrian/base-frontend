@@ -129,15 +129,20 @@
          <v-card
             flat
             max-width="244"
+            :shaped="false"
+            :outlined="false"
           >
             <v-img
               aspect-ratio="1.7"
-              class="white--text align-start app--sidenav__img"
+              class="white--text align-end app--sidenav__img"
               height="200px"
               src="../../public/img/geometric.png"
             >
-              <v-card-title>{{ user.nombres }} {{ user.primer_apellido }}</v-card-title>
-              <v-card-subtitle class="pb-0 white--text">{{ user.email }}</v-card-subtitle>
+              <v-card-title>
+                <div class="initial--name"> {{ user.nombres.charAt(0)}}</div>
+                <div>{{ user.nombres }} {{ user.primer_apellido }}</div>
+              </v-card-title>
+              <v-card-subtitle class="pb-0 white--text email--user">{{ user.email }}</v-card-subtitle>
             </v-img>
           </v-card>
           <!-- FIN DEL CARD -->
@@ -294,6 +299,32 @@ export default {
     }
     .app--sidenav__img {
       background: rgba($color: #ff974f, $alpha: 1);
+      border-top: 2px solid $white;
+      border-bottom: 1px solid $white;
+      .initial--name {
+        border: 3px solid $white;
+        border-radius: 50%;
+        color: $white;
+        font-size: 3.4rem;
+        height: 100px;
+        line-height: 90px;
+        margin: 0 auto;
+        text-align: center;
+        text-transform: uppercase;
+        width: 100px;
+        & + div {
+          font-family: $fontFamilySansation;
+          font-size: .9rem;
+          letter-spacing: 0;
+          font-weight: 600;
+        }
+      }
+      .email--user {
+        font-family: $fontFamilySansation;
+        font-size: .9rem;
+        letter-spacing: 0;
+        font-weight: 400;
+      }
     }
     .app--sidenav__background {
       background: $bgSidenav !important;
@@ -313,6 +344,7 @@ export default {
         justify-content: center;
         border-bottom: 1px solid rgba($color: $white, $alpha: .3);
         .app-title {
+          font-size: .9rem;
           font-weight: 400;
         }
       }

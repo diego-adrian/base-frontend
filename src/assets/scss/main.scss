@@ -17,7 +17,7 @@ body, html {
   .v-data-table {
     font-size: 13px;
   }
-  .main {
-    margin: 0;
+  .v-card:not(.v-sheet--tile):not(.v-card--shaped) {
+    border-radius: 0;
   }
 }
