@@ -30,7 +30,7 @@
     left: 0;
     right: 0;
     bottom: 0;
-    background: rgba($color: $secondary, $alpha: .35);
+    background: rgba($color: $primary, $alpha: .2);
     z-index: 2;
   }
 
@@ -45,8 +45,8 @@
     min-width: 350px;
     height: 50vh;
     padding: 0;
-    // background: linear-gradient(rgba($color: $white, $alpha: .7) 30%, $secondary, $primary);
-    background: rgba($color: darken($primary, 20), $alpha: .65);
+    // background: linear-gradient(transparent 40%, darken($primary, $amount: 25) transparent);
+    // background: rgba($color: darken($primary, 20), $alpha: .45);
     border-radius: 8px;
     overflow: hidden;
 
