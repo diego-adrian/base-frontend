@@ -118,9 +118,9 @@
         </v-list>
       </v-menu>
       <!-- APPS -->
-      <section v-if="auth">
+      <section :class="auth ? 'borderBlack' : 'borderWhite'">
         <v-btn icon>
-          <v-icon color="black">apps</v-icon>
+          <v-icon :color=" auth ? 'black' : 'white'">apps</v-icon>
         </v-btn>
       </section>
     </v-toolbar-items>
@@ -233,19 +233,20 @@ body.fullscreen {
       flex-direction: row;
       justify-content: center;
       align-items: center;
-      section {
+      .borderWhite {
+        border-left: 1px solid rgba($color: $white, $alpha: .25)
+      }
+      .borderBlack {
+        border-left: 1px solid rgba($color: $black, $alpha: .25)
+      }
+      button {
         font-family: $fontFamilySansation;
         font-weight: 300;
-        display: flex;
-        flex-direction: row;
-        align-items: center;
         cursor: pointer;
         font-size: .875rem;
-        margin-right: 20px;
-        &:nth-child(4) {
+        &:nth-child(6) {
           height: 50px;
           margin-right: auto;
-          border-left: 1px solid rgba($color: $black, $alpha: .2);
         }
       }
 
