@@ -30,8 +30,8 @@
                 align="start"
                 justify="center"
                 :cols="11">
-                <v-icon>{{ form._id ? 'person' : 'person_add' }}</v-icon>
-                {{ form._id ? 'Editar usuario' : 'Adicionar usuario' }}
+                <v-icon>{{ form.id ? 'person' : 'person_add' }}</v-icon>
+                {{ form.id ? 'Editar usuario' : 'Adicionar usuario' }}
               </v-col>
               <v-col :cols="1">
                 <v-tooltip bottom>
@@ -49,6 +49,7 @@
         <!-- FORMULARIO PARA AGREGAR O EDITAR -->
         <v-form
           ref="form"
+          v-model="valid"
         >
         <v-card>
           <v-container fluid>
@@ -64,6 +65,7 @@
                   clearable
                   required
                   :rules="rules.user"
+                  v-model="form.usuario"
                   prepend-icon="account_circle"
                   label="Usuario"
                 ></v-text-field>
@@ -74,9 +76,18 @@
                 :xs="12"
                 :sm="12"
               >
-                <v-text-field
-                  label="Usuario"
-                ></v-text-field>
+                <v-autocomplete
+                  color="success"
+                  label="Cargo"
+                  no-data-text="No existen registros"
+                  :items="items"
+                  required
+                  v-model="form.cargo"
+                  :rules="rules.cargo"
+                  item-text="label"
+                  return-object
+                  clearable
+                ></v-autocomplete>
               </v-col>
             </v-row>
             <v-row>
@@ -87,13 +98,55 @@
                 :sm="12"
               >
                 <v-text-field
+                  color="primary"
                   required
-                  label="Usuario"
+                  label="Correo Electrónico"
+                  v-model="form.email"
+                  :rules="rules.email"
+                  placeholder="Escriba su correo electrónico"
                 ></v-text-field>
-              </v-col>
-            </v-row>
-          </v-container>
-        </v-card>
+                </v-col>
+              </v-row>
+            </v-container>
+            <v-card-actions>
+              <v-container fluid>
+                <v-row>
+                  <v-col
+                    justify="start"
+                    :xs="12"
+                    :sm="12"
+                    :md="6"
+                    :lg="6"
+                    cols="12">
+                      <small class="error--text text-required">* Los campos son obligatorios</small>
+                  </v-col>
+                  <v-col
+                    align="right"
+                    :sm="12"
+                    :xs="12"
+                    :md="3"
+                    :lg="3"
+                    cols="12"
+                  >
+                    <v-btn block @click.native="$store.commit('closeModal');"><v-icon>cancel</v-icon> Cancelar </v-btn>
+                  </v-col>
+                  <v-col
+                    align="right"
+                    :sm="12"
+                    :xs="12"
+                    :md="3"
+                    :lg="3"
+                    cols="12"
+                  >
+                    <v-btn block color="primary" type="submit" :disabled="!valid">
+                      <v-icon dark>check</v-icon> Enviar
+                    </v-btn>
+                  </v-col>
+                </v-row>
+              </v-container>
+
+            </v-card-actions>
+          </v-card>
         </v-form>
       </template>
 
@@ -142,29 +195,33 @@
   </template>
 <script>
 import CrudTable from '@/plugins/crud-table/CrudTable.vue';
+import actions from '@/plugins/crud-table/mixins/crud-table';
 
 export default {
+  mixins: [actions],
   data: () => ({
+    valid: false,
     rules: {
       user: [
         val => (val || '').length > 0 || 'El campo usuario no puede estar vacio',
         val => (val || '').length > 10 || 'El campo usuario no puede tener menos de 10 caracteres'
+      ],
+      cargo: [
+        (val) => {
+          const isValid = val ? Object.keys(val) : '';
+          return isValid.includes('key') || 'El campo cargo no puede estar vacio';
+        }
+      ],
+      email: [
+        val => (val || '').length > 0 || 'El campo email no puede estar vacio',
+        val => /\S+@\S+\.\S+/.test(val) || 'El campo email no es válido'
       ]
     },
-    form: {
-      user: '',
-      password: '',
-      nombres: '',
-      primer_apellido: '',
-      segundo_apellido: '',
-      ci: '',
-      tipo_documento: '',
-      fecha_nacimiento: '',
-      email: '',
-      telefono: '',
-      institucion: '',
-      roles: ''
-    },
+    items: [
+      { key: 'Profesional', label: 'Profesional' },
+      { key: 'Tecnico', label: 'Técnico' },
+      { key: 'Director', label: 'Director' }
+    ],
     url: 'user',
     order: ['createdAt', 'DESC'],
     headers: [
@@ -176,6 +233,12 @@ export default {
       { text: 'Fecha de creacion', value: '_created_at' },
       { text: 'Estado', sortable: false, value: 'estado' }
     ],
+    form: {
+      id: null,
+      usuario: null,
+      cargo: null,
+      email: null
+    },
     filters: [
       {
         field: 'usuario',
@@ -199,11 +262,6 @@ export default {
   }),
   methods: {
     openModal () {
-      const { lg, sm, xs } = this.$vuetify.breakpoint;
-      console.log('------------------------------------');
-      console.log(lg, sm, xs);
-      console.log('------------------------------------');
-      // this.$refs.form.reset();
       // if (data._id) {
       //   this.$nextTick(() => {
       //     this.form = data;
@@ -227,6 +285,33 @@ export default {
       //   };
       // }
       this.$store.commit('openModal');
+    },
+    /**
+     * @function save
+     * @description Esta funcion esta creada para guardar en la BD
+     * @author dbarra@agetic.gob.bo
+     */
+    async save () {
+      if (this.$refs.form.validate()) {
+        const data = Object.assign({}, this.form);
+        if (data.id) {
+          const response = await this.$service.put(`usuarios/${data.id}`, data);
+          if (response) {
+            this.$store.commit('closeModal');
+            this.updateList();
+            this.$message.success('Se actualizó el registro correctamente');
+          }
+        } else {
+          this.updateList();
+          // this.$service.post('usuarios', data).then((response) => {
+          //   if (response) {
+          //     this.$store.commit('closeModal');
+          //     this.updateList();
+          //     this.$message.success('El registro fue agregado correctamente');
+          //   }
+          // });
+        }
+      }
     }
   },
   components: {

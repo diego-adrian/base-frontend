@@ -5,13 +5,11 @@ body, html {
   overflow: auto;
   font-family: $fontFamilyTitilliumWeb;
   font-weight: 300;
-  
+
   .cursor--pointer {
     cursor: pointer !important;
   }
-  .v-data-table {
-    font-size: 13px;
-  }
+
   .v-card:not(.v-sheet--tile):not(.v-card--shaped) {
     border-radius: 0;
   }
