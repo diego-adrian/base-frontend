@@ -166,7 +166,7 @@ export default {
 </script>
 
 <style lang="scss">
-@import '../assets/scss/variables.scss';
+@import '../scss/variables.scss';
 $bgNabvar: rgba($color: darken($primary, 35%), $alpha: .75);
 .view--init {
   background: transparent !important;

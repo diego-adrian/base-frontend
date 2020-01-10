@@ -319,7 +319,7 @@ export default {
 };
 </script>
 <style lang="scss">
-  @import '../../assets/scss/variables.scss';
+  @import '../../scss/variables.scss';
 
   $filterBackground: #f5f5f5;
   $filterBorder: #e5e5e5;

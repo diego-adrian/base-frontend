@@ -290,7 +290,7 @@ export default {
 </script>
 
 <style lang="scss">
-@import '../assets/scss/variables.scss';
+@import '../scss/variables.scss';
   $bgSidenav: rgba($color: darken($primary, 28), $alpha: .75);
   .app--sidenav {
     overflow: hidden !important;

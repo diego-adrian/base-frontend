@@ -29,7 +29,7 @@ export default {
 </script>
 
 <style lang="scss">
-@import '../assets/scss/variables.scss';
+@import '../scss/variables.scss';
 
 .theme--light .v-footer {
   display: flex;

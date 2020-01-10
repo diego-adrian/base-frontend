@@ -12,7 +12,7 @@
 
 <style lang="scss">
 
-@import '../assets/scss/variables.scss';
+@import '../scss/variables.scss';
 .not-found {
   background: url('../../public/img/sidebar.jpg') no-repeat;
   background-size: cover;

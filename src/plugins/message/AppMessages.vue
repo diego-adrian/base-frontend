@@ -20,7 +20,7 @@ export default {
   props: {
     timeout: {
       type: Number,
-      default: 60000
+      default: 5000
     }
   },
   methods: {
@@ -59,7 +59,7 @@ export default {
 };
 </script>
 <style lang="scss">
-  @import '../../assets/scss/variables.scss';
+  @import '../../scss/variables.scss';
   .snackbar--success {
     .v-snack__wrapper {
       border-radius: 7px;

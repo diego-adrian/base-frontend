@@ -4,7 +4,6 @@ import './registerServiceWorker';
 import router from './router';
 import store from './store';
 import vuetify from './plugins/vuetify';
-
 // Plugins
 import Message from '@/plugins/message/message';
 import Storage from '@/plugins/storage';
@@ -14,7 +13,8 @@ import Notifications from '@/plugins/notifications/notification';
 import Progress from '@/plugins/progress-bar/progress';
 import Util from '@/plugins/util';
 
-import './assets/scss/index.scss';
+import './assets/fonts/index.scss';
+import './scss/index.scss';
 
 Vue.use(Progress);
 Vue.use(Message);
