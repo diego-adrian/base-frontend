@@ -50,46 +50,11 @@
         <v-form
           ref="form"
           v-model="valid"
+          lazy-validation
+          @submit.prevent="save"
         >
         <v-card>
           <v-container fluid>
-            <v-row>
-              <v-col
-                cols="12"
-                :md="6"
-                :xs="12"
-                :sm="12"
-              >
-                <v-text-field
-                  color="success"
-                  clearable
-                  required
-                  :rules="rules.user"
-                  v-model="form.usuario"
-                  prepend-icon="account_circle"
-                  label="Usuario"
-                ></v-text-field>
-              </v-col>
-              <v-col
-                cols="12"
-                :md="6"
-                :xs="12"
-                :sm="12"
-              >
-                <v-autocomplete
-                  color="success"
-                  label="Cargo"
-                  no-data-text="No existen registros"
-                  :items="items"
-                  required
-                  v-model="form.cargo"
-                  :rules="rules.cargo"
-                  item-text="label"
-                  return-object
-                  clearable
-                ></v-autocomplete>
-              </v-col>
-            </v-row>
             <v-row>
               <v-col
                 cols="12"
@@ -98,15 +63,114 @@
                 :sm="12"
               >
                 <v-text-field
+                  color="success"
+                  clearable
+                  required
+                  :rules="rules.numeroDocumento"
+                  v-model="form.numeroDocumento"
+                  prepend-icon="account_circle"
+                  label="Nùmero de documento"
+                ></v-text-field>
+              </v-col>
+            </v-row>
+            <v-row>
+              <v-col
+                cols="12"
+                :md="6"
+                :xs="12"
+                :sm="12"
+              >
+                <v-text-field
+                  color="success"
+                  clearable
+                  required
+                  :rules="rules.nombres"
+                  v-model="form.nombres"
+                  prepend-icon="account_circle"
+                  label="Nombres"
+                ></v-text-field>
+              </v-col>
+              <v-col
+                cols="12"
+                :md="6"
+                :xs="12"
+                :sm="12"
+              >
+                <v-text-field
+                  color="success"
+                  label="Primer apellido"
+                  required
+                  v-model="form.primerApellido"
+                  :rules="rules.primerApellido"
+                  prepend-icon="account_circle"
+                  clearable
+                ></v-text-field>
+              </v-col>
+            </v-row>
+            <v-row>
+              <v-col
+                cols="12"
+                :md="6"
+                :xs="12"
+                :sm="12"
+              >
+                <v-text-field
                   color="primary"
                   required
-                  label="Correo Electrónico"
-                  v-model="form.email"
-                  :rules="rules.email"
-                  placeholder="Escriba su correo electrónico"
+                  label="Segundo apellido"
+                  v-model="form.segundoApellido"
+                  :rules="rules.segundoApellido"
+                  prepend-icon="account_circle"
+                  clearable
                 ></v-text-field>
-                </v-col>
-              </v-row>
+              </v-col>
+              <v-col
+                cols="12"
+                :md="6"
+                :xs="12"
+                :sm="12"
+              >
+                <v-text-field
+                  color="primary"
+                  required
+                  label="Fecha de nacimiento"
+                  v-model="form.fechaNacimiento"
+                  :rules="rules.fechaNacimiento"
+                ></v-text-field>
+              </v-col>
+            </v-row>
+            <v-row>
+              <v-col
+                cols="12"
+                :md="6"
+                :xs="12"
+                :sm="12"
+              >
+                <v-text-field
+                  color="primary"
+                  required
+                  label="Correo electrònico"
+                  v-model="form.correoElectronico"
+                  :rules="rules.correoElectronico"
+                  prepend-icon="contact_mail"
+                  clearable
+                ></v-text-field>
+              </v-col>
+              <v-col
+                cols="12"
+                :md="6"
+                :xs="12"
+                :sm="12"
+              >
+                <v-text-field
+                  color="primary"
+                  label="Telefono"
+                  v-model="form.telefono"
+                  prepend-icon="contact_phone"
+                  clearable
+                ></v-text-field>
+              </v-col>
+            </v-row>
             </v-container>
             <v-card-actions>
               <v-container fluid>
@@ -202,59 +266,84 @@ export default {
   data: () => ({
     valid: false,
     rules: {
-      user: [
+      numeroDocumento: [
+        val => (val || '').length > 0 || 'El campo del nùmero de documento no puede estar vacio'
+      ],
+      nombres: [
         val => (val || '').length > 0 || 'El campo usuario no puede estar vacio',
-        val => (val || '').length > 10 || 'El campo usuario no puede tener menos de 10 caracteres'
+        val => (val || '').length > 5 || 'El campo usuario no puede tener menos de 10 caracteres'
       ],
-      cargo: [
-        (val) => {
-          const isValid = val ? Object.keys(val) : '';
-          return isValid.includes('key') || 'El campo cargo no puede estar vacio';
-        }
+      primerApellido: [
+        val => (val || '').length > 0 || 'El campo del primer apellido no puede estar vacio',
       ],
-      email: [
+      segundoApellido: [
+        val => (val || '').length > 0 || 'El campo del segundo apellido no puede estar vacio',
+      ],
+      fechaNacimiento: [
+        val => (val || '').length > 0 || 'El campo de la fecha de nacimiento no puede estar vacio',
+      ],
+      correoElectronico: [
         val => (val || '').length > 0 || 'El campo email no puede estar vacio',
         val => /\S+@\S+\.\S+/.test(val) || 'El campo email no es válido'
       ]
     },
-    items: [
-      { key: 'Profesional', label: 'Profesional' },
-      { key: 'Tecnico', label: 'Técnico' },
-      { key: 'Director', label: 'Director' }
-    ],
-    url: 'user',
+    url: 'persona',
     order: ['createdAt', 'DESC'],
     headers: [
       { text: 'Acciones', divider: true, sortable: false },
-      { text: 'Activado', divider: false, sortable: false },
-      { text: 'Usuario', align: 'center', value: 'usuario' },
-      { text: 'Cargo', value: 'cargo' },
-      { text: 'Correo Electronico', value: 'email' },
+      { text: 'Nombres', align: 'center', value: 'nombres' },
+      { text: 'Primer apellido', value: 'primerApellido' },
+      { text: 'Segundo apellido', value: 'segundoApellido' },
+      { text: 'Fecha de Nacimiento', value: 'fechaNacimiento' },
+      { text: 'Correo Electronico', value: 'correoElectronico' },
+      { text: 'Nùmero telefònico', value: 'telefono' },
       { text: 'Fecha de creacion', value: '_created_at' },
       { text: 'Estado', sortable: false, value: 'estado' }
     ],
     form: {
-      id: null,
-      usuario: null,
-      cargo: null,
-      email: null
+      id: '',
+      numeroDocumento: '',
+      complemento: '',
+      complementoVisible: false,
+      fechaNacimiento: '',
+      nombres: '',
+      primerApellido: '',
+      segundoApellido: '',
+      apellidoCasada: '',
+      id_pais_origen: null,
+      parIdEstadoCivil: 1,
+      parIdTipoDocumento: 1,
+      parIdTipoPersona: 1,
+      genero: 'MASCULINO',
+      nombre_completo: '',
+      telefono: '',
+      celular: '',
+      correoElectronico: '',
+      fax: '',
+      estado: 'ACTIVO'
     },
     filters: [
       {
-        field: 'usuario',
-        label: 'Usuario',
+        field: 'nombres',
+        label: 'Nombres',
         type: 'text',
         typeG: 'String'
       },
       {
-        field: 'cargo',
-        label: 'Nombre completo',
+        field: 'primerApellido',
+        label: 'Primer Apellido',
         type: 'text',
         typeG: 'String'
       },
       {
-        field: 'email',
-        label: 'Email',
+        field: 'segundoApellido',
+        label: 'Segundo Apellido',
+        type: 'text',
+        typeG: 'String'
+      },
+      {
+        field: 'telefono',
+        label: 'Telefono',
         type: 'text',
         typeG: 'String'
       }
@@ -302,14 +391,12 @@ export default {
             this.$message.success('Se actualizó el registro correctamente');
           }
         } else {
-          this.updateList();
-          // this.$service.post('usuarios', data).then((response) => {
-          //   if (response) {
-          //     this.$store.commit('closeModal');
-          //     this.updateList();
-          //     this.$message.success('El registro fue agregado correctamente');
-          //   }
-          // });
+          const response = await this.$service.post('persona', data);
+          if (response) {
+            this.$store.commit('closeModal');
+            this.updateList();
+            this.$message.success('El registro fue agregado correctamente');
+          }
         }
       }
     }
