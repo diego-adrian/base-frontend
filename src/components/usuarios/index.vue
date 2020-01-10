@@ -5,6 +5,7 @@
     :filters="filters"
     :widthModal="600"
     :order="order"
+    :custom="false"
     >
 
       <template slot="buttons">
@@ -233,6 +234,36 @@
         </v-tooltip>
       </template>
       <!-- SLOT PARA TODOS LOS ITEMS (Solo en caso de que se quiera personalizar cada columna o mas de 1 columna) -->
+      <template slot="items" slot-scope="items">
+        <tr v-for="(item, idx) in items" :key="idx">
+          <td>
+            <v-tooltip bottom color="success">
+              <template v-slot:activator="{ on }">
+                <v-btn icon v-on="on" @click="hola(item)">
+                  <v-icon color="success">edit</v-icon>
+                </v-btn>
+              </template>
+              <span>Editar registro</span>
+            </v-tooltip>
+            <v-tooltip bottom color="error">
+              <template v-slot:activator="{ on }">
+                <v-btn icon v-on="on" @click="">
+                  <v-icon color="red">delete</v-icon>
+                </v-btn>
+              </template>
+              <span>Eliminar registro</span>
+            </v-tooltip>
+          </td>
+          <td>{{ item.nombres }}</td>
+          <td>{{ item.primerApellido }}</td>
+          <td>{{ item.segundoApellido }}</td>
+          <td>{{ item.fechaNacimiento }}</td>
+          <td>{{ item.correoElectronico }}</td>
+          <td>{{ item.telefono }}</td>
+          <td>{{ item._created_at }}</td>
+          <td>{{ item.estado }}</td>
+        </tr>
+      </template>
     </crud-table>
   </template>
 <script>

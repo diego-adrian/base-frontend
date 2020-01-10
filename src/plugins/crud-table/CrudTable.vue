@@ -115,8 +115,13 @@
           itemsPerPageText: 'Filas por página'
         }"
         >
+        <!-- ACTIONS -->
         <template v-slot:item.ACTIONS="{ item }">
           <slot name="actions" :props="item"></slot>
+        </template>
+        <!-- ALL ITEMS -->
+        <template v-slot:item="{item}" v-if="custom">
+          <slot name="items" :props="item"></slot>
         </template>
       </v-data-table>
     </v-skeleton-loader>
@@ -135,6 +140,10 @@ export default {
     url: {
       type: String,
       default: process.env.VUE_APP_API_URL
+    },
+    custom: {
+      type: Boolean,
+      default: false
     },
     idRefresh: {
       type: String,
