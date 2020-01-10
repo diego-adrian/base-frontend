@@ -116,12 +116,12 @@
         }"
         >
         <!-- ACTIONS -->
-        <template v-slot:item.ACTIONS="{ item }">
+        <template v-slot:item.ACTIONS="{ item }" v-if="!custom">
           <slot name="actions" :props="item"></slot>
         </template>
         <!-- ALL ITEMS -->
         <template v-slot:item="{item}" v-if="custom">
-          <slot name="items" :props="item"></slot>
+          <slot name="items" :items="item"></slot>
         </template>
       </v-data-table>
     </v-skeleton-loader>

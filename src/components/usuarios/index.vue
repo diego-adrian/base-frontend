@@ -5,7 +5,7 @@
     :filters="filters"
     :widthModal="600"
     :order="order"
-    :custom="false"
+    :custom="true"
     >
 
       <template slot="buttons">
