@@ -91,7 +91,8 @@
       "one-var": "off",
       "one-var-declaration-per-line": "off",
       "no-lonely-if": "off",
-      "no-mixed-operators": "off"
+      "no-mixed-operators": "off",
+      "object-curly-newline": "off"
     },
     "parserOptions": {
       "parser": "babel-eslint"

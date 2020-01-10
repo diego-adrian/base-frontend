@@ -21,7 +21,7 @@
           <span> Agregar usuario </span>
         </v-tooltip>
       </template>
-
+    <!-- SLOT PARA EL FORMULARIO -->
       <template slot="form" slot-scope="">
         <v-card-title class="ma-0 pa-1">
           <v-container fluid>
@@ -213,48 +213,26 @@
           </v-card>
         </v-form>
       </template>
-
-      <template slot="items" slot-scope="items">
-        <td>
-          <v-tooltip bottom>
-            <v-btn icon slot="activator" @click="editItem(items.item._id)">
-              <v-icon color="teal">edit</v-icon>
+      <!-- SLOT PARA LAS ACCIONES DEL CRUD TABLE  -->
+      <template slot="actions" slot-scope="items">
+        <v-tooltip bottom color="success">
+          <template v-slot:activator="{ on }">
+            <v-btn icon v-on="on" @click="hola(items)">
+              <v-icon color="success">edit</v-icon>
             </v-btn>
-            <span>Editar registro</span>
-          </v-tooltip>
-          <v-tooltip bottom>
-            <v-btn icon slot="activator" @click="deleteItem(items.item._id)">
+          </template>
+          <span>Editar registro</span>
+        </v-tooltip>
+        <v-tooltip bottom color="error">
+          <template v-slot:activator="{ on }">
+            <v-btn icon v-on="on" @click="">
               <v-icon color="red">delete</v-icon>
             </v-btn>
-            <span>Eliminar registro</span>
-          </v-tooltip>
-        </td>
-        <td>
-          <v-tooltip bottom>
-            <v-switch
-              :input-value="items.item.activo"
-              value
-              @change="changeVisible('usuarios/', items.item, items.item._id)"
-              slot="activator"
-              color="success"></v-switch>
-            <span>Activar/desactivar registro</span>
-          </v-tooltip>
-        </td>
-        <td>{{ items.item.user }}</td>
-        <td>{{ items.item.primer_apellido }} {{ items.item.segundo_apellido }} {{ items.item.nombres }}</td>
-        <td>{{ items.item.email }}</td>
-        <td>{{ items.item.roles.titulo }}</td>
-        <td>{{ $datetime.format(items.item.createAt, 'dd/MM/YYYY') }}</td>
-        <td>
-          <v-chip label color="success" text-color="white" v-if="items.item.activo == true">
-            ACTIVO
-          </v-chip>
-          <v-chip label color="warning" text-color="white" v-if="items.item.activo == false">
-            INACTIVO
-          </v-chip>
-        </td>
+          </template>
+          <span>Eliminar registro</span>
+        </v-tooltip>
       </template>
-
+      <!-- SLOT PARA TODOS LOS ITEMS (Solo en caso de que se quiera personalizar cada columna o mas de 1 columna) -->
     </crud-table>
   </template>
 <script>
@@ -290,7 +268,7 @@ export default {
     url: 'persona',
     order: ['createdAt', 'DESC'],
     headers: [
-      { text: 'Acciones', divider: true, sortable: false },
+      { text: 'Acciones', divider: true, sortable: false, align: 'center', value: 'ACTIONS' },
       { text: 'Nombres', align: 'center', value: 'nombres' },
       { text: 'Primer apellido', value: 'primerApellido' },
       { text: 'Segundo apellido', value: 'segundoApellido' },
@@ -350,6 +328,11 @@ export default {
     ]
   }),
   methods: {
+    hola (data) {
+      console.log('-------------DATAAAAAAA-----------------------');
+      console.log(data);
+      console.log('------------------------------------');
+    },
     openModal () {
       // if (data._id) {
       //   this.$nextTick(() => {

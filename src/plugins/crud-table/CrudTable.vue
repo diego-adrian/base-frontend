@@ -115,6 +115,9 @@
           itemsPerPageText: 'Filas por página'
         }"
         >
+        <template v-slot:item.ACTIONS="{ item }">
+          <slot name="actions" :props="item"></slot>
+        </template>
       </v-data-table>
     </v-skeleton-loader>
 
