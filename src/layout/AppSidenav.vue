@@ -80,7 +80,7 @@
                   :color="action.theme"
                   overlap
                   right
-                  class="align-self-center"
+                  class="align-self-center pointer--none"
                 >
                   <template v-slot:badge>
                     <span> {{ action.number }} </span>
@@ -110,7 +110,7 @@
               </v-list-item-content>
             </v-list-item>
           </v-list>
-          <template v-slot:append>
+          <template v-slot:append v-if="false">
             <div class="pa-2 app--sidenav__drawer">
               <v-app-bar-nav-icon color="white" class="btn-mini-variant" @click.prevent="handleMiniVariant"></v-app-bar-nav-icon>
             </div>
@@ -121,9 +121,7 @@
         <!-- SECCION MENU PRINCIPAL -->
         <v-list dense class="grow app--sidenav__background">
           <div class="app-logo">
-            <h4 class="app-title">
-              <span class="white--text text-center">{{ appTitle.toUpperCase() }}</span>
-            </h4>
+            <span class="white--text text-center">{{ appTitle.toUpperCase() }}</span>
           </div>
           <!-- CARD-IMAGEN PORTADA MENU -->
          <v-card
@@ -134,15 +132,15 @@
           >
             <v-img
               aspect-ratio="1.7"
-              class="white--text align-end app--sidenav__img"
+              class="white--text center app--sidenav__img"
               height="200px"
               src="../../public/img/geometric.png"
             >
-              <v-card-title>
-                <div class="initial--name"> {{ user && user.nombres ? user.nombres.charAt(0) : ''}}</div>
-                <div>{{ user.nombres }} {{ user.primer_apellido }}</div>
+              <v-card-title class="container--userinfo">
+                <div class="initial--name text-center"> {{ user && user.nombres ? user.nombres.charAt(0) : ''}}</div>
+                <div>{{ user.nombres }}</div>
               </v-card-title>
-              <v-card-subtitle class="pb-0 white--text email--user">{{ user.email }}</v-card-subtitle>
+              <v-card-subtitle class="pb-0 text-center white--text email--user">{{ user.email }}</v-card-subtitle>
             </v-img>
           </v-card>
           <!-- FIN DEL CARD -->
@@ -153,7 +151,7 @@
                 :key="item.label"
                 :value="true"
                 color="warning"
-                :prepend-icon="item.icon"
+               :prepend-icon="item.icon"
                 mandatory
               >
                 <template v-slot:activator>
@@ -230,7 +228,7 @@ export default {
   data () {
     return {
       clipped: false,
-      appTitle: 'Frontend Base',
+      appTitle: 'Frontend Base VUE',
       user: {},
       actions: [
         {
@@ -301,35 +299,38 @@ export default {
       background: rgba($color: #ff974f, $alpha: 1);
       border-top: 2px solid $white;
       border-bottom: 1px solid $white;
-      .initial--name {
-        border: 3px solid $white;
-        border-radius: 50%;
-        color: $white;
-        font-size: 3.4rem;
-        height: 100px;
-        line-height: 90px;
-        margin: 0 auto;
-        text-align: center;
-        text-transform: uppercase;
-        width: 100px;
-        & + div {
-          font-family: $fontFamilySansation;
-          font-size: .9rem;
+      .container--userinfo {
+        flex-direction: column;
+        .initial--name {
+          border: 3px solid $white;
+          border-radius: 50%;
+          color: $white;
+          font-size: 3.4rem;
+          height: 100px;
+          line-height: 90px;
+          margin: 0 auto;
+          text-align: center;
+          text-transform: uppercase;
+          width: 100px;
+          & + div {
+            font-family: $fontFamilyTitilliumWeb;
+            font-size: .9rem;
+            letter-spacing: 0;
+            font-weight: 600;
+          }
+        }
+        .email--user {
+          font-family: $fontFamilyTitilliumWeb;
           letter-spacing: 0;
           font-weight: 600;
         }
-      }
-      .email--user {
-        font-family: $fontFamilySansation;
-        font-size: .9rem;
-        letter-spacing: 0;
-        font-weight: 400;
       }
     }
     .app--sidenav__background {
       background: $bgSidenav !important;
       padding: 0;
       width: 1px;
+      border-radius: 0;
       .v-list-item {
         .v-list-item__title {
           font-size: 0.8rem;
@@ -342,11 +343,11 @@ export default {
         flex-direction: row;
         align-items: center;
         justify-content: center;
-        border-bottom: 1px solid rgba($color: $white, $alpha: .3);
-        .app-title {
-          font-size: .9rem;
-          font-weight: 400;
-        }
+        border-bottom: 1px solid rgba($color: $white, $alpha: 1);
+        font-size: .8rem;
+        font-weight: 300;
+        color: $white;
+        font-family: $fontFamilySansation;
       }
     }
     .app--sidenav__drawer {
@@ -359,6 +360,11 @@ export default {
     }
     .app--sidenav__avatar {
       cursor: pointer;
+    }
+    .pointer--none {
+      span {
+        pointer-events: none;
+      }
     }
   }
 </style>

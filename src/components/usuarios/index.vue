@@ -1,3 +1,4 @@
+
 <template>
   <crud-table
     :headers="headers"
@@ -5,7 +6,7 @@
     :filters="filters"
     :widthModal="600"
     :order="order"
-    :custom="true"
+    :custom="false"
     >
 
       <template slot="buttons">
@@ -306,6 +307,7 @@ export default {
       { text: 'Fecha de Nacimiento', value: 'fechaNacimiento' },
       { text: 'Correo Electronico', value: 'correoElectronico' },
       { text: 'Nùmero telefònico', value: 'telefono' },
+      { text: 'Genero', value: 'genero' },
       { text: 'Fecha de creacion', value: '_created_at' },
       { text: 'Estado', sortable: false, value: 'estado' }
     ],

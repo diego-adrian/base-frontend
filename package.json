@@ -5,9 +5,11 @@
   "scripts": {
     "serve": "vue-cli-service --open serve",
     "secure": "vue-cli-service --https --open serve",
-    "server": "nodemon server.js",
+    "report": "vue-cli-service build --report",
     "build": "vue-cli-service build",
-    "lint": "vue-cli-service lint"
+    "lint": "vue-cli-service lint",
+    "config": "vue-cli-service --mode production > config.js"
+
   },
   "dependencies": {
     "axios": "^0.19.0",
@@ -28,16 +30,12 @@
     "@vue/cli-service": "^4.1.0",
     "@vue/eslint-config-airbnb": "^4.0.0",
     "babel-eslint": "^10.0.3",
-    "crypto": "^1.0.1",
     "eslint": "^5.16.0",
     "eslint-import-resolver-webpack": "^0.12.0",
     "eslint-plugin-vue": "^5.0.0",
-    "express": "^4.17.1",
-    "firebase": "^7.6.1",
+    "imagemin-webpack-plugin": "^2.4.2",
     "material-design-icons-iconfont": "^5.0.1",
     "node-sass": "^4.12.0",
-    "nodemon": "^2.0.2",
-    "openid-client": "2.4.2",
     "sass": "^1.19.0",
     "sass-loader": "^8.0.0",
     "vue-cli-plugin-vuetify": "^2.0.2",
@@ -92,7 +90,8 @@
       "one-var-declaration-per-line": "off",
       "no-lonely-if": "off",
       "no-mixed-operators": "off",
-      "object-curly-newline": "off"
+      "object-curly-newline": "off",
+      "no-unused-expressions": "off"
     },
     "parserOptions": {
       "parser": "babel-eslint"

@@ -8,7 +8,7 @@
     :class="[auth ? 'app-navbar' : 'view--init', $store.state.layout.miniVariant ? 'isMiniVariant' : auth ? 'normalMiniVariant' : '']"
     flat
   >
-    <v-app-bar-nav-icon v-if="auth" class="btn-mini-variant" @click.prevent="handleMiniVariant"></v-app-bar-nav-icon>
+    <v-app-bar-nav-icon v-if="auth" class="btn-mini-variant" @click="handleMiniVariant"></v-app-bar-nav-icon>
     <v-toolbar-title :class="[ auth ? 'black--text' : 'white--text', 'title__servicio']">BOLIVIA A TU SERVICIO : </v-toolbar-title>
     <ul class="redes__sociales">
       <li :style="auth ? '' : 'filter: invert(1)'" tooltip="Facebook">&nbsp;</li>
@@ -47,7 +47,7 @@
             class="items--ciudadania"
             v-for="(item, i) in ciudadaniaDigital"
             :key="i"
-            @click="() => {}"
+            @click.stop="goToCiudadania(item.url)"
           >
             <v-list-item-title>{{ item.title }}</v-list-item-title>
           </v-list-item>
@@ -79,7 +79,7 @@
             class="items--ciudadania"
             v-for="(item, i) in registrarse"
             :key="i"
-            @click="() => {}"
+            @click.stop="goToCiudadania(item.url)"
           >
             <v-list-item-title>{{ item.title }}</v-list-item-title>
           </v-list-item>
@@ -111,7 +111,7 @@
             class="items--ciudadania"
             v-for="(item, i) in ayuda"
             :key="i"
-            @click="() => {}"
+            @click.stop="goToCiudadania(item.url)"
           >
             <v-list-item-title>{{ item.title }}</v-list-item-title>
           </v-list-item>
@@ -136,27 +136,30 @@ export default {
   data: () => ({
     clipped: false,
     ciudadaniaDigital: [
-      { title: 'Ciudadania Digital en Bolivia' },
-      { title: 'Tramites en Ciudadania Digital' },
-      { title: 'Servicios Digitales' },
-      { title: 'Aplicaciones de Ciudadania Digital' }
+      { title: 'Ciudadania Digital en Bolivia', url: 'https://test.agetic.gob.bo/ciudadania/ciudadania' },
+      { title: 'Tramites en Ciudadania Digital', url: 'https://test.agetic.gob.bo/ciudadania/tramites' },
+      { title: 'Servicios Digitales', url: 'https://test.agetic.gob.bo/ciudadania/servicios-digitales' },
+      { title: 'Aplicaciones de Ciudadania Digital', url: 'https://test.agetic.gob.bo/ciudadania/aplicaciones' }
     ],
     registrarse: [
-      { title: 'Entidades Habilitadas' },
-      { title: 'Puntos de Registro de Ciudadania' }
+      { title: 'Entidades Habilitadas', url: 'https://test.agetic.gob.bo/ciudadania/entidades' },
+      { title: 'Puntos de Registro de Ciudadania', url: 'https://test.agetic.gob.bo/ciudadania/mapa' }
     ],
     ayuda: [
-      { title: '¿Como recupero mi contrasena?' },
-      { title: '¿Como obtner la Ciudadania Digital?' },
-      { title: '¿Como activar mi cuenta de Ciudadania?' },
-      { title: 'Preguntas Frecuentes' },
-      { title: 'Videos y Tutoriales' }
+      { title: '¿Como recupero mi contrasena?', url: 'https://test.agetic.gob.bo/ciudadania/recuperar-contrasena' },
+      { title: '¿Como obtener la Ciudadania Digital?', url: 'https://test.agetic.gob.bo/ciudadania/obtener-ciudadania' },
+      { title: '¿Como activar mi cuenta de Ciudadania?', url: 'https://test.agetic.gob.bo/ciudadania/activar-cuenta' },
+      { title: 'Preguntas Frecuentes', url: 'https://test.agetic.gob.bo/ciudadania/preguntas' },
+      { title: 'Videos y Tutoriales', url: 'https://test.agetic.gob.bo/ciudadania/videos' }
     ]
   }),
   methods: {
     handleMiniVariant () {
       this.$store.commit('layout/toggleMiniVariant');
       this.$store.commit('layout/toggleExpandOnHover');
+    },
+    goToCiudadania (url) {
+      window.open(url, '_black');
     }
   },
   computed: {

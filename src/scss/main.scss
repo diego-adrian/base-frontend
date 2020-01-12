@@ -13,4 +13,9 @@ body, html {
   .v-card:not(.v-sheet--tile):not(.v-card--shaped) {
     border-radius: 0;
   }
+  .v-application {
+    th {
+      white-space: nowrap;
+    }
+  }
 }
