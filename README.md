@@ -1,24 +1,18 @@
 # frontend-base-vue
 
-## Project setup
-```
-npm install
-```
+## Instalar [INSTALL.md](./INSTALL.md)
 
-### Compiles and hot-reloads for development
+### Ejecutar en modo desarrollo
 ```
 npm run serve
 ```
 
-### Compiles and minifies for production
+### Compilar para produccion
 ```
 npm run build
 ```
 
-### Lints and fixes files
+### Ejecutar para ver errores y corregir
 ```
 npm run lint
 ```
-
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
