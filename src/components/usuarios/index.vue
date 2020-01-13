@@ -396,7 +396,7 @@ export default {
   methods: {
     reset () {
       this.form = {
-        id: '',
+        id: null,
         numeroDocumento: '',
         complemento: '',
         complementoVisible: false,
@@ -468,6 +468,8 @@ export default {
             this.$message.success('El registro fue agregado correctamente');
           }
         }
+      } else {
+        this.$message.error('Faltan campos por llenar');
       }
     }
   },

@@ -35,7 +35,7 @@ export default {
           if (this.$storage.existUser()) {
             const request = {
               method: 'POST',
-              url: `${url}/public/logout`,
+              url: `${url}public/logout`,
               responseType: 'json',
               data: {
                 codigo,
