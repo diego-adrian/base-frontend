@@ -11,13 +11,13 @@
     <v-app-bar-nav-icon v-if="auth" class="btn-mini-variant" @click="handleMiniVariant"></v-app-bar-nav-icon>
     <v-toolbar-title :class="[ auth ? 'black--text' : 'white--text', 'title__servicio']">BOLIVIA A TU SERVICIO : </v-toolbar-title>
     <ul class="redes__sociales">
-      <li :style="auth ? '' : 'filter: invert(1)'" tooltip="Facebook">&nbsp;</li>
-      <li :style="auth ? '' : 'filter: invert(1)'" tooltip="Twitter">&nbsp;</li>
-      <li :style="auth ? '' : 'filter: invert(1)'" tooltip="Youtube">&nbsp;</li>
-      <li :style="auth ? '' : 'filter: invert(1)'" tooltip="Teléfono de contacto">&nbsp;</li>
-      <li :style="auth ? '' : 'filter: invert(1)'" tooltip="Correo electrónico">&nbsp;</li>
-      <li :style="auth ? '' : 'filter: invert(1)'" tooltip="Whatsapp">&nbsp;</li>
-      <li :style="auth ? '' : 'filter: invert(1)'" tooltip="Messenger">&nbsp;</li>
+      <li :style="auth ? '' : 'filter: invert(1)'" tooltip="Facebook" @click.stop="redirect('facebook')">&nbsp;</li>
+      <li :style="auth ? '' : 'filter: invert(1)'" tooltip="Twitter" @click.stop="redirect('twitter')">&nbsp;</li>
+      <li :style="auth ? '' : 'filter: invert(1)'" tooltip="Youtube" @click.stop="redirect('youtube')">&nbsp;</li>
+      <li :style="auth ? '' : 'filter: invert(1)'" tooltip="Teléfono de contacto" @click.stop="redirect('contacto')">&nbsp;</li>
+      <li :style="auth ? '' : 'filter: invert(1)'" tooltip="Correo electrónico" @click.stop="redirect('email')">&nbsp;</li>
+      <li :style="auth ? '' : 'filter: invert(1)'" tooltip="Whatsapp" @click.stop="redirect('whatsapp')">&nbsp;</li>
+      <li :style="auth ? '' : 'filter: invert(1)'" tooltip="Messenger" @click.stop="redirect('messenger')">&nbsp;</li>
     </ul>
     <v-spacer></v-spacer>
     <v-toolbar-items class="hidden-sm-and-down bolivia__servicio__details">
@@ -135,6 +135,14 @@ export default {
   mixins: [Auth],
   data: () => ({
     clipped: false,
+    servicios: [
+      { label: 'facebook', url: 'https://www.facebook.com/AGETIC/' },
+      { label: 'twitter', url: 'https://twitter.com/AgeticBolivia' },
+      { label: 'youtube', url: 'https://www.youtube.com/channel/UCEJbZkvWhboLhVBSqC_XOoQ' },
+      { label: 'telefono', url: 'tel:59167176743' },
+      { label: 'whatsapp', url: 'https://wa.me/59167176743?text=Hola%20Bolivia%20a%20tu%20servicio' },
+      { label: 'messenger', url: 'https://m.me/AGETIC' }
+    ],
     ciudadaniaDigital: [
       { title: 'Ciudadania Digital en Bolivia', url: 'https://test.agetic.gob.bo/ciudadania/ciudadania' },
       { title: 'Tramites en Ciudadania Digital', url: 'https://test.agetic.gob.bo/ciudadania/tramites' },
@@ -160,6 +168,12 @@ export default {
     },
     goToCiudadania (url) {
       window.open(url, '_black');
+    },
+    redirect (key) {
+      const findService = this.servicios.find(service => service.label === key);
+      if (findService) {
+        window.open(findService.url, '_blank');
+      }
     }
   },
   computed: {
