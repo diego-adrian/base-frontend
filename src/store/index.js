@@ -38,6 +38,10 @@ export default new Vuex.Store({
       text: '',
       callback: null
     },
+    waiting: {
+      show: false,
+      message: ''
+    },
     form: {},
     confirm: {
       show: false,

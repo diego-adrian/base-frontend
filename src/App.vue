@@ -13,6 +13,7 @@
     <app-notifications/>
     <app-confirm/>
     <app-alert/>
+    <app-loading/>
     <app-progress/>
   </v-app>
 </template>
@@ -26,6 +27,7 @@ import AppNotifications from '@/plugins/notifications/AppNotifications.vue';
 import AppProgress from '@/plugins/progress-bar/AppProgress.vue';
 import AppConfirm from '@/plugins/modal/AppConfirm.vue';
 import AppAlert from '@/plugins/modal/AppAlert.vue';
+import AppLoading from '@/plugins/loading/AppLoading.vue';
 import Auth from '@/components/auth/mixins/auth';
 
 // Páginas que no necesitan autenticación/token/sesión
@@ -44,7 +46,8 @@ export default {
     AppNotifications,
     AppProgress,
     AppConfirm,
-    AppAlert
+    AppAlert,
+    AppLoading
   },
   created () {
     const error = this.$storage.get('error');

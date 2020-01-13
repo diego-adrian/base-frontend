@@ -6,6 +6,7 @@
       :timeout="timeout"
       :multi-line="false"
       top
+      right
     >
       {{ item.message }}
       <v-btn dark icon @click.native.prevent="remove">

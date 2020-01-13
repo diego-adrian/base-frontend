@@ -44,7 +44,7 @@
               window.localStorage.setItem(config.appName + '_sidenav', JSON.stringify(true));
               window.localStorage.setItem(config.appName + '_permissions', JSON.stringify(data.permisos));
               window.localStorage.setItem(config.appName + '_user', JSON.stringify(data.usuario));
-              window.location = config.urlHome + '#/';
+              window.location = config.urlHome + '#/' + config.page;
             }
           })
           .catch(function (error) {

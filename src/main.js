@@ -11,6 +11,7 @@ import Service from '@/plugins/service';
 import Datetime from '@/plugins/datetime';
 import Notifications from '@/plugins/notifications/notification';
 import Progress from '@/plugins/progress-bar/progress';
+import Loading from '@/plugins/loading/loading';
 import Util from '@/plugins/util';
 import Modal from '@/plugins/modal/modal';
 
@@ -22,6 +23,7 @@ Vue.use(Message);
 Vue.use(Storage);
 Vue.use(Util);
 Vue.use(Modal);
+Vue.use(Loading);
 Vue.use(Datetime);
 Vue.use(Notifications);
 Vue.use(Service, {
