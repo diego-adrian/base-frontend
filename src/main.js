@@ -12,6 +12,7 @@ import Datetime from '@/plugins/datetime';
 import Notifications from '@/plugins/notifications/notification';
 import Progress from '@/plugins/progress-bar/progress';
 import Util from '@/plugins/util';
+import Modal from '@/plugins/modal/modal';
 
 import './assets/fonts/index.scss';
 import './scss/index.scss';
@@ -19,8 +20,9 @@ import './scss/index.scss';
 Vue.use(Progress);
 Vue.use(Message);
 Vue.use(Storage);
-Vue.use(Datetime);
 Vue.use(Util);
+Vue.use(Modal);
+Vue.use(Datetime);
 Vue.use(Notifications);
 Vue.use(Service, {
   apiUrl: process.env.VUE_APP_API_URL,

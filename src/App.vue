@@ -3,7 +3,6 @@
     <app-sidenav v-if="auth"></app-sidenav>
     <app-navbar></app-navbar>
     <v-content v-if="main">
-      <!-- <app-breadcrumbs v-if="auth"></app-breadcrumbs> -->
       <div class="main pa-3">
         <transition :name="transitionName" mode="out-in">
           <router-view/>
@@ -12,6 +11,8 @@
     </v-content>
     <app-footer></app-footer>
     <app-notifications/>
+    <app-confirm/>
+    <app-alert/>
     <app-progress/>
   </v-app>
 </template>
@@ -23,6 +24,8 @@ import AppNavbar from '@/layout/AppNavbar.vue';
 import AppFooter from '@/layout/AppFooter.vue';
 import AppNotifications from '@/plugins/notifications/AppNotifications.vue';
 import AppProgress from '@/plugins/progress-bar/AppProgress.vue';
+import AppConfirm from '@/plugins/modal/AppConfirm.vue';
+import AppAlert from '@/plugins/modal/AppAlert.vue';
 import Auth from '@/components/auth/mixins/auth';
 
 // Páginas que no necesitan autenticación/token/sesión
@@ -39,7 +42,9 @@ export default {
     AppNavbar,
     AppFooter,
     AppNotifications,
-    AppProgress
+    AppProgress,
+    AppConfirm,
+    AppAlert
   },
   created () {
     const error = this.$storage.get('error');

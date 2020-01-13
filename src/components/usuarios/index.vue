@@ -4,9 +4,9 @@
     :headers="headers"
     :url="url"
     :filters="filters"
-    :widthModal="600"
+    :widthModal="500"
     :order="order"
-    :custom="false"
+    :custom="true"
     >
 
       <template slot="buttons">
@@ -16,7 +16,7 @@
               color="primary"
               dark
               v-on="on"
-              @click.native.stop="openModal()"
+              @click.native.stop="openModal"
               slot="activator"
             ><v-icon dark>person_add</v-icon> Agregar </v-btn>
           </template>
@@ -38,7 +38,7 @@
               <v-col :cols="1">
                 <v-tooltip bottom>
                   <template v-slot:activator="{ on }">
-                    <v-btn icon color="gray" v-on="on" @click.native="$store.commit('closeModal')">
+                    <v-btn icon color="gray" v-on="on" @click.stop="closeModal">
                       <v-icon>close</v-icon>
                     </v-btn>
                   </template>
@@ -57,7 +57,7 @@
         >
         <v-card>
           <v-container fluid>
-            <v-row>
+            <v-row no-gutters>
               <v-col
                 cols="12"
                 :md="12"
@@ -65,6 +65,7 @@
                 :sm="12"
               >
                 <v-text-field
+                  dense
                   color="success"
                   clearable
                   required
@@ -86,6 +87,7 @@
                   color="success"
                   clearable
                   required
+                  dense
                   :rules="rules.nombres"
                   v-model="form.nombres"
                   prepend-icon="account_circle"
@@ -102,6 +104,7 @@
                   color="success"
                   label="Primer apellido"
                   required
+                  dense
                   v-model="form.primerApellido"
                   :rules="rules.primerApellido"
                   prepend-icon="account_circle"
@@ -119,6 +122,7 @@
                 <v-text-field
                   color="primary"
                   required
+                  dense
                   label="Segundo apellido"
                   v-model="form.segundoApellido"
                   :rules="rules.segundoApellido"
@@ -132,13 +136,36 @@
                 :xs="12"
                 :sm="12"
               >
-                <v-text-field
-                  color="primary"
-                  required
-                  label="Fecha de nacimiento"
-                  v-model="form.fechaNacimiento"
-                  :rules="rules.fechaNacimiento"
-                ></v-text-field>
+
+                <v-menu
+                  v-model="date"
+                  :close-on-content-click="false"
+                  :nudge-right="40"
+                  transition="scale-transition"
+                  offset-y
+                  locale="es-EN"
+                  min-width="290px"
+                >
+                  <template v-slot:activator="{ on }">
+                    <v-text-field
+                      dense
+                      v-model="form.fechaNacimiento"
+                      label="Fecha de nacimiento"
+                      prepend-icon="event"
+                      readonly
+                      :rules="rules.fechaNacimiento"
+                      v-on="on"
+                    ></v-text-field>
+                  </template>
+                  <v-date-picker
+                    v-model="form.fechaNacimiento"
+                    @input="date = false"
+                    :first-day-of-week="0"
+                    locale="es-EN"
+                  ></v-date-picker>
+                </v-menu>
+
+
               </v-col>
             </v-row>
             <v-row>
@@ -151,6 +178,7 @@
                 <v-text-field
                   color="primary"
                   required
+                  dense
                   label="Correo electrònico"
                   v-model="form.correoElectronico"
                   :rules="rules.correoElectronico"
@@ -167,6 +195,7 @@
                 <v-text-field
                   color="primary"
                   label="Telefono"
+                  dense
                   v-model="form.telefono"
                   prepend-icon="contact_phone"
                   clearable
@@ -181,8 +210,8 @@
                     justify="start"
                     :xs="12"
                     :sm="12"
-                    :md="6"
-                    :lg="6"
+                    :md="5"
+                    :lg="5"
                     cols="12">
                       <small class="error--text text-required">* Los campos son obligatorios</small>
                   </v-col>
@@ -194,17 +223,17 @@
                     :lg="3"
                     cols="12"
                   >
-                    <v-btn block @click.native="$store.commit('closeModal');"><v-icon>cancel</v-icon> Cancelar </v-btn>
+                    <v-btn block @click.stop="closeModal"><v-icon>cancel</v-icon> Cancelar </v-btn>
                   </v-col>
                   <v-col
                     align="right"
                     :sm="12"
                     :xs="12"
-                    :md="3"
-                    :lg="3"
+                    :md="4"
+                    :lg="4"
                     cols="12"
                   >
-                    <v-btn block color="primary" type="submit" :disabled="!valid">
+                    <v-btn color="primary" type="submit" :disabled="!valid">
                       <v-icon dark>check</v-icon> Enviar
                     </v-btn>
                   </v-col>
@@ -216,10 +245,10 @@
         </v-form>
       </template>
       <!-- SLOT PARA LAS ACCIONES DEL CRUD TABLE  -->
-      <template slot="actions" slot-scope="items">
+      <template slot="actions" slot-scope="item">
         <v-tooltip bottom color="success">
           <template v-slot:activator="{ on }">
-            <v-btn icon v-on="on" @click="hola(items)">
+            <v-btn icon v-on="on" @click="openModal(item)">
               <v-icon color="success">edit</v-icon>
             </v-btn>
           </template>
@@ -227,7 +256,7 @@
         </v-tooltip>
         <v-tooltip bottom color="error">
           <template v-slot:activator="{ on }">
-            <v-btn icon v-on="on" @click="">
+            <v-btn icon v-on="on" @click.stop="itemDelete(Object.assign({}, item))">
               <v-icon color="red">delete</v-icon>
             </v-btn>
           </template>
@@ -236,11 +265,11 @@
       </template>
       <!-- SLOT PARA TODOS LOS ITEMS (Solo en caso de que se quiera personalizar cada columna o mas de 1 columna) -->
       <template slot="items" slot-scope="items">
-        <tr v-for="(item, idx) in items" :key="idx">
+        <tr v-for="item in items" :key="item.id">
           <td>
             <v-tooltip bottom color="success">
               <template v-slot:activator="{ on }">
-                <v-btn icon v-on="on" @click="hola(item)">
+                <v-btn icon v-on="on" @click.stop="openModal(Object.assign({}, items))">
                   <v-icon color="success">edit</v-icon>
                 </v-btn>
               </template>
@@ -248,7 +277,7 @@
             </v-tooltip>
             <v-tooltip bottom color="error">
               <template v-slot:activator="{ on }">
-                <v-btn icon v-on="on" @click="">
+                <v-btn icon v-on="on" @click.prevent="itemDelete(Object.assign({}, items))">
                   <v-icon color="red">delete</v-icon>
                 </v-btn>
               </template>
@@ -258,11 +287,14 @@
           <td>{{ item.nombres }}</td>
           <td>{{ item.primerApellido }}</td>
           <td>{{ item.segundoApellido }}</td>
-          <td>{{ item.fechaNacimiento }}</td>
+          <td>{{ $datetime.format(item.fechaNacimiento, 'dd/MM/YYYY') }}</td>
           <td>{{ item.correoElectronico }}</td>
           <td>{{ item.telefono }}</td>
-          <td>{{ item._created_at }}</td>
-          <td>{{ item.estado }}</td>
+          <td>{{ item.genero }}</td>
+          <td>{{ $datetime.format(item._created_at, 'dd/MM/YYYY' )}}</td>
+          <td>
+            <v-btn outlined :color="item.estado === 'ACTIVO' ? 'info' : 'default'">{{ item.estado}}</v-btn>
+          </td>
         </tr>
       </template>
     </crud-table>
@@ -300,7 +332,7 @@ export default {
     url: 'persona',
     order: ['createdAt', 'DESC'],
     headers: [
-      { text: 'Acciones', divider: true, sortable: false, align: 'center', value: 'ACTIONS' },
+      { text: 'Acciones', divider: false, sortable: false, align: 'center', value: 'ACTIONS' },
       { text: 'Nombres', align: 'center', value: 'nombres' },
       { text: 'Primer apellido', value: 'primerApellido' },
       { text: 'Segundo apellido', value: 'segundoApellido' },
@@ -358,37 +390,59 @@ export default {
         type: 'text',
         typeG: 'String'
       }
-    ]
+    ],
+    date: null
   }),
   methods: {
-    hola (data) {
-      console.log('-------------DATAAAAAAA-----------------------');
-      console.log(data);
-      console.log('------------------------------------');
+    reset () {
+      this.form = {
+        id: '',
+        numeroDocumento: '',
+        complemento: '',
+        complementoVisible: false,
+        fechaNacimiento: '',
+        nombres: '',
+        primerApellido: '',
+        segundoApellido: '',
+        apellidoCasada: '',
+        id_pais_origen: null,
+        parIdEstadoCivil: 1,
+        parIdTipoDocumento: 1,
+        parIdTipoPersona: 1,
+        genero: 'MASCULINO',
+        nombre_completo: '',
+        telefono: '',
+        celular: '',
+        correoElectronico: '',
+        fax: '',
+        estado: 'ACTIVO'
+      };
     },
-    openModal () {
-      // if (data._id) {
-      //   this.$nextTick(() => {
-      //     this.form = data;
-      //     this.form.roles = this.getValue(this.form.roles, this.roles);
-      //     this.form.institucion = this.getValue(this.form.institucion, this.instituciones);
-      //   });
-      // } else {
-      //   this.form = {
-      //     user: '',
-      //     password: '',
-      //     nombres: '',
-      //     primer_apellido: '',
-      //     segundo_apellido: '',
-      //     email: '',
-      //     telefono: '',
-      //     institucion: '',
-      //     roles: '',
-      //     tipo_documento: '',
-      //     ci: '',
-      //     fecha_nacimiento: null
-      //   };
-      // }
+    itemDelete ({ items }) {
+      const message = 'Esta seguro de eliminar este registro';
+      this.$confirm(message, async () => {
+        try {
+          await this.$service.delete(`persona/${items.id}`);
+          this.updateList();
+          this.$store.commit('closeModal');
+          this.$message.success('Registro eliminado satisfactoriamente');
+        } catch (err) {
+          this.$message.error(err.message);
+        }
+      });
+    },
+    closeModal () {
+      this.reset();
+      this.$store.commit('closeModal');
+    },
+    openModal ({ items }) {
+      if (items && items.id) {
+        this.$nextTick(() => {
+          this.form = items;
+        });
+      } else {
+        this.reset();
+      }
       this.$store.commit('openModal');
     },
     /**
@@ -400,7 +454,7 @@ export default {
       if (this.$refs.form.validate()) {
         const data = Object.assign({}, this.form);
         if (data.id) {
-          const response = await this.$service.put(`usuarios/${data.id}`, data);
+          const response = await this.$service.put(`persona/${data.id}`, data);
           if (response) {
             this.$store.commit('closeModal');
             this.updateList();

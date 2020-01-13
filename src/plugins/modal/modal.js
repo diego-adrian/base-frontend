@@ -1,7 +1,6 @@
 
 /* eslint-disable no-new */
 import store from '@/store';
-import modal from './mixins/modal';
 
 export default {
   store,
@@ -13,23 +12,18 @@ export default {
         alert.title = title;
         alert.text = text;
 
-        document.addEventListener('keydown', modal.methods.bloquear, false);
-
         if (typeof callback === 'function') {
           alert.callback = callback;
         }
       },
 
-      confirm(text = 'Mensaje...', callbackOk, callbackCancel, textOk = 'Aceptar', textCancel =
-      'Cancelar', width = 360) {
+      confirm(text = 'Mensaje...', callbackOk, callbackCancel, textOk = 'Aceptar', textCancel = 'Cancelar', width = 360) {
         const { confirm } = store.state;
         confirm.show = true;
         confirm.text = text;
         confirm.width = width;
         confirm.textOk = textOk;
         confirm.textCancel = textCancel;
-
-        document.addEventListener('keydown', modal.methods.bloquear, false);
 
         if (typeof callbackOk === 'function') {
           confirm.callbackOk = callbackOk;

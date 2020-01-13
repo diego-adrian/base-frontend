@@ -54,6 +54,14 @@ const Util = {
     return texto.replace(/(<([^>]+)>)/ig, '');
   },
 
+  replace (text, find, replace) {
+    for (let i = 0, l = find.length, regex; i < l; i++) {
+      regex = new RegExp(find[i], 'g');
+      text = text.replace(regex, replace[i]);
+    }
+    return text;
+  },
+
   fullscreen() {
     if (!document.fullscreenElement && !document.mozFullScreenElement && !document.webkitFullscreenElement && !document.msFullscreenElement) {
       if (document.documentElement.requestFullscreen) {

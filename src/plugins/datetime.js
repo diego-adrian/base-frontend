@@ -36,6 +36,13 @@ export default {
         return this.convert(date, separator, format);
       },
 
+      isDate(date) {
+        if (Util.toType(date) === 'string') {
+          date = this.convert(date);
+        }
+        return this.isValid(date);
+      },
+
       convert (date, separator = '/', format) {
         if (date) {
           format = format || this.formatDate;
@@ -114,13 +121,6 @@ export default {
           }
         }
         return string;
-      },
-
-      isDate(date) {
-        if (Util.toType(date) === 'string') {
-          date = this.convert(date);
-        }
-        return this.isValid(date);
       },
 
       isValid(date) {

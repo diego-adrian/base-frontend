@@ -168,18 +168,6 @@ export default {
     attribute: {
       type: String,
       default: 'listado'
-    },
-    successList: {
-      type: Function,
-      default: null
-    },
-    checkbox: {
-      type: Boolean,
-      default: false
-    },
-    checkboxHide: {
-      type: Array,
-      default: null
     }
   },
   watch: {

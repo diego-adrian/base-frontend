@@ -2,12 +2,12 @@
 <template>
   <v-dialog v-model="show" persistent content-class="dialog--alert" :max-width="width">
     <v-card>
-      <v-card-title class="headline"><v-icon>warning</v-icon> Confirmar</v-card-title>
+      <v-card-title class="title--dialog"><v-icon size="20" color="warning">warning</v-icon> Confirmar</v-card-title>
       <v-card-text v-html="text" class="pt-0"></v-card-text>
       <v-card-actions>
         <v-spacer></v-spacer>
-        <v-btn @click.native="cancel()" id="md-btn-confirm-selected-cancel">{{ textCancel }}</v-btn>
-        <v-btn color="primary" @click.native="ok()" id="md-btn-confirm-selected-ok">{{ textOk }}</v-btn>
+        <v-btn @click.native="cancel()" id="btn-confirm-selected-cancel">{{ textCancel }}</v-btn>
+        <v-btn color="primary" @click.native="ok()" id="btn-confirm-selected-ok">{{ textOk }}</v-btn>
       </v-card-actions>
     </v-card>
   </v-dialog>
@@ -15,10 +15,8 @@
 
 <script>
 import { mapState } from 'vuex';
-import modal from './mixins/modal';
 
 export default {
-  mixins: [modal],
   mounted () {
     const el = document.querySelector('.dialog--alert');
     if (el) {
@@ -55,8 +53,14 @@ export default {
 };
 </script>
 
-<style>
+<style lang="scss">
+@import '../../scss/variables.scss';
 .overlay + .overlay {
   z-index: 99;
+}
+.dialog--alert {
+  .title--dialog {
+    font-size: 1.1rem !important;
+  }
 }
 </style>
