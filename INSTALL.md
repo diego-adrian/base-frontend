@@ -2,7 +2,7 @@
 
 - Nodejs 10.17 en adelante
 
-## Copiar el contenido del archivo .env a 2 archivos para los ambientes de desarrollo y produccion
+## La configuración de las variables de entorno se encuentran en el archivo .env, con la cual se deben crear 2 archivos para los ambientes de desarrollo y produccion
 
 ``` bash
 touch .env.development.local
