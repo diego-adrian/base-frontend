@@ -10,7 +10,7 @@ module.exports = {
       })
     ]
   },
-  filenameHashing: false,
+  filenameHashing: process.env.NODE_ENV === 'development',
   transpileDependencies: [
     'vuetify',
   ],
