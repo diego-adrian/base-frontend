@@ -6,7 +6,7 @@
       <v-layout row wrap>
         <v-flex md12 lg12 xs12 sm12 text-center>
           <v-card class="app-login__ciudadaniaDigital"></v-card>
-          <v-btn width="80%" color="white" height="45px" v-on="on" outlined @click="loginOpenid" class="app-login__boton">Ingresar con ciudadanía Digital</v-btn>
+          <v-btn width="80%" color="white" height="45px" outlined @click="loginOpenid" class="app-login__boton">Ingresar con ciudadanía Digital</v-btn>
         </v-flex>
       </v-layout>
     </div>

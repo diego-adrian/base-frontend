@@ -25,7 +25,6 @@ export default {
     },
     cleanData (store) {
       store.commit('setDefault');
-      store.commit('DESTROY_INTERVAL');
     },
     async logout (router, loading) {
       try {
