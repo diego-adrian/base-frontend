@@ -7,7 +7,7 @@
       :mini-variant="$store.state.layout.miniVariant"
       src="../../public/img/sidebar.jpg"
       mini-variant-width="57"
-      :expand-on-hover="$store.state.layout.expandOnHover"
+      :expand-on-hover="breakpoints.includes($vuetify.breakpoint.name) ? $store.state.layout.expandOnHover : false"
       floating
       hide-overlay
       class="app--sidenav"
@@ -229,6 +229,7 @@ export default {
     return {
       clipped: false,
       appTitle: 'Frontend Base VUE',
+      breakpoints: ['md', 'lg', 'xl'],
       user: {},
       actions: [
         {
