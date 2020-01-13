@@ -1,6 +1,8 @@
 # frontend-base-vue
 
-## Instalar [INSTALL.md](./INSTALL.md)
+## Instalar
+
+Seguir las indicaciones del [install.md](./INSTALL.md)
 
 ### Ejecutar en modo desarrollo
 ```
