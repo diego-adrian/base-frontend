@@ -110,6 +110,7 @@
         :items="items"
         :items-per-page="10"
         :loading="loading"
+        @update:sort-by="getData"
         @update:page="requestData"
         @update:items-per-page="handleItemsPerPageOptions"
         :options.sync="options"
@@ -276,12 +277,16 @@ export default {
     async getData () {
       try {
         this.loading = true;
-        const { page, itemsPerPage } = this.options;
+        const { sortBy, sortDesc, page, itemsPerPage } = this.options;
 
         const query = {
           limit: itemsPerPage,
           page
         };
+
+        if (sortBy && sortBy.length > 0) {
+          query.order = (sortDesc[0] ? '-' : '') + sortBy[0];
+        }
 
         if (Object.keys(this.search).length) {
           for (const key in this.search) {
