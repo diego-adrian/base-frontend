@@ -8,7 +8,16 @@
       top
       right
     >
-      {{ item.message }}
+      <v-container fluid class="snackbar--row">
+        <v-row no-gutters>
+          <v-col cols="2" class="snackbar--icon">
+            <v-icon color="warning">information</v-icon>
+          </v-col>
+          <v-col cols="10" class="text-left">
+            {{ item.message }}
+          </v-col>
+        </v-row>
+      </v-container>
       <v-btn dark icon @click.native.prevent="remove">
         <v-icon color="white">close</v-icon>
       </v-btn>
@@ -21,7 +30,7 @@ export default {
   props: {
     timeout: {
       type: Number,
-      default: 5000
+      default: 60000
     }
   },
   methods: {
@@ -61,6 +70,17 @@ export default {
 </script>
 <style lang="scss">
   @import '../../scss/variables.scss';
+  .snackbar--row {
+    padding: 0 !important
+  }
+  .snackbar--icon {
+    display: inline-flex;
+    color: $white !important;
+    i {
+      padding-left: 10px;
+      color: $white !important;
+    }
+  }
   .snackbar--success {
     .v-snack__wrapper {
       border-radius: 7px;
@@ -68,6 +88,7 @@ export default {
         border-radius: 7px;
         background: $success;
         font-size: .8rem;
+        max-width: 400px;
       }
     }
   }
@@ -78,6 +99,7 @@ export default {
         border-radius: 7px;
         background: $info;
         font-size: .8rem;
+        max-width: 400px;
       }
     }
   }
@@ -88,6 +110,7 @@ export default {
         border-radius: 7px;
         background: $error;
         font-size: .8rem;
+        max-width: 400px;
       }
     }
   }
@@ -98,6 +121,7 @@ export default {
         border-radius: 7px;
         background: $warning;
         font-size: .8rem;
+        max-width: 400px;
       }
     }
   }
