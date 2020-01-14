@@ -30,7 +30,7 @@ export default {
   props: {
     timeout: {
       type: Number,
-      default: 60000
+      default: 5000
     }
   },
   methods: {
