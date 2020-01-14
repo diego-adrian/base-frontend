@@ -429,7 +429,7 @@ export default {
         } catch (err) {
           this.$message.error(err.message);
         }
-      });
+      }, () => {});
     },
     closeModal () {
       this.reset();

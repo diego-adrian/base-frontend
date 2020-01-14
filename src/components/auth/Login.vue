@@ -3,12 +3,23 @@
     <div class="app-login__background"></div>
     <div class="app-login__primary"></div>
     <div class="app-login__container">
-      <v-layout row wrap>
-        <v-flex md12 lg12 xs12 sm12 text-center>
-          <v-card class="app-login__ciudadaniaDigital"></v-card>
-          <v-btn width="80%" color="white" height="45px" outlined @click="loginOpenid" class="app-login__boton">Ingresar con ciudadanía Digital</v-btn>
-        </v-flex>
-      </v-layout>
+      <v-container fluid>
+        <v-row no-gutters>
+          <v-col
+            justify="center"
+            align="center"
+            cols="12"
+            sm="12"
+            xs="12"
+            md="12"
+            lg="12"
+            xl="12"
+          >
+            <v-card class="app-login__ciudadaniaDigital"></v-card>
+            <v-btn width="80%" color="white" height="45px" outlined @click="loginOpenid" class="app-login__boton">Ingresar con ciudadanía Digital</v-btn>
+          </v-col>
+        </v-row>
+      </v-container>
     </div>
   </div>
 </template>

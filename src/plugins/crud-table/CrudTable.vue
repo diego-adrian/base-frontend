@@ -1,94 +1,104 @@
 <template>
   <div class="crud-table">
-    <v-layout row wrap>
-      <v-flex xs8 pt-2 pb-3 pl-3>
-        <!-- Section buttons -->
-        <slot name="buttons"></slot>
-        <!-- Section Filters -->
-        <div class="btn-filter" :class="{ 'active': showFilter }">
+
+    <v-container fluid>
+      <v-row no-gutters>
+        <v-col
+          cols="12"
+          class="pt-2 pb-3 pl-3"
+          xs="8"
+        >
+          <!-- Section buttons -->
+          <slot name="buttons"></slot>
+          <!-- Section Filters -->
+          <div class="btn-filter" :class="{ 'active': showFilter }">
+            <v-tooltip bottom>
+              <template v-slot:activator="{ on }">
+                <v-btn
+                  @click.native="filtrar()"
+                  :id="idFilter"
+                  class="btn-filter ml-2"
+                  v-on="on"><v-icon>search</v-icon>
+                </v-btn>
+              </template>
+              <span> Buscar </span>
+            </v-tooltip>
+          </div>
           <v-tooltip bottom>
             <template v-slot:activator="{ on }">
               <v-btn
-                @click.native="filtrar()"
-                :id="idFilter"
-                class="btn-filter ml-2"
-                v-on="on"><v-icon>search</v-icon>
+                @click.native="getData()"
+                class="btn-refresh ml-2"
+                :id="idRefresh"
+                v-on="on"><v-icon>refresh</v-icon>
               </v-btn>
             </template>
-            <span> Buscar </span>
+            <span> Actualizar listado </span>
           </v-tooltip>
-        </div>
-        <v-tooltip bottom>
-          <template v-slot:activator="{ on }">
-            <v-btn
-              @click.native="getData()"
-              class="btn-refresh ml-2"
-              :id="idRefresh"
-              v-on="on"><v-icon>refresh</v-icon>
-            </v-btn>
-          </template>
-           <span> Actualizar listado </span>
-        </v-tooltip>
-        <!-- END Section buttons -->
+          <!-- END Section buttons -->
 
-        <!-- Modal Add/Edit -->
-        <v-dialog v-model="modal" persistent :max-width="widthModal">
-          <v-card class="crud-dialog">
-            <slot name="form">Agregue su formulario aquí</slot>
-          </v-card>
-        </v-dialog>
-        <!-- END Modal Add/Edit -->
-      </v-flex>
-
-      <!-- Section Filter -->
-      <v-flex xs12 v-if="showFilter && filters.length > 0">
-        <transition name="slide-fade">
-          <v-container fluid class="container--filter">
-            <v-row
-              no-gutters
-              style="width: 97%"
-            >
-              <v-col
-                v-for="(filter, idx) in filters"
-                :key="filter.field"
-                :cols="parseInt(12 / filters.length)"
+          <!-- Modal Add/Edit -->
+          <v-dialog v-model="modal" persistent :max-width="widthModal">
+            <v-card class="crud-dialog">
+              <slot name="form">Agregue su formulario aquí</slot>
+            </v-card>
+          </v-dialog>
+          <!-- END Modal Add/Edit -->
+        </v-col>
+        <!-- Section Filter -->
+        <v-col
+          cols="12"
+          xs="12"
+          v-if="showFilter && filters.length > 0"
+        >
+          <transition name="slide-fade">
+            <v-container fluid class="container--filter">
+              <v-row
+                no-gutters
+                style="width: 97%"
               >
-                <v-text-field
-                  dense
-                  outlined
-                  ref="searchTextField"
-                  class="ml-2 mr-2"
-                  :autofocus="idx === 0"
-                  v-if="filter.type == 'text'"
-                  v-model="search[filter.field]"
-                  :label="filter.label"
-                  hide-details
-                ></v-text-field>
-              </v-col>
+                <v-col
+                  v-for="(filter, idx) in filters"
+                  :key="filter.field"
+                  :cols="parseInt(12 / filters.length)"
+                >
+                  <v-text-field
+                    dense
+                    outlined
+                    ref="searchTextField"
+                    class="ml-2 mr-2"
+                    :autofocus="idx === 0"
+                    v-if="filter.type == 'text'"
+                    v-model="search[filter.field]"
+                    :label="filter.label"
+                    hide-details
+                  ></v-text-field>
+                </v-col>
 
-              <v-tooltip bottom>
-                <template v-slot:activator="{ on }">
-                  <v-btn
-                    @click.native="handleCleanFilters()" v-on="on"
-                    color="gray"
-                    dark
-                    small
-                    absolute
-                    right
-                    fab
-                  >
-                    <v-icon>close</v-icon>
-                  </v-btn>
-                </template>
-                <span>Cerrar filtro/búsqueda</span>
-              </v-tooltip>
+                <v-tooltip bottom>
+                  <template v-slot:activator="{ on }">
+                    <v-btn
+                      @click.native="handleCleanFilters()" v-on="on"
+                      color="gray"
+                      dark
+                      small
+                      absolute
+                      right
+                      fab
+                    >
+                      <v-icon>close</v-icon>
+                    </v-btn>
+                  </template>
+                  <span>Cerrar filtro/búsqueda</span>
+                </v-tooltip>
 
-            </v-row>
-          </v-container>
-        </transition>
-      </v-flex>
-      <!-- END Section Filter -->
-    </v-layout>
+              </v-row>
+            </v-container>
+          </transition>
+
+        </v-col>
+      </v-row>
+    </v-container>
 
     <v-skeleton-loader
       :loading="loading"

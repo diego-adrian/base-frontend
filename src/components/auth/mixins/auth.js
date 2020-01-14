@@ -26,7 +26,7 @@ export default {
     cleanData (store) {
       store.commit('setDefault');
     },
-    async logout (router, loading) {
+    async logout (router) {
       try {
         const url = process.env.VUE_APP_BASE_SERVER;
         const codigo = this.$storage.get('oauth2_state');
@@ -38,25 +38,31 @@ export default {
               responseType: 'json',
               data: {
                 codigo,
-                usuario: this.$storage.getUser().usuario || '4206088'
+                usuario: this.$storage.getUser().usuario
               }
             };
             const response = await axios(request);
             this.cleanData(this.$store);
             window.location.href = new URL(`${response.data.url}`);
+          } else {
+            const storevuex = this.$store;
+            router = router || this.$router;
+            this.$storage.removeUser();
+            this.$storage.remove('menu');
+            this.$storage.remove('token');
+            this.$storage.remove('sidenav');
+            this.$storage.remove('permissions');
+            this.cleanData(storevuex);
+            router.push('/login');
           }
         } else {
           const storevuex = this.$store;
           router = router || this.$router;
-          loading = loading || this.$loading;
           this.$storage.removeUser();
           this.$storage.remove('menu');
           this.$storage.remove('token');
           this.$storage.remove('sidenav');
           this.$storage.remove('permissions');
-          if (loading) {
-            loading.hide();
-          }
           this.cleanData(storevuex);
           router.push('/login');
         }

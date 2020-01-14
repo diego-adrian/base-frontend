@@ -65,8 +65,6 @@ export default {
       if (this.$storage.exist('permissions')) {
         this.$store.commit('setPermissions', this.$storage.get('permissions'));
       }
-
-      // this.timerSession();
     } else if (PageNoLogin.indexOf(this.$route.path.substring(1)) === -1 || this.$route.path === '/') {
       this.logout();
     }
