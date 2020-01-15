@@ -116,7 +116,7 @@
         :options.sync="options"
         :server-items-length="totalItems"
         loading-text="Cargando registros..."
-        rowsPerPageText="filas por pagina"
+        rowsPerPageText="filas por página"
         no-results-text="No se encontraron registros que coincidan"
         no-data-text="No hay resultados"
         :mobile-breakpoint="600"

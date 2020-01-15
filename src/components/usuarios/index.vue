@@ -72,7 +72,7 @@
                   :rules="rules.numeroDocumento"
                   v-model="form.numeroDocumento"
                   prepend-icon="account_circle"
-                  label="Nùmero de documento"
+                  label="Número de documento"
                 ></v-text-field>
               </v-col>
             </v-row>
@@ -179,7 +179,7 @@
                   color="primary"
                   required
                   dense
-                  label="Correo electrònico"
+                  label="Correo electrónico"
                   v-model="form.correoElectronico"
                   :rules="rules.correoElectronico"
                   prepend-icon="contact_mail"
@@ -194,7 +194,7 @@
               >
                 <v-text-field
                   color="primary"
-                  label="Telefono"
+                  label="Teléfono"
                   dense
                   v-model="form.telefono"
                   prepend-icon="contact_phone"
@@ -309,23 +309,23 @@ export default {
     valid: false,
     rules: {
       numeroDocumento: [
-        val => (val || '').length > 0 || 'El campo del nùmero de documento no puede estar vacio'
+        val => (val || '').length > 0 || 'El campo del número de documento no puede estar vacío'
       ],
       nombres: [
-        val => (val || '').length > 0 || 'El campo usuario no puede estar vacio',
+        val => (val || '').length > 0 || 'El campo usuario no puede estar vacío',
         val => (val || '').length > 5 || 'El campo usuario no puede tener menos de 10 caracteres'
       ],
       primerApellido: [
-        val => (val || '').length > 0 || 'El campo del primer apellido no puede estar vacio',
+        val => (val || '').length > 0 || 'El campo del primer apellido no puede estar vacío',
       ],
       segundoApellido: [
-        val => (val || '').length > 0 || 'El campo del segundo apellido no puede estar vacio',
+        val => (val || '').length > 0 || 'El campo del segundo apellido no puede estar vacío',
       ],
       fechaNacimiento: [
-        val => (val || '').length > 0 || 'El campo de la fecha de nacimiento no puede estar vacio',
+        val => (val || '').length > 0 || 'El campo de la fecha de nacimiento no puede estar vacío',
       ],
       correoElectronico: [
-        val => (val || '').length > 0 || 'El campo email no puede estar vacio',
+        val => (val || '').length > 0 || 'El campo email no puede estar vacío',
         val => /\S+@\S+\.\S+/.test(val) || 'El campo email no es válido'
       ]
     },
@@ -337,10 +337,10 @@ export default {
       { text: 'Primer apellido', value: 'primerApellido' },
       { text: 'Segundo apellido', value: 'segundoApellido' },
       { text: 'Fecha de Nacimiento', value: 'fechaNacimiento' },
-      { text: 'Correo Electronico', value: 'correoElectronico' },
-      { text: 'Nùmero telefònico', value: 'telefono' },
-      { text: 'Genero', value: 'genero' },
-      { text: 'Fecha de creacion', value: '_created_at' },
+      { text: 'Correo Electrónico', value: 'correoElectronico' },
+      { text: 'Número telefónico', value: 'telefono' },
+      { text: 'Género', value: 'genero' },
+      { text: 'Fecha de creación', value: '_created_at' },
       { text: 'Estado', sortable: false, value: 'estado' }
     ],
     form: {
@@ -386,7 +386,7 @@ export default {
       },
       {
         field: 'telefono',
-        label: 'Telefono',
+        label: 'Teléfono',
         type: 'text',
         typeG: 'String'
       }
@@ -419,7 +419,7 @@ export default {
       };
     },
     itemDelete ({ items }) {
-      const message = 'Esta seguro de eliminar este registro';
+      const message = '¿Está seguro de eliminar este registro?';
       this.$confirm(message, async () => {
         try {
           await this.$service.delete(`persona/${items.id}`);

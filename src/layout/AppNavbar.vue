@@ -71,7 +71,7 @@
             :class="[auth ? 'black--text' : 'white--text', 'app--navbar__buttons']"
             style="text-transform: none"
           >
-            ¿Donde me registro?
+            ¿Dónde me registro?
           </v-btn>
         </template>
         <v-list>
@@ -144,19 +144,19 @@ export default {
       { label: 'messenger', url: 'https://m.me/AGETIC' }
     ],
     ciudadaniaDigital: [
-      { title: 'Ciudadania Digital en Bolivia', url: 'https://test.agetic.gob.bo/ciudadania/ciudadania' },
-      { title: 'Tramites en Ciudadania Digital', url: 'https://test.agetic.gob.bo/ciudadania/tramites' },
+      { title: 'Ciudadanía Digital en Bolivia', url: 'https://test.agetic.gob.bo/ciudadania/ciudadania' },
+      { title: 'Trámites en Ciudadanía Digital', url: 'https://test.agetic.gob.bo/ciudadania/tramites' },
       { title: 'Servicios Digitales', url: 'https://test.agetic.gob.bo/ciudadania/servicios-digitales' },
-      { title: 'Aplicaciones de Ciudadania Digital', url: 'https://test.agetic.gob.bo/ciudadania/aplicaciones' }
+      { title: 'Aplicaciones de Ciudadanía Digital', url: 'https://test.agetic.gob.bo/ciudadania/aplicaciones' }
     ],
     registrarse: [
       { title: 'Entidades Habilitadas', url: 'https://test.agetic.gob.bo/ciudadania/entidades' },
-      { title: 'Puntos de Registro de Ciudadania', url: 'https://test.agetic.gob.bo/ciudadania/mapa' }
+      { title: 'Puntos de Registro de Ciudadanía', url: 'https://test.agetic.gob.bo/ciudadania/mapa' }
     ],
     ayuda: [
-      { title: '¿Como recupero mi contrasena?', url: 'https://test.agetic.gob.bo/ciudadania/recuperar-contrasena' },
-      { title: '¿Como obtener la Ciudadania Digital?', url: 'https://test.agetic.gob.bo/ciudadania/obtener-ciudadania' },
-      { title: '¿Como activar mi cuenta de Ciudadania?', url: 'https://test.agetic.gob.bo/ciudadania/activar-cuenta' },
+      { title: '¿Cómo recupero mi contraseña?', url: 'https://test.agetic.gob.bo/ciudadania/recuperar-contrasena' },
+      { title: '¿Cómo obtener la Ciudadanía Digital?', url: 'https://test.agetic.gob.bo/ciudadania/obtener-ciudadania' },
+      { title: '¿Cómo activar mi cuenta de Ciudadanía?', url: 'https://test.agetic.gob.bo/ciudadania/activar-cuenta' },
       { title: 'Preguntas Frecuentes', url: 'https://test.agetic.gob.bo/ciudadania/preguntas' },
       { title: 'Videos y Tutoriales', url: 'https://test.agetic.gob.bo/ciudadania/videos' }
     ]

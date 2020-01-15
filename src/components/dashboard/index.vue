@@ -23,7 +23,7 @@
         :xs="12"
         class="mt-2 mb-2"
       >
-        <v-btn color="warning" @click.stop="showConfirmation">Confirmacion</v-btn>
+        <v-btn color="warning" @click.stop="showConfirmation">Confirmación</v-btn>
         <v-btn class="ml-2" color="info" @click.stop="showAlert">Alert</v-btn>
       </v-col>
       <v-col

@@ -54,7 +54,7 @@
                   <v-list-item @click="logout">
                     <v-list-item-title class="red--text">
                       <v-icon color="error">folder_shared</v-icon>
-                      Cerrar Sesion
+                      Cerrar Sesión
                     </v-list-item-title>
                   </v-list-item>
                 </v-list>
