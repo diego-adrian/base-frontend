@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "serve": "vue-cli-service --open serve",
+    "start": "vue-cli-service --open serve",
     "secure": "vue-cli-service --https --open serve",
     "report": "vue-cli-service build --report",
     "build": "vue-cli-service build",
