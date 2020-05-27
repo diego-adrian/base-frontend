@@ -452,7 +452,7 @@ export default {
      */
     async save () {
       if (this.$refs.form.validate()) {
-        const data = Object.assign({}, this.form);
+        const data = { ...({}, this.form) };
         if (data.id) {
           const response = await this.$service.put(`persona/${data.id}`, data);
           if (response) {

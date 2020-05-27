@@ -3,25 +3,24 @@ body, html {
   padding: 0;
   margin: 0;
   overflow: auto;
-  font-family: $fontFamilyTitilliumWeb;
   font-weight: 300;
 
   .cursor--pointer {
     cursor: pointer !important;
   }
 
+  .fs8 {
+    font-size: .8rem !important;
+  }
+  
   .v-card:not(.v-sheet--tile):not(.v-card--shaped) {
     border-radius: 0;
   }
   .v-application {
+    font-family: $fontFamilyTitilliumWeb !important;
+    font-size: 14px !important;
     th {
       white-space: nowrap;
-    }
-    .v-input {
-      font-size: 14px;
-    }
-    .v-label {
-      font-size: 15px;
     }
   }
 }

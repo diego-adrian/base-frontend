@@ -4,15 +4,18 @@ import Vuetify from 'vuetify/lib';
 
 Vue.use(Vuetify);
 
-export default new Vuetify({
+const opts = {
+  options: {
+    customProperties: true,
+  },
   icons: {
     iconfont: 'md'
   },
   theme: {
     themes: {
       light: {
-        primary: '#024f9b',
-        secondary: '#046cb3',
+        primary: '#002635',
+        secondary: '#004B68',
         accent: '#82B1FF',
         info: '#1680c2',
         warning: '#f9c100',
@@ -20,8 +23,8 @@ export default new Vuetify({
         success: '#449935'
       },
       dark: {
-        primary: '#024f9b',
-        secondary: '#046cb3',
+        primary: '#002635',
+        secondary: '#004B68',
         accent: '#82B1FF',
         info: '#1680c2',
         warning: '#f9c100',
@@ -30,4 +33,6 @@ export default new Vuetify({
       }
     }
   }
-});
+};
+
+export default new Vuetify(opts);

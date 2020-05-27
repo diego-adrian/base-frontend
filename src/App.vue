@@ -1,15 +1,15 @@
 <template>
   <v-app :class="{ 'app-login': !auth }">
     <app-sidenav v-if="auth"></app-sidenav>
-    <app-navbar></app-navbar>
+    <app-navbar v-if="auth"></app-navbar>
     <v-content v-if="main">
-      <div class="main pa-3">
+      <div class="main">
         <transition :name="transitionName" mode="out-in">
           <router-view/>
         </transition>
       </div>
     </v-content>
-    <app-footer></app-footer>
+    <app-footer v-if="auth"></app-footer>
     <app-notifications/>
     <app-confirm/>
     <app-alert/>

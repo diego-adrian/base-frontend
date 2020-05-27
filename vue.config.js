@@ -1,8 +1,15 @@
 const ImageminPlugin = require('imagemin-webpack-plugin').default;
+const VuetifyLoaderPlugin = require('vuetify-loader/lib/plugin');
+// const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
 
 module.exports = {
   configureWebpack: {
+    resolve: {
+      extensions: ['*', '.js', '.vue', '.json'],
+    },
     plugins: [
+      new VuetifyLoaderPlugin(),
+      // new BundleAnalyzerPlugin(),
       new ImageminPlugin({
         pngquant: {
           quality: '90-95'
@@ -10,7 +17,7 @@ module.exports = {
       })
     ]
   },
-  filenameHashing: process.env.NODE_ENV === 'development',
+  filenameHashing: process.env.NODE_ENV === 'production',
   transpileDependencies: [
     'vuetify',
   ],

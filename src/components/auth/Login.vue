@@ -1,7 +1,6 @@
 <template>
   <div class="app-login">
     <div class="app-login__background"></div>
-    <div class="app-login__primary"></div>
     <div class="app-login__container">
       <v-container fluid>
         <v-row no-gutters>
@@ -15,8 +14,8 @@
             lg="12"
             xl="12"
           >
-            <v-card class="app-login__ciudadaniaDigital"></v-card>
-            <v-btn width="80%" color="white" height="45px" outlined @click="loginOpenid" class="app-login__boton">Ingresar con ciudadanía Digital</v-btn>
+            <v-card elevation="0" class="app-login__ciudadaniaDigital"></v-card>
+            <v-btn outlined @click="loginOpenid" class="app-login__boton">Ingresar con ciudadanía Digital</v-btn>
           </v-col>
         </v-row>
       </v-container>

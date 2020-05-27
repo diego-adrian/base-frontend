@@ -20,110 +20,6 @@
       <li :style="auth ? '' : 'filter: invert(1)'" tooltip="Messenger" @click.stop="redirect('messenger')">&nbsp;</li>
     </ul>
     <v-spacer></v-spacer>
-    <v-toolbar-items class="hidden-sm-and-down bolivia__servicio__details">
-      <!-- QUE ES CIUDADANIA DIGITAL -->
-      <v-menu
-        bottom
-        left
-        dense
-        hide-overlay
-        offset-y
-        open-on-hover
-        origin="center top"
-        transition="scale-transition"
-      >
-        <template v-slot:activator="{ on }">
-          <v-btn
-            text
-            v-on="on"
-            :class="[auth ? 'black--text' : 'white--text', 'app--navbar__buttons']"
-            style="text-transform: none"
-          >
-            ¿Qué es Ciudadania Digital?
-          </v-btn>
-        </template>
-        <v-list>
-          <v-list-item
-            class="items--ciudadania"
-            v-for="(item, i) in ciudadaniaDigital"
-            :key="i"
-            @click.stop="goToCiudadania(item.url)"
-          >
-            <v-list-item-title>{{ item.title }}</v-list-item-title>
-          </v-list-item>
-        </v-list>
-      </v-menu>
-      <!-- DONDE ME REGISTRO -->
-      <v-menu
-        bottom
-        left
-        dense
-        hide-overlay
-        offset-y
-        open-on-hover
-        origin="center top"
-        transition="scale-transition"
-      >
-        <template v-slot:activator="{ on }">
-          <v-btn
-            text
-            v-on="on"
-            :class="[auth ? 'black--text' : 'white--text', 'app--navbar__buttons']"
-            style="text-transform: none"
-          >
-            ¿Dónde me registro?
-          </v-btn>
-        </template>
-        <v-list>
-          <v-list-item
-            class="items--ciudadania"
-            v-for="(item, i) in registrarse"
-            :key="i"
-            @click.stop="goToCiudadania(item.url)"
-          >
-            <v-list-item-title>{{ item.title }}</v-list-item-title>
-          </v-list-item>
-        </v-list>
-      </v-menu>
-      <!-- AYUDA -->
-      <v-menu
-        bottom
-        left
-        dense
-        hide-overlay
-        offset-y
-        open-on-hover
-        origin="center top"
-        transition="scale-transition"
-      >
-        <template v-slot:activator="{ on }">
-          <v-btn
-            text
-            v-on="on"
-            :class="[auth ? 'black--text' : 'white--text', 'app--navbar__buttons']"
-            style="text-transform: none"
-          >
-            Ayuda
-          </v-btn>
-        </template>
-        <v-list>
-          <v-list-item
-            class="items--ciudadania"
-            v-for="(item, i) in ayuda"
-            :key="i"
-            @click.stop="goToCiudadania(item.url)"
-          >
-            <v-list-item-title>{{ item.title }}</v-list-item-title>
-          </v-list-item>
-        </v-list>
-      </v-menu>
-      <!-- APPS -->
-      <section :class="auth ? 'borderBlack' : 'borderWhite'">
-        <v-btn icon>
-          <v-icon :color=" auth ? 'black' : 'white'">apps</v-icon>
-        </v-btn>
-      </section>
-    </v-toolbar-items>
   </v-app-bar>
 </template>
 
@@ -401,9 +297,9 @@ body.fullscreen {
     }
   }
   .isMiniVariant {
-    width: calc(100vw - 56px);
+    width: calc(100vw);
   }
   .normalMiniVariant {
-    width: calc(100vw - 300px);
+    width: calc(100vw);
   }
 </style>
